@@ -14,18 +14,53 @@ a, & |t| \le b \\
 \hat{f}(\omega) = \frac{1}{\sqrt{2\pi}} \int_{-b}^{b} a e^{-i \omega t} dt = \frac{2a}{\sqrt{2\pi}} \cdot \frac{\sin(\omega b)}{\omega}
 \]
 
+\textbf{Вывод аналитического выражения:}
+\[
+\hat{f}(\omega) = \frac{1}{\sqrt{2\pi}} \int_{-b}^{b} a e^{-i \omega t} dt = \frac{a}{\sqrt{2\pi}} \int_{-b}^{b} e^{-i \omega t} dt
+\]
+\[
+= \frac{a}{\sqrt{2\pi}} \left[ \frac{e^{-i \omega t}}{-i \omega} \right]_{-b}^{b} = \frac{a}{\sqrt{2\pi}} \cdot \frac{e^{-i \omega b} - e^{i \omega b}}{-i \omega}
+\]
+\[
+= \frac{a}{\sqrt{2\pi}} \cdot \frac{2i \sin(\omega b)}{i \omega} = \frac{2a}{\sqrt{2\pi}} \cdot \frac{\sin(\omega b)}{\omega}
+\]
+
 \textbf{Графики:}
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{rect_function.png}
-    \caption{Функция $f(t)$ при различных $b$}
+    \includegraphics[width=0.8\textwidth]{rect_function_b0.5.png}
+    \caption{Прямоугольная функция $f(t)$ при $b = 0.5$}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{rect_fourier.png}
-    \caption{Амплитудный спектр $|\hat{f}(\omega)|$}
+    \includegraphics[width=0.8\textwidth]{rect_fourier_b0.5.png}
+    \caption{Амплитудный спектр $|\hat{f}(\omega)|$ при $b = 0.5$}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{rect_function_b1.png}
+    \caption{Прямоугольная функция $f(t)$ при $b = 1$}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{rect_fourier_b1.png}
+    \caption{Амплитудный спектр $|\hat{f}(\omega)|$ при $b = 1$}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{rect_function_b2.png}
+    \caption{Прямоугольная функция $f(t)$ при $b = 2$}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{rect_fourier_b2.png}
+    \caption{Амплитудный спектр $|\hat{f}(\omega)|$ при $b = 2$}
 \end{figure}
 
 \textbf{Проверка равенства Парсеваля:}
@@ -61,18 +96,59 @@ a - \frac{a |t|}{b}, & |t| \le b \\
 \hat{f}(\omega) = \frac{2a}{\sqrt{2\pi}} \cdot \frac{1 - \cos(\omega b)}{\omega^2 b}
 \]
 
+\textbf{Вывод аналитического выражения:}
+\[
+\hat{f}(\omega) = \frac{1}{\sqrt{2\pi}} \int_{-b}^{b} \left(a - \frac{a |t|}{b}\right) e^{-i \omega t} dt
+\]
+\[
+= \frac{a}{\sqrt{2\pi}} \int_{-b}^{b} e^{-i \omega t} dt - \frac{a}{b\sqrt{2\pi}} \int_{-b}^{b} |t| e^{-i \omega t} dt
+\]
+\[
+= \frac{2a}{\sqrt{2\pi}} \cdot \frac{\sin(\omega b)}{\omega} - \frac{2a}{b\sqrt{2\pi}} \int_{0}^{b} t \cos(\omega t) dt
+\]
+\[
+= \frac{2a}{\sqrt{2\pi}} \cdot \frac{\sin(\omega b)}{\omega} - \frac{2a}{b\sqrt{2\pi}} \cdot \frac{b \cos(\omega b) + \omega b \sin(\omega b) - 1}{\omega^2}
+\]
+\[
+= \frac{2a}{\sqrt{2\pi}} \cdot \frac{1 - \cos(\omega b)}{\omega^2 b}
+\]
+
 \textbf{Графики:}
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{triangle_function_b1.png}
-    \caption{Треугольная функция $f(t)$ при $b=1$}
+    \includegraphics[width=0.8\textwidth]{triangle_function_b0.5.png}
+    \caption{Треугольная функция $f(t)$ при $b = 0.5$}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{triangle_spectrum_b0.5.png}
+    \caption{Амплитудный спектр $|\hat{f}(\omega)|$ при $b = 0.5$}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{triangle_function_b1.png}
+    \caption{Треугольная функция $f(t)$ при $b = 1$}
+\end{figure}
+
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{triangle_spectrum_b1.png}
-    \caption{Амплитудный спектр $|\hat{f}(\omega)|$ при $b=1$}
+    \caption{Амплитудный спектр $|\hat{f}(\omega)|$ при $b = 1$}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{triangle_function_b2.png}
+    \caption{Треугольная функция $f(t)$ при $b = 2$}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{triangle_spectrum_b2.png}
+    \caption{Амплитудный спектр $|\hat{f}(\omega)|$ при $b = 2$}
 \end{figure}
 
 \textbf{Проверка равенства Парсеваля:}
@@ -103,19 +179,43 @@ f(t) = a \cdot \mathrm{sinc}(bt) = a \cdot \frac{\sin(\pi b t)}{\pi b t}
 
 \textbf{Графики:}
 
-\begin{figure}[h!]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{sinc_function_b0.5.png}
+    \caption{Функция $f(t) = a \cdot \mathrm{sinc}(bt)$ при $b = 0.5$}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{sinc_spectrum_b0.5.png}
+    \caption{Фурье-образ $\hat{f}(\omega)$ — прямоугольная функция при $b = 0.5$}
+\end{figure}
+
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{sinc_function_b1.png}
     \caption{Функция $f(t) = a \cdot \mathrm{sinc}(bt)$ при $b = 1$}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{sinc_spectrum_b1.png}
-    \caption{Фурье-образ $hat{f}(omega)$ — прямоугольная функция}
+    \caption{Фурье-образ $\hat{f}(\omega)$ — прямоугольная функция при $b = 1$}
 \end{figure}
 
-\textbf{Проверка Парсеваля:}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{sinc_function_b2.png}
+    \caption{Функция $f(t) = a \cdot \mathrm{sinc}(bt)$ при $b = 2$}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{sinc_spectrum_b2.png}
+    \caption{Фурье-образ $\hat{f}(\omega)$ — прямоугольная функция при $b = 2$}
+\end{figure}
+
+\textbf{Проверка равенства Парсеваля:}
 
 \begin{itemize}
     \item Теоретически: $\displaystyle \int_{-\infty}^{\infty} |f(t)|^2 dt = \frac{a^2}{b}$
@@ -144,19 +244,43 @@ f(t) = a \cdot e^{-b t^2}
 
 \textbf{Графики:}
 
-\begin{figure}[h!]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{gauss_function_b0.5.png}
+    \caption{Гауссовская функция $f(t)$ при $b = 0.5$}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{gauss_spectrum_b0.5.png}
+    \caption{Фурье-образ $\hat{f}(\omega)$ — тоже Гаусс при $b = 0.5$}
+\end{figure}
+
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{gauss_function_b1.png}
-    \caption{Гауссовская функция $f(t)$ при $b=1$}
+    \caption{Гауссовская функция $f(t)$ при $b = 1$}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{gauss_spectrum_b1.png}
-    \caption{Фурье-образ $hat{f}(omega)$ — тоже Гаусс}
+    \caption{Фурье-образ $\hat{f}(\omega)$ — тоже Гаусс при $b = 1$}
 \end{figure}
 
-\textbf{Проверка Парсеваля:}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{gauss_function_b2.png}
+    \caption{Гауссовская функция $f(t)$ при $b = 2$}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{gauss_spectrum_b2.png}
+    \caption{Фурье-образ $\hat{f}(\omega)$ — тоже Гаусс при $b = 2$}
+\end{figure}
+
+\textbf{Проверка равенства Парсеваля:}
 
 \begin{itemize}
     \item Теоретически: $\displaystyle \int |f(t)|^2 dt = a^2 \cdot \sqrt{\frac{\pi}{2b}}$
@@ -166,11 +290,11 @@ f(t) = a \cdot e^{-b t^2}
 \textbf{Анализ:}
 
 \begin{itemize}
-    \item Гаусс — единственная функция, совпадающая со своим Фурье-образом (до масштаба).
+    \item Гаусс — единственная функция, совпадающая со своим Фурье-образу (до масштаба).
     \item Чем уже $f(t)$, тем шире спектр — яркий пример принципа неопределённости.
 \end{itemize}
 
-\section*{Задание 1.5: Экспоненциальное затухание}
+\section*{Задание 1.5: Двустороннее затухание}
 
 \textbf{Функция:}
 \[
@@ -182,21 +306,62 @@ f(t) = a \cdot e^{-b |t|}
 \hat{f}(\omega) = \frac{2ab}{\sqrt{2\pi}(b^2 + \omega^2)}
 \]
 
+\textbf{Вывод аналитического выражения:}
+\[
+\hat{f}(\omega) = \frac{1}{\sqrt{2\pi}} \int_{-\infty}^{\infty} a e^{-b |t|} e^{-i \omega t} dt
+\]
+\[
+= \frac{a}{\sqrt{2\pi}} \left( \int_{-\infty}^{0} e^{b t} e^{-i \omega t} dt + \int_{0}^{\infty} e^{-b t} e^{-i \omega t} dt \right)
+\]
+\[
+= \frac{a}{\sqrt{2\pi}} \left( \int_{-\infty}^{0} e^{(b - i \omega) t} dt + \int_{0}^{\infty} e^{-(b + i \omega) t} dt \right)
+\]
+\[
+= \frac{a}{\sqrt{2\pi}} \left( \frac{1}{b - i \omega} + \frac{1}{b + i \omega} \right)
+\]
+\[
+= \frac{a}{\sqrt{2\pi}} \cdot \frac{2b}{b^2 + \omega^2} = \frac{2ab}{\sqrt{2\pi}(b^2 + \omega^2)}
+\]
+
 \textbf{Графики:}
 
-\begin{figure}[h!]
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{exp_function_b0.5.png}
+    \caption{Экспоненциальная функция $f(t)$ при $b = 0.5$}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{exp_spectrum_b0.5.png}
+    \caption{Спектр $\hat{f}(\omega)$ — функция Лоренца при $b = 0.5$}
+\end{figure}
+
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{exp_function_b1.png}
     \caption{Экспоненциальная функция $f(t)$ при $b = 1$}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{exp_spectrum_b1.png}
-    \caption{Спектр $hat{f}(omega)$ — функция Лоренца}
+    \caption{Спектр $\hat{f}(\omega)$ — функция Лоренца при $b = 1$}
 \end{figure}
 
-\textbf{Проверка Парсеваля:}
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{exp_function_b2.png}
+    \caption{Экспоненциальная функция $f(t)$ при $b = 2$}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.8\textwidth]{exp_spectrum_b2.png}
+    \caption{Спектр $\hat{f}(\omega)$ — функция Лоренца при $b = 2$}
+\end{figure}
+
+\textbf{Проверка равенства Парсеваля:}
 
 \begin{itemize}
     \item Теоретически: $\displaystyle \int |f(t)|^2 dt = \frac{a^2}{b}$
@@ -210,6 +375,39 @@ f(t) = a \cdot e^{-b |t|}
     \item Снова наблюдается: уже функция $\Rightarrow$ шире спектр
     \item Принцип неопределённости выполняется
 \end{itemize}
+
+\section*{Общий анализ принципа неопределённости}
+
+\textbf{Принцип неопределённости в контексте Фурье-преобразований:}
+
+Принцип неопределённости утверждает, что произведение ширины функции во временной области и ширины её спектра в частотной области не может быть меньше определённой константы. Математически это выражается как:
+
+\[
+\Delta t \cdot \Delta \omega \geq \frac{1}{2}
+\]
+
+где $\Delta t$ — эффективная ширина функции во времени, $\Delta \omega$ — эффективная ширина спектра.
+
+\textbf{Проявление в рассмотренных примерах:}
+
+\begin{enumerate}
+    \item \textbf{Прямоугольная функция:} При увеличении $b$ функция становится шире, а спектр (sinc-функция) становится уже.
+    
+    \item \textbf{Треугольная функция:} Более гладкая, чем прямоугольная, поэтому её спектр убывает быстрее, но принцип неопределённости всё равно выполняется.
+    
+    \item \textbf{Sinc-функция:} При увеличении $b$ функция становится уже, а спектр (прямоугольная функция) становится шире.
+    
+    \item \textbf{Функция Гаусса:} Единственная функция, которая может быть равна своему Фурье-образу (с точностью до масштаба). При $a = 1$ и $b = \frac{1}{2}$ получаем:
+    \[
+    f(t) = e^{-\frac{t^2}{2}} \quad \Rightarrow \quad \hat{f}(\omega) = e^{-\frac{\omega^2}{2}}
+    \]
+    
+    \item \textbf{Экспоненциальное затухание:} Негладкая функция, поэтому спектр убывает медленно, но принцип неопределённости выполняется.
+\end{enumerate}
+
+\textbf{Функция, равная своему Фурье-образу:}
+
+Гауссовская функция $f(t) = e^{-\frac{t^2}{2}}$ является единственной функцией, которая в точности равна своему Фурье-образу. Это происходит при параметрах $a = 1$ и $b = \frac{1}{2}$.
 
 \section*{Задание 2: Сдвиг функции}
 
@@ -230,7 +428,7 @@ g(t) = f(t + c) = a \cdot e^{-b (t + c)^2}
 
 \textbf{Графики сдвинутой функции:}
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{g_function_c-2.png}
     \caption{Сдвинутая функция $g(t)$ при $c = -2$}
@@ -238,16 +436,16 @@ g(t) = f(t + c) = a \cdot e^{-b (t + c)^2}
 
 \textbf{Фурье-образ:}
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{g_hat_complex_c-2.png}
-    \caption{Re $hat{g}(omega)$ и Im $hat{g}(omega)$ при $c = -2$}
+    \caption{Re $\hat{g}(\omega)$ и Im $\hat{g}(\omega)$ при $c = -2$}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{g_hat_magnitude_c-2.png}
-    \caption{Амплитудный спектр $|hat{g}(omega)|$ — НЕ зависит от $c$}
+    \caption{Амплитудный спектр $|\hat{g}(\omega)|$ — НЕ зависит от $c$}
 \end{figure}
 
 \textbf{Анализ:}
@@ -279,13 +477,13 @@ g(t) = f(t + c) = a \cdot e^{-b (t + c)^2}
 
 \textbf{Графики:}
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{audio_signal.png}
     \caption{График сигнала $f(t)$}
 \end{figure}
 
-\begin{figure}[h!]
+\begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{audio_spectrum.png}
     \caption{Амплитудный спектр $|\hat{f}(\nu)|$}
