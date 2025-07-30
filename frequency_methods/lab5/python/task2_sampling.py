@@ -54,11 +54,11 @@ def sampling_sines():
         # Графики
         plt.subplot(2, 2, i+1)
         
-        # Непрерывный сигнал
-        plt.plot(t_continuous, y_continuous_vals, 'b-', linewidth=2, label='Непрерывный сигнал')
+        # Непрерывный сигнал (рисуем первым, чтобы он был на заднем плане)
+        plt.plot(t_continuous, y_continuous_vals, 'b-', linewidth=3, alpha=0.7, label='Непрерывный сигнал')
         
         # Сэмплированные точки
-        plt.plot(t_samples, y_samples, 'ro', markersize=4, label=f'Сэмплы (dt={dt})')
+        plt.plot(t_samples, y_samples, 'ro', markersize=6, label=f'Сэмплы (dt={dt})')
         
         # Восстановленный сигнал
         plt.plot(t_continuous, y_interpolated, 'g-', linewidth=2, label='Восстановленный сигнал')
@@ -71,6 +71,7 @@ def sampling_sines():
         
         # Показываем только центральную часть для лучшей видимости
         plt.xlim(-2, 2)
+        plt.ylim(-2, 2)  # Фиксируем диапазон по Y для лучшего сравнения
     
     plt.tight_layout()
     plt.savefig('../images/task2/sampling_sines.png', dpi=300, bbox_inches='tight')
@@ -132,11 +133,11 @@ def sampling_sinc():
         # Графики
         plt.subplot(2, 2, i+1)
         
-        # Непрерывный сигнал
-        plt.plot(t_continuous, y_continuous_vals, 'b-', linewidth=2, label='Непрерывный сигнал')
+        # Непрерывный сигнал (рисуем первым, чтобы он был на заднем плане)
+        plt.plot(t_continuous, y_continuous_vals, 'b-', linewidth=3, alpha=0.7, label='Непрерывный сигнал')
         
         # Сэмплированные точки
-        plt.plot(t_samples, y_samples, 'ro', markersize=4, label=f'Сэмплы (dt={dt})')
+        plt.plot(t_samples, y_samples, 'ro', markersize=6, label=f'Сэмплы (dt={dt})')
         
         # Восстановленный сигнал
         plt.plot(t_continuous, y_interpolated, 'g-', linewidth=2, label='Восстановленный сигнал')
@@ -149,6 +150,7 @@ def sampling_sinc():
         
         # Показываем только центральную часть
         plt.xlim(-3, 3)
+        plt.ylim(-0.5, 1.2)  # Фиксируем диапазон по Y для лучшего сравнения
     
     plt.tight_layout()
     plt.savefig('../images/task2/sampling_sinc.png', dpi=300, bbox_inches='tight')

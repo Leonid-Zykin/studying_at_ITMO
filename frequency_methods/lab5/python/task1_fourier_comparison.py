@@ -79,6 +79,7 @@ plt.ylabel('|Π̂(ν)|')
 plt.title('Сравнение Фурье-образов (численное интегрирование)')
 plt.legend()
 plt.grid(True, alpha=0.3)
+plt.xlim(-5, 5)  # Ограничиваем диапазон для лучшей видимости
 
 plt.subplot(2, 2, 4)
 plt.plot(t_trapz, np.real(reconstructed_trapz), 'g-', linewidth=2, label='Восстановленная')
@@ -88,6 +89,7 @@ plt.ylabel('Амплитуда')
 plt.title('Восстановление функции (численное интегрирование)')
 plt.legend()
 plt.grid(True, alpha=0.3)
+plt.xlim(-2, 2)  # Ограничиваем диапазон для лучшей видимости
 
 plt.tight_layout()
 plt.savefig('../images/task1/analytical_and_trapz_comparison.png', dpi=300, bbox_inches='tight')
