@@ -39,6 +39,13 @@ A_1 = \begin{pmatrix} -\frac{4}{3} & \frac{1}{3} \\ \frac{2}{3} & -\frac{5}{3} \
 v_1 = \begin{pmatrix} 1 \\ 1 \end{pmatrix}, \quad v_2 = \begin{pmatrix} -1 \\ 2 \end{pmatrix}
 \end{equation}
 
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\textwidth]{images/task1/система_1_-_асимптотически_устойчива.png}
+\caption{Система 1: Асимптотически устойчивая система с собственными векторами v1 и v2}
+\label{fig:system1}
+\end{figure}
+
 \subsection{Система 2: Неустойчивая система без неколлинеарных собственных векторов}
 
 Используем жорданову клетку:
@@ -49,6 +56,13 @@ A_2 = \begin{pmatrix} -1 & 1 \\ 0 & -1 \end{pmatrix}
 Собственные значения: $\lambda_1 = \lambda_2 = -1$ (кратное)
 
 Собственные векторы: только один линейно независимый вектор $\begin{pmatrix} 1 \\ 0 \end{pmatrix}$
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\textwidth]{images/task1/система_2_-_неустойчива,_нет_неколлинеарных_собственных_векторов.png}
+\caption{Система 2: Неустойчивая система без неколлинеарных собственных векторов}
+\label{fig:system2}
+\end{figure}
 
 \subsection{Система 3: Неустойчивая система с особым поведением}
 
@@ -66,6 +80,13 @@ v_1 = \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \quad v_2 = \begin{pmatrix} 0 \\ 1 \
 
 Если $x(0) = v_2$, то $x(t) = e^{-2t}v_2 \to 0$ при $t \to \infty$.
 
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\textwidth]{images/task1/система_3_-_неустойчива,_но_v1_->_0.png}
+\caption{Система 3: Неустойчивая система с особым поведением (v1 → 0)}
+\label{fig:system3}
+\end{figure}
+
 \subsection{Система 4: Асимптотически устойчивая система с комплексными собственными векторами}
 
 Используем матрицу с комплексными собственными значениями с отрицательной вещественной частью:
@@ -79,6 +100,13 @@ A_4 = \begin{pmatrix} -1 & -1 \\ 1 & -1 \end{pmatrix}
 \begin{equation}
 v_1 = \begin{pmatrix} 1 \\ -i \end{pmatrix}, \quad v_2 = \begin{pmatrix} 1 \\ i \end{pmatrix}
 \end{equation}
+
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\textwidth]{images/task1/система_4_-_асимптотически_устойчива,_комплексные_собственные_векторы.png}
+\caption{Система 4: Асимптотически устойчивая система с комплексными собственными векторами}
+\label{fig:system4}
+\end{figure}
 
 \subsection{Система 5: Неустойчивая система с комплексными собственными векторами}
 
@@ -94,6 +122,13 @@ A_5 = \begin{pmatrix} 1 & -1 \\ 1 & 1 \end{pmatrix}
 v_1 = \begin{pmatrix} 1 \\ -i \end{pmatrix}, \quad v_2 = \begin{pmatrix} 1 \\ i \end{pmatrix}
 \end{equation}
 
+\begin{figure}[h!]
+\centering
+\includegraphics[width=0.9\textwidth]{images/task1/система_5_-_неустойчива,_комплексные_собственные_векторы.png}
+\caption{Система 5: Неустойчивая система с комплексными собственными векторами}
+\label{fig:system5}
+\end{figure}
+
 \subsection{Система 6: Нейтрально устойчивая система}
 
 Используем мнимые собственные значения:
@@ -108,51 +143,16 @@ A_6 = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}
 v_1 = \begin{pmatrix} 1 \\ -i \end{pmatrix}, \quad v_2 = \begin{pmatrix} 1 \\ i \end{pmatrix}
 \end{equation}
 
-\subsection{Моделирование непрерывных систем}
-
-На рис. \ref{fig:continuous_systems} представлены графики для всех шести систем с различными начальными условиями.
-
 \begin{figure}[h!]
 \centering
-\includegraphics[width=0.8\textwidth]{images/task1/система_1_-_асимптотически_устойчива.png}
-\caption{Система 1: Асимптотически устойчивая система}
-\label{fig:system1}
-\end{figure}
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.8\textwidth]{images/task1/система_2_-_неустойчива,_нет_неколлинеарных_собственных_векторов.png}
-\caption{Система 2: Неустойчивая система без неколлинеарных собственных векторов}
-\label{fig:system2}
-\end{figure}
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.8\textwidth]{images/task1/система_3_-_неустойчива,_но_v1_->_0.png}
-\caption{Система 3: Неустойчивая система с особым поведением}
-\label{fig:system3}
-\end{figure}
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.8\textwidth]{images/task1/система_4_-_асимптотически_устойчива,_комплексные_собственные_векторы.png}
-\caption{Система 4: Асимптотически устойчивая система с комплексными собственными векторами}
-\label{fig:system4}
-\end{figure}
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.8\textwidth]{images/task1/система_5_-_неустойчива,_комплексные_собственные_векторы.png}
-\caption{Система 5: Неустойчивая система с комплексными собственными векторами}
-\label{fig:system5}
-\end{figure}
-
-\begin{figure}[h!]
-\centering
-\includegraphics[width=0.8\textwidth]{images/task1/система_6_-_не_асимптотически_устойчива_и_не_неустойчива.png}
+\includegraphics[width=0.9\textwidth]{images/task1/система_6_-_не_асимптотически_устойчива_и_не_неустойчива.png}
 \caption{Система 6: Нейтрально устойчивая система}
 \label{fig:system6}
 \end{figure}
+
+\subsection{Моделирование непрерывных систем}
+
+Выше представлены графики для всех шести систем с различными начальными условиями. Каждая система демонстрирует характерное поведение в зависимости от своих собственных значений и собственных векторов.
 
 \section{Задание 2. Дискретные динамические системы}
 
