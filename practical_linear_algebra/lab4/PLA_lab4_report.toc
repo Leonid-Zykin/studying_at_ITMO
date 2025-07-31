@@ -1,0 +1,19 @@
+\babel@toc {russian}{}\relax 
+\contentsline {section}{\numberline {1}Задание 1. Непрерывные динамические системы}{3}{}%
+\contentsline {subsection}{\numberline {1.1}Система 1: Асимптотически устойчивая система}{3}{}%
+\contentsline {subsection}{\numberline {1.2}Система 2: Неустойчивая система без неколлинеарных собственных векторов}{3}{}%
+\contentsline {subsection}{\numberline {1.3}Система 3: Неустойчивая система с особым поведением}{4}{}%
+\contentsline {subsection}{\numberline {1.4}Система 4: Асимптотически устойчивая система с комплексными собственными векторами}{4}{}%
+\contentsline {subsection}{\numberline {1.5}Система 5: Неустойчивая система с комплексными собственными векторами}{5}{}%
+\contentsline {subsection}{\numberline {1.6}Система 6: Нейтрально устойчивая система}{5}{}%
+\contentsline {subsection}{\numberline {1.7}Моделирование непрерывных систем}{6}{}%
+\contentsline {section}{\numberline {2}Задание 2. Дискретные динамические системы}{6}{}%
+\contentsline {subsection}{\numberline {2.1}Создание матриц с заданными собственными значениями}{6}{}%
+\contentsline {subsection}{\numberline {2.2}Системы с различными собственными значениями}{6}{}%
+\contentsline {subsection}{\numberline {2.3}Моделирование дискретных систем}{7}{}%
+\contentsline {section}{\numberline {3}Задание 3. Осциллятор}{7}{}%
+\contentsline {subsection}{\numberline {3.1}Случай 1: $a < 0$, $b = 0$}{8}{}%
+\contentsline {subsection}{\numberline {3.2}Случай 2: $a < 0$, $b < 0$}{8}{}%
+\contentsline {subsection}{\numberline {3.3}Случай 3: $a > 0$, $b = 0$}{9}{}%
+\contentsline {subsection}{\numberline {3.4}Случай 4: $a > 0$, $b < 0$}{9}{}%
+\contentsline {section}{\numberline {4}Выводы}{9}{}%
