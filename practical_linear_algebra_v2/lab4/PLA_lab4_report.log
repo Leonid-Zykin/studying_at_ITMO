@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Debian) (preloaded format=xelatex 2025.7.13)  31 JUL 2025 13:46
+This is XeTeX, Version 3.141592653-2.6-0.999995 (TeX Live 2023/Debian) (preloaded format=xelatex 2025.7.13)  2 AUG 2025 22:25
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -461,17 +461,6 @@ LaTeX Info: Redefining \Relbar on input line 971.
 LaTeX Info: Redefining \[ on input line 2953.
 LaTeX Info: Redefining \] on input line 2954.
 )
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amssymb.sty
-Package: amssymb 2013/01/14 v3.01 AMS font symbols
-
-(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
-Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
-\symAMSa=\mathgroup4
-\symAMSb=\mathgroup5
-LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
-LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
-(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
-))
 (/usr/share/texlive/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
 
@@ -753,39 +742,543 @@ Package: memhfixc 2023/09/10 v1.22 hyperref package fixes for memoir class
 \c@memhycontfloat=\count357
 \c@Hpagenote=\count358
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 113.
-Package hyperref Info: Option `bookmarksopen' set `true' on input line 113.
-Package hyperref Info: Option `bookmarksnumbered' set `true' on input line 113.
+Package hyperref Info: Option `colorlinks' set `true' on input line 104.
+Package hyperref Info: Option `linktocpage' set `true' on input line 104.
+
+(/usr/share/texlive/texmf-dist/tex/latex/enumitem/enumitem.sty
+Package: enumitem 2019/06/20 v3.9 Customized lists
+\labelindent=\skip194
+\enit@outerparindent=\dimen278
+\enit@toks=\toks33
+\enit@inbox=\box62
+\enit@count@id=\count359
+\enitdp@description=\count360
+)
+(/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.sty
+Package: csquotes 2022-09-14 v5.2n context-sensitive quotations (JAW)
+\csq@reset=\count361
+\csq@gtype=\count362
+\csq@glevel=\count363
+\csq@qlevel=\count364
+\csq@maxlvl=\count365
+\csq@tshold=\count366
+\csq@ltx@everypar=\toks34
+
+(/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.def
+File: csquotes.def 2022-09-14 v5.2n csquotes generic definitions (JAW)
+)
+Package csquotes Info: Trying to load configuration file 'csquotes.cfg'...
+Package csquotes Info: ... configuration file loaded successfully.
+
+(/usr/share/texlive/texmf-dist/tex/latex/csquotes/csquotes.cfg
+File: csquotes.cfg 
+))
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.sty
+Package: biblatex 2023/03/05 v3.19 programmable bibliographies (PK/MW)
+
+(/usr/share/texlive/texmf-dist/tex/latex/logreq/logreq.sty
+Package: logreq 2010/08/04 v1.0 xml request logger
+\lrq@indent=\count367
+
+(/usr/share/texlive/texmf-dist/tex/latex/logreq/logreq.def
+File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
+))
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2022/04/13 v1.1d Standard LaTeX ifthen package (DPC)
+)
+\c@tabx@nest=\count368
+\c@listtotal=\count369
+\c@listcount=\count370
+\c@liststart=\count371
+\c@liststop=\count372
+\c@citecount=\count373
+\c@citetotal=\count374
+\c@multicitecount=\count375
+\c@multicitetotal=\count376
+\c@instcount=\count377
+\c@maxnames=\count378
+\c@minnames=\count379
+\c@maxitems=\count380
+\c@minitems=\count381
+\c@citecounter=\count382
+\c@maxcitecounter=\count383
+\c@savedcitecounter=\count384
+\c@uniquelist=\count385
+\c@uniquename=\count386
+\c@refsection=\count387
+\c@refsegment=\count388
+\c@maxextratitle=\count389
+\c@maxextratitleyear=\count390
+\c@maxextraname=\count391
+\c@maxextradate=\count392
+\c@maxextraalpha=\count393
+\c@abbrvpenalty=\count394
+\c@highnamepenalty=\count395
+\c@lownamepenalty=\count396
+\c@maxparens=\count397
+\c@parenlevel=\count398
+\blx@tempcnta=\count399
+\blx@tempcntb=\count400
+\blx@tempcntc=\count401
+\c@blx@maxsection=\count402
+\blx@maxsegment@0=\count403
+\blx@notetype=\count404
+\blx@parenlevel@text=\count405
+\blx@parenlevel@foot=\count406
+\blx@sectionciteorder@0=\count407
+\blx@sectionciteorderinternal@0=\count408
+\blx@entrysetcounter=\count409
+\blx@biblioinstance=\count410
+\labelnumberwidth=\skip195
+\labelalphawidth=\skip196
+\biblabelsep=\skip197
+\bibnamesep=\skip198
+\bibinitsep=\skip199
+\bibparsep=\skip256
+\bibhang=\skip257
+\blx@bcfin=\read4
+\blx@bcfout=\write4
+\blx@langwohyphens=\language90
+\c@mincomprange=\count411
+\c@maxcomprange=\count412
+\c@mincompwidth=\count413
+Package biblatex Info: Trying to load biblatex default data model...
+Package biblatex Info: ... file 'blx-dm.def' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/blx-dm.def
+File: blx-dm.def 2023/03/05 v3.19 biblatex localization (PK/MW)
+)
+Package biblatex Info: Trying to load biblatex style data model...
+Package biblatex Info: ... file 'gost-numeric.dbx' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex-gost/gost-numeric.dbx
+File: gost-numeric.dbx 2023/04/25 v1.24 biblatex-gost data model
+Package biblatex Info: Trying to load biblatex-gost data model...
+Package biblatex Info: ... file 'biblatex-gost.dbx' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex-gost/biblatex-gost.dbx
+File: biblatex-gost.dbx 2023/04/25 v1.24 biblatex-gost data model
+))
+Package biblatex Info: Trying to load biblatex custom data model...
+Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
+\c@afterword=\count414
+\c@savedafterword=\count415
+\c@annotator=\count416
+\c@savedannotator=\count417
+\c@author=\count418
+\c@savedauthor=\count419
+\c@bookauthor=\count420
+\c@savedbookauthor=\count421
+\c@commentator=\count422
+\c@savedcommentator=\count423
+\c@editor=\count424
+\c@savededitor=\count425
+\c@editora=\count426
+\c@savededitora=\count427
+\c@editorb=\count428
+\c@savededitorb=\count429
+\c@editorc=\count430
+\c@savededitorc=\count431
+\c@foreword=\count432
+\c@savedforeword=\count433
+\c@holder=\count434
+\c@savedholder=\count435
+\c@introduction=\count436
+\c@savedintroduction=\count437
+\c@namea=\count438
+\c@savednamea=\count439
+\c@nameb=\count440
+\c@savednameb=\count441
+\c@namec=\count442
+\c@savednamec=\count443
+\c@translator=\count444
+\c@savedtranslator=\count445
+\c@shortauthor=\count446
+\c@savedshortauthor=\count447
+\c@shorteditor=\count448
+\c@savedshorteditor=\count449
+\c@booktranslator=\count450
+\c@savedbooktranslator=\count451
+\c@bookcommentator=\count452
+\c@savedbookcommentator=\count453
+\c@bookannotator=\count454
+\c@savedbookannotator=\count455
+\c@bookintroduction=\count456
+\c@savedbookintroduction=\count457
+\c@bookforeword=\count458
+\c@savedbookforeword=\count459
+\c@bookafterword=\count460
+\c@savedbookafterword=\count461
+\c@labelname=\count462
+\c@savedlabelname=\count463
+\c@institution=\count464
+\c@savedinstitution=\count465
+\c@lista=\count466
+\c@savedlista=\count467
+\c@listb=\count468
+\c@savedlistb=\count469
+\c@listc=\count470
+\c@savedlistc=\count471
+\c@listd=\count472
+\c@savedlistd=\count473
+\c@liste=\count474
+\c@savedliste=\count475
+\c@listf=\count476
+\c@savedlistf=\count477
+\c@location=\count478
+\c@savedlocation=\count479
+\c@organization=\count480
+\c@savedorganization=\count481
+\c@origlocation=\count482
+\c@savedoriglocation=\count483
+\c@origpublisher=\count484
+\c@savedorigpublisher=\count485
+\c@publisher=\count486
+\c@savedpublisher=\count487
+\c@language=\count488
+\c@savedlanguage=\count489
+\c@origlanguage=\count490
+\c@savedoriglanguage=\count491
+\c@bookoriglanguage=\count492
+\c@savedbookoriglanguage=\count493
+\c@specdata=\count494
+\c@savedspecdata=\count495
+\c@credits=\count496
+\c@savedcredits=\count497
+\c@bookcredits=\count498
+\c@savedbookcredits=\count499
+\c@editioncredits=\count500
+\c@savededitioncredits=\count501
+\c@pageref=\count502
+\c@savedpageref=\count503
+\shorthandwidth=\skip258
+\shortjournalwidth=\skip259
+\shortserieswidth=\skip260
+\shorttitlewidth=\skip261
+\shortauthorwidth=\skip262
+\shorteditorwidth=\skip263
+\locallabelnumberwidth=\skip264
+\locallabelalphawidth=\skip265
+\localshorthandwidth=\skip266
+\localshortjournalwidth=\skip267
+\localshortserieswidth=\skip268
+\localshorttitlewidth=\skip269
+\localshortauthorwidth=\skip270
+\localshorteditorwidth=\skip271
+Package biblatex Info: Trying to load enhanced support for Unicode engines...
+Package biblatex Info: ... file 'blx-unicode.def' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/blx-unicode.def)
+Package biblatex Info: Trying to load compatibility code...
+Package biblatex Info: ... file 'blx-compat.def' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/blx-compat.def
+File: blx-compat.def 2023/03/05 v3.19 biblatex compatibility (PK/MW)
+)
+Package biblatex Info: Trying to load generic definitions...
+Package biblatex Info: ... file 'biblatex.def' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.def
+File: biblatex.def 2023/03/05 v3.19 biblatex compatibility (PK/MW)
+\c@textcitecount=\count504
+\c@textcitetotal=\count505
+\c@textcitemaxnames=\count506
+\c@biburlbigbreakpenalty=\count507
+\c@biburlbreakpenalty=\count508
+\c@biburlnumpenalty=\count509
+\c@biburlucpenalty=\count510
+\c@biburllcpenalty=\count511
+\biburlbigskip=\muskip18
+\biburlnumskip=\muskip19
+\biburlucskip=\muskip20
+\biburllcskip=\muskip21
+\c@smartand=\count512
+)
+Package biblatex Info: Trying to load bibliography style 'gost-numeric'...
+Package biblatex Info: ... file 'gost-numeric.bbx' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex-gost/gost-numeric.bbx
+File: gost-numeric.bbx 2023/04/25 v1.24 biblatex-gost styles
+Package biblatex Info: Trying to load bibliography style 'gost-standard'...
+Package biblatex Info: ... file 'gost-standard.bbx' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex-gost/gost-standard.bbx
+File: gost-standard.bbx 2023/04/25 v1.24 biblatex-gost styles
+Package biblatex Info: Trying to load biblatex-gost generic definitions...
+Package biblatex Info: ... file 'biblatex-gost.def' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex-gost/biblatex-gost.def
+File: biblatex-gost.def 2023/04/25 v1.24 biblatex-gost styles
+)
+\c@blx@gost@pointer=\count513
+\c@bbx:relatedcount=\count514
+\c@bbx:relatedtotal=\count515
+Package biblatex Info: Redefining autocite command 'footnote'.
+Package biblatex Info: Redefining autocite command 'superscript'.
+))
+Package biblatex Info: Trying to load citation style 'gost-numeric'...
+Package biblatex Info: ... file 'gost-numeric.cbx' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex-gost/gost-numeric.cbx
+File: gost-numeric.cbx 2023/04/25 v1.24 biblatex-gost styles
+Package biblatex Info: Trying to load citation style 'numeric-comp'...
+Package biblatex Info: ... file 'numeric-comp.cbx' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/cbx/numeric-comp.cbx
+File: numeric-comp.cbx 2023/03/05 v3.19 biblatex citation style (PK/MW)
+\c@cbx@tempcnta=\count516
+\c@cbx@tempcntb=\count517
+\c@cbx@tempcntc=\count518
+\c@cbx@tempcntd=\count519
+Package biblatex Info: Redefining '\cite'.
+Package biblatex Info: Redefining '\parencite'.
+Package biblatex Info: Redefining '\footcite'.
+Package biblatex Info: Redefining '\footcitetext'.
+Package biblatex Info: Redefining '\smartcite'.
+Package biblatex Info: Redefining '\supercite'.
+Package biblatex Info: Redefining '\textcite'.
+Package biblatex Info: Redefining '\textcites'.
+Package biblatex Info: Redefining '\cites'.
+Package biblatex Info: Redefining '\parencites'.
+Package biblatex Info: Redefining '\smartcites'.
+))
+Package biblatex Info: Trying to load configuration file...
+Package biblatex Info: ... file 'biblatex.cfg' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/biblatex.cfg
+File: biblatex.cfg 
+)
+Package biblatex Info: XeTeX detected.
+(biblatex)             Assuming input encoding 'utf8'.
+Package biblatex Info: Document encoding is UTF8 ....
+Package biblatex Info: ... and expl3
+(biblatex)             2024-01-22 L3 programming layer (loader) 
+(biblatex)             is new enough (at least 2020/04/06),
+(biblatex)             setting 'casechanger=expl3'.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/blx-case-expl3.sty
+Package: blx-case-expl3 2023/03/05 v3.19 expl3 case changing code for biblatex
+))
+Package biblatex Info: Delimiter 'bibinitdelim' in context '' already defined, 
+overwriting on input line 143.
+
+(/usr/share/texlive/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2023-11-01 v4.19 Multi-page Table package (DPC)
+\LTleft=\skip272
+\LTright=\skip273
+\LTpre=\skip274
+\LTpost=\skip275
+\LTchunksize=\count520
+\LTcapwidth=\dimen279
+\LT@head=\box63
+\LT@firsthead=\box64
+\LT@foot=\box65
+\LT@lastfoot=\box66
+\LT@gbox=\box67
+\LT@cols=\count521
+\LT@rows=\count522
+\c@LT@tables=\count523
+\c@LT@chunks=\count524
+\LT@p@ftn=\toks35
+)
+(/usr/share/texlive/texmf-dist/tex/latex/caption/ltcaption.sty
+Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/multirow/multirow.sty
+Package: multirow 2021/03/15 v2.8 Span multiple rows of a table
+\multirow@colwidth=\skip276
+\multirow@cntb=\count525
+\multirow@dima=\skip277
+\bigstrutjot=\dimen280
+)
+(/usr/share/texlive/texmf-dist/tex/latex/makecell/makecell.sty
+Package: makecell 2009/08/03 V0.1e Managing of Tab Column Heads and Cells
+\rotheadsize=\dimen281
+\c@nlinenum=\count526
+\TeXr@lab=\toks36
+)
+(/usr/share/texlive/texmf-dist/tex/generic/soul/soulutf8.sty
+Package: soulutf8 2023-06-14 v3.1 Permit use of UTF-8 characters in soul (HO)
 
 
-(./PLA_lab4_report.aux)
+Package soulutf8 Warning: This package is obsolete,
+(soulutf8)                use the soul package directly. 
+(soulutf8)                 on input line 29.
+
+) (/usr/share/texlive/texmf-dist/tex/generic/soul/soul.sty
+Package: soul 2023-06-14 v3.1 Permit use of UTF-8 characters in soul (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/soul/soul-ori.sty
+Package: soul-ori 2023-06-14 v3.1 letterspacing/underlining (mf)
+\SOUL@word=\toks37
+\SOUL@lasttoken=\toks38
+\SOUL@syllable=\toks39
+\SOUL@cmds=\toks40
+\SOUL@buffer=\toks41
+\SOUL@token=\toks42
+\SOUL@syllgoal=\dimen282
+\SOUL@syllwidth=\dimen283
+\SOUL@charkern=\dimen284
+\SOUL@hyphkern=\dimen285
+\SOUL@dimen=\dimen286
+\SOUL@dimeni=\dimen287
+\SOUL@minus=\count527
+\SOUL@comma=\count528
+\SOUL@apo=\count529
+\SOUL@grave=\count530
+\SOUL@spaceskip=\skip278
+\SOUL@ttwidth=\dimen288
+\SOUL@uldp=\dimen289
+\SOUL@ulht=\dimen290
+)
+(/usr/share/texlive/texmf-dist/tex/generic/etexcmds/etexcmds.sty
+Package: etexcmds 2019/12/15 v1.7 Avoid name clashes with e-TeX commands (HO)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/was/icomma.sty
+Package: icomma 2002/03/10 v2.0 (WaS)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/hyphenat/hyphenat.sty
+Package: hyphenat 2009/09/02 v2.3c hyphenation utilities
+\langwohyphens=\language91
+LaTeX Info: Redefining \_ on input line 43.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/textcomp.sty
+Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
+)
+(/usr/share/texlive/texmf-dist/tex/latex/mhchem/mhchem.sty
+Package: mhchem 2024/01/29 v4.10 for typesetting chemical formulae
+
+(/usr/share/texlive/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
+Package: l3keys2e 2023-10-10 LaTeX2e option processing using LaTeX3 keys
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2023/07/08 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count531
+\calc@Bcount=\count532
+\calc@Adimen=\dimen291
+\calc@Bdimen=\dimen292
+\calc@Askip=\skip279
+\calc@Bskip=\skip280
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count533
+\calc@Cskip=\skip281
+)
+(/usr/share/texlive/texmf-dist/tex/latex/chemgreek/chemgreek.sty
+Package: chemgreek 2020/01/16 v1.1a interface for upright Greek letters for use
+ in chemistry (CN)
+\l__chemgreek_tmpa_int=\count534
+\g__chemgreek_tmpa_int=\count535
+)
+\l__mhchem_ce_distanceFromLastComma_int=\count536
+\__mhchem_arrow_extPgfLength_skip=\skip282
+\mhchem@minispace@tmp=\skip283
+\mhchem@minibackspace@tmp=\skip284
+\mhchem@bondwidth=\skip285
+\mhchem@bondheight=\skip286
+\mhchem@smallbondwidth@tmpA=\skip287
+\mhchem@smallbondwidth@tmpB=\skip288
+\mhchem@smallbondwidth=\skip289
+\mhchem@bondtmp@minussidebearingleft=\skip290
+\mhchem@bondtmp@minussidebearingright=\skip291
+\l__mhchem_option_version_int=\count537
+\mhchem@option@minusmathsidebearingleft=\dimen293
+\mhchem@option@minusmathsidebearingright=\dimen294
+\mhchem@option@minustextsidebearingleft=\dimen295
+\mhchem@option@minustextsidebearingright=\dimen296
+)
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.sty
+\lst@mode=\count538
+\lst@gtempboxa=\box68
+\lst@token=\toks43
+\lst@length=\count539
+\lst@currlwidth=\dimen297
+\lst@column=\count540
+\lst@pos=\count541
+\lst@lostspace=\dimen298
+\lst@width=\dimen299
+\lst@newlines=\count542
+\lst@lineno=\count543
+\lst@maxwidth=\dimen300
+
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
+\c@lstnumber=\count544
+\lst@skipnumbers=\count545
+\lst@framebox=\box69
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/listings.cfg
+File: listings.cfg 2023/02/27 1.9 listings configuration
+))
+Package: listings 2023/02/27 1.9 (Carsten Heinz)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
+Package: color 2022/01/06 v1.3d Standard LaTeX Color (DPC)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package color Info: Driver file: xetex.def on input line 149.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/mathcolor.ltx))
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2023/02/27 1.9 listings language file
+)
+Package csquotes Info: Checking for multilingual support...
+Package csquotes Info: ... found 'babel' package.
+Package csquotes Info: Adjusting default style.
+Package csquotes Info: Redefining alias 'default' -> 'russian'.
+
+(./PLA_lab4_report.aux
+
+Package babel Info: The following font families will use the default
+(babel)             settings for all or some languages:
+(babel)             * \sffamily = lmss
+(babel)               "[lmsans12-regular]:mapping=tex-text;" at 14.4pt
+(babel)             * \ttfamily = lmtt
+(babel)               "[lmmono12-regular]:" at 14.4pt
+(babel)             There is nothing intrinsically wrong with it, but
+(babel)             'babel' will no set Script and Language, which could
+(babel)             be relevant in some languages. If your document uses
+(babel)             these families, consider redefining them with \babelfont.
+(babel)             Reported on input line 4.
+
+)
 \openout1 = `PLA_lab4_report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 115.
-LaTeX Font Info:    ... okay on input line 115.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 115.
-LaTeX Font Info:    ... okay on input line 115.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 115.
-LaTeX Font Info:    ... okay on input line 115.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 115.
-LaTeX Font Info:    ... okay on input line 115.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 115.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 189.
+LaTeX Font Info:    ... okay on input line 189.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 189.
+LaTeX Font Info:    ... okay on input line 189.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 189.
+LaTeX Font Info:    ... okay on input line 189.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 189.
+LaTeX Font Info:    ... okay on input line 189.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 189.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 1
-15.
+89.
  (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
 File: ts1cmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 115.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 115.
-LaTeX Font Info:    ... okay on input line 115.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 115.
-LaTeX Font Info:    ... okay on input line 115.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 115.
-LaTeX Font Info:    ... okay on input line 115.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 115.
-LaTeX Font Info:    ... okay on input line 115.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 115.
-LaTeX Font Info:    ... okay on input line 115.
+LaTeX Font Info:    ... okay on input line 189.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 189.
+LaTeX Font Info:    ... okay on input line 189.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 189.
+LaTeX Font Info:    ... okay on input line 189.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 189.
+LaTeX Font Info:    ... okay on input line 189.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 189.
+LaTeX Font Info:    ... okay on input line 189.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 189.
+LaTeX Font Info:    ... okay on input line 189.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
@@ -821,115 +1314,139 @@ LaTeX Font Info:    ... okay on input line 115.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-
-Package babel Info: The following font families will use the default
-(babel)             settings for all or some languages:
-(babel)             * \sffamily = lmss
-(babel)               "[lmsans12-regular]:mapping=tex-text;" at 14.4pt
-(babel)             * \ttfamily = lmtt
-(babel)               "[lmmono12-regular]:" at 14.4pt
-(babel)             There is nothing intrinsically wrong with it, but
-(babel)             'babel' will no set Script and Language, which could
-(babel)             be relevant in some languages. If your document uses
-(babel)             these families, consider redefining them with \babelfont.
-(babel)             Reported on input line 115.
-
-LaTeX Info: Redefining \th on input line 115.
+LaTeX Info: Redefining \th on input line 189.
 
 Package fontspec Info: Adjusting the maths setup (use [no-math] to avoid
 (fontspec)             this).
 
 \symlegacymaths=\mathgroup6
 LaTeX Font Info:    Overwriting symbol font `legacymaths' in version `bold'
-(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 115.
-LaTeX Font Info:    Redeclaring math accent \acute on input line 115.
-LaTeX Font Info:    Redeclaring math accent \grave on input line 115.
-LaTeX Font Info:    Redeclaring math accent \ddot on input line 115.
-LaTeX Font Info:    Redeclaring math accent \tilde on input line 115.
-LaTeX Font Info:    Redeclaring math accent \bar on input line 115.
-LaTeX Font Info:    Redeclaring math accent \breve on input line 115.
-LaTeX Font Info:    Redeclaring math accent \check on input line 115.
-LaTeX Font Info:    Redeclaring math accent \hat on input line 115.
-LaTeX Font Info:    Redeclaring math accent \dot on input line 115.
-LaTeX Font Info:    Redeclaring math accent \mathring on input line 115.
-LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 115.
-LaTeX Font Info:    Redeclaring math symbol \Delta on input line 115.
-LaTeX Font Info:    Redeclaring math symbol \Theta on input line 115.
-LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 115.
-LaTeX Font Info:    Redeclaring math symbol \Xi on input line 115.
-LaTeX Font Info:    Redeclaring math symbol \Pi on input line 115.
-LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 115.
-LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 115.
-LaTeX Font Info:    Redeclaring math symbol \Phi on input line 115.
-LaTeX Font Info:    Redeclaring math symbol \Psi on input line 115.
-LaTeX Font Info:    Redeclaring math symbol \Omega on input line 115.
-LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 115.
-LaTeX Font Info:    Redeclaring symbol font `operators' on input line 115.
+(Font)                  OT1/cmr/m/n --> OT1/cmr/bx/n on input line 189.
+LaTeX Font Info:    Redeclaring math accent \acute on input line 189.
+LaTeX Font Info:    Redeclaring math accent \grave on input line 189.
+LaTeX Font Info:    Redeclaring math accent \ddot on input line 189.
+LaTeX Font Info:    Redeclaring math accent \tilde on input line 189.
+LaTeX Font Info:    Redeclaring math accent \bar on input line 189.
+LaTeX Font Info:    Redeclaring math accent \breve on input line 189.
+LaTeX Font Info:    Redeclaring math accent \check on input line 189.
+LaTeX Font Info:    Redeclaring math accent \hat on input line 189.
+LaTeX Font Info:    Redeclaring math accent \dot on input line 189.
+LaTeX Font Info:    Redeclaring math accent \mathring on input line 189.
+LaTeX Font Info:    Redeclaring math symbol \Gamma on input line 189.
+LaTeX Font Info:    Redeclaring math symbol \Delta on input line 189.
+LaTeX Font Info:    Redeclaring math symbol \Theta on input line 189.
+LaTeX Font Info:    Redeclaring math symbol \Lambda on input line 189.
+LaTeX Font Info:    Redeclaring math symbol \Xi on input line 189.
+LaTeX Font Info:    Redeclaring math symbol \Pi on input line 189.
+LaTeX Font Info:    Redeclaring math symbol \Sigma on input line 189.
+LaTeX Font Info:    Redeclaring math symbol \Upsilon on input line 189.
+LaTeX Font Info:    Redeclaring math symbol \Phi on input line 189.
+LaTeX Font Info:    Redeclaring math symbol \Psi on input line 189.
+LaTeX Font Info:    Redeclaring math symbol \Omega on input line 189.
+LaTeX Font Info:    Redeclaring math symbol \mathdollar on input line 189.
+LaTeX Font Info:    Redeclaring symbol font `operators' on input line 189.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 115.
+(Font)              `operators' in the math version `normal' on input line 189.
 
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/cmr/m/n --> TU/TimesNewRoman(0)/m/n on input line 1
-15.
+89.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 115.
+(Font)              `operators' in the math version `bold' on input line 189.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
 (Font)                  OT1/cmr/bx/n --> TU/TimesNewRoman(0)/m/n on input line 
-115.
+189.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  TU/TimesNewRoman(0)/m/n --> TU/TimesNewRoman(0)/m/n on 
-input line 115.
+input line 189.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
 (Font)                  OT1/cmr/m/it --> TU/TimesNewRoman(0)/m/it on input line
- 115.
+ 189.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
 (Font)                  OT1/cmr/bx/n --> TU/TimesNewRoman(0)/b/n on input line 
-115.
+189.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 115.
+(Font)                  OT1/cmss/m/n --> TU/lmss/m/n on input line 189.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 115.
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/m/n on input line 189.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
 (Font)                  TU/TimesNewRoman(0)/m/n --> TU/TimesNewRoman(0)/b/n on 
-input line 115.
+input line 189.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
 (Font)                  OT1/cmr/bx/it --> TU/TimesNewRoman(0)/b/it on input lin
-e 115.
+e 189.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/cmss/bx/n --> TU/lmss/b/n on input line 115.
+(Font)                  OT1/cmss/bx/n --> TU/lmss/b/n on input line 189.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 115.
+(Font)                  OT1/cmtt/m/n --> TU/lmtt/b/n on input line 189.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
+Package caption Info: listings package is loaded.
+Package caption Info: longtable package is loaded.
 Package caption Info: End \AtBeginDocument code.
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
-Package: color 2022/01/06 v1.3d Standard LaTeX Color (DPC)
-
-(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
-File: color.cfg 2016/01/02 v1.6 sample color configuration
-)
-Package color Info: Driver file: xetex.def on input line 149.
-
-(/usr/share/texlive/texmf-dist/tex/latex/graphics/mathcolor.ltx))
-Package hyperref Info: Link coloring ON on input line 115.
-
+Package hyperref Info: Link coloring ON on input line 189.
 (./PLA_lab4_report.out) (./PLA_lab4_report.out)
-\@outlinefile=\write4
-\openout4 = `PLA_lab4_report.out'.
+\@outlinefile=\write5
+\openout5 = `PLA_lab4_report.out'.
 
+Package biblatex Info: Trying to load language 'russian' -> 'russian-gost'...
+Package biblatex Info: ... file 'russian-gost.lbx' found.
 
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex-gost/russian-gost.lbx
+File: russian-gost.lbx 2023/04/25 v1.24 biblatex-gost styles
+Package biblatex Info: Trying to load language 'russian'...
+Package biblatex Info: ... file 'russian.lbx' found.
 
-Package hyperref Warning: Rerun to get /PageLabels entry.
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/lbx/russian.lbx
+File: russian.lbx 2023/03/05 v3.19 biblatex localization (PK/MW)
+)
+Package biblatex Info: Trying to load language 'russian'...
+Package biblatex Info: ... file 'russian.lbx' found.
 
-(./1_title.tex)
-No file PLA_lab4_report.toc.
-(./2_intro.tex [1
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/lbx/russian.lbx
+File: russian.lbx 2023/03/05 v3.19 biblatex localization (PK/MW)
+))
+Package biblatex Info: Trying to load language 'english' -> 'english-gost'...
+Package biblatex Info: ... file 'english-gost.lbx' found.
 
-]
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex-gost/english-gost.lbx
+File: english-gost.lbx 2023/04/25 v1.24 biblatex-gost styles
+Package biblatex Info: Trying to load language 'english'...
+Package biblatex Info: ... file 'english.lbx' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/lbx/english.lbx
+File: english.lbx 2023/03/05 v3.19 biblatex localization (PK/MW)
+)
+Package biblatex Info: Trying to load language 'english'...
+Package biblatex Info: ... file 'english.lbx' found.
+
+(/usr/share/texlive/texmf-dist/tex/latex/biblatex/lbx/english.lbx
+File: english.lbx 2023/03/05 v3.19 biblatex localization (PK/MW)
+))
+Package biblatex Info: XeTeX detected.
+(biblatex)             Assuming input encoding 'utf8'.
+Package biblatex Info: Data encoding 'utf8' specified.
+(biblatex)             No need to reencode data.
+\openout4 = `PLA_lab4_report.bcf'.
+
+Package biblatex Info: Trying to load bibliographic data...
+Package biblatex Info: ... file 'PLA_lab4_report.bbl' not found.
+
+No file PLA_lab4_report.bbl.
+Package biblatex Info: Reference section=0 on input line 189.
+Package biblatex Info: Reference segment=0 on input line 189.
+
+Package chemgreek Info: Activating mapping `fontspec' on line 189.
+
+\c@lstlisting=\count546
+(./1_title.tex) [1
+
+] (./2_intro.tex
 LaTeX Font Info:    Trying to load font information for U+msa on input line 19.
 
- (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
+
+(/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
 LaTeX Font Info:    Trying to load font information for U+msb on input line 19.
@@ -943,9 +1460,9 @@ Underfull \hbox (badness 3635) in paragraph at lines 27--28
 ма асимптотически устойчива, при этом если
  []
 
+[2]
 File: images/task1/system1_asymptotically_stable.png Graphic file (type bmp)
 <images/task1/system1_asymptotically_stable.png>
-[2]
 File: images/task1/system2_unstable_defective.png Graphic file (type bmp)
 <images/task1/system2_unstable_defective.png>
  [3]
@@ -955,20 +1472,19 @@ File: images/task1/system3_unstable_v1_to_zero.png Graphic file (type bmp)
 File: images/task1/system4_asymptotically_stable_complex.png Graphic file (type
  bmp)
 <images/task1/system4_asymptotically_stable_complex.png>
+ [5]
 File: images/task1/system5_unstable_complex.png Graphic file (type bmp)
 <images/task1/system5_unstable_complex.png>
- [5]
 File: images/task1/system6_neutrally_stable.png Graphic file (type bmp)
 <images/task1/system6_neutrally_stable.png>
- [6]
+ [6] [7]
 File: images/task2/eigenvalues_complex_plane.png Graphic file (type bmp)
 <images/task2/eigenvalues_complex_plane.png>
- [7]
 File: images/task2/system1_lambda_minus1.png Graphic file (type bmp)
 <images/task2/system1_lambda_minus1.png>
+ [8]
 File: images/task2/system3_lambda_pure_imaginary.png Graphic file (type bmp)
 <images/task2/system3_lambda_pure_imaginary.png>
- [8]
 File: images/task2/system5_lambda_plus1.png Graphic file (type bmp)
 <images/task2/system5_lambda_plus1.png>
  [9]
@@ -984,15 +1500,19 @@ File: images/task3/oscillator_case3_unstable.png Graphic file (type bmp)
 File: images/task3/oscillator_case4_unstable_damped.png Graphic file (type bmp)
 
 <images/task3/oscillator_case4_unstable_damped.png>
+ [13]
 File: images/task3/oscillator_comparison.png Graphic file (type bmp)
 <images/task3/oscillator_comparison.png>
- [13] [14]
-Underfull \hbox (badness 1616) in paragraph at lines 395--396
-[]\TU/TimesNewRoman(0)/m/n/14.4 Практическое применение теории собственных чисе
-л для анализа
+ [14]
+Underfull \hbox (badness 3884) in paragraph at lines 357--358
+[]\TU/TimesNewRoman(0)/m/n/14.4 Энергетический анализ подтверждает качественные
+ выводы об
  []
 
-)
+[15])
+
+LaTeX Warning: Empty bibliography on input line 204.
+
 
 Package caption Warning: Unused \captionsetup[subfigure] on input line 85.
 See the caption package documentation for explanation.
@@ -1001,15 +1521,14 @@ See the caption package documentation for explanation.
 Package caption Warning: Unused \captionsetup[table] on input line 86.
 See the caption package documentation for explanation.
 
-[15] [16]
-\tf@toc=\write5
-\openout5 = `PLA_lab4_report.toc'.
-
- (./PLA_lab4_report.aux)
+[16] [17] (./PLA_lab4_report.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2020/03/25>
  ***********
+
+
+LaTeX Warning: There were undefined references.
 
 
 Package rerunfilecheck Warning: File `PLA_lab4_report.out' has changed.
@@ -1017,16 +1536,24 @@ Package rerunfilecheck Warning: File `PLA_lab4_report.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `PLA_lab4_report.out':
-(rerunfilecheck)             Before: D41D8CD98F00B204E9800998ECF8427E;0
-(rerunfilecheck)             After:  4134F103E8D7CCC9940EDAC5344D0DBD;123.
+(rerunfilecheck)             Before: 4134F103E8D7CCC9940EDAC5344D0DBD;123
+(rerunfilecheck)             After:  D41D8CD98F00B204E9800998ECF8427E;0.
+
+Package biblatex Warning: Please (re)run Biber on the file:
+(biblatex)                PLA_lab4_report
+(biblatex)                and rerun LaTeX afterwards.
+
+Package logreq Info: Writing requests to 'PLA_lab4_report.run.xml'.
+\openout1 = `PLA_lab4_report.run.xml'.
+
  ) 
 Here is how much of TeX's memory you used:
- 18818 strings out of 474878
- 350402 string characters out of 5762516
- 1926627 words of memory out of 5000000
- 40602 multiletter control sequences out of 15000+600000
- 565865 words of font info for 90 fonts, out of 8000000 for 9000
+ 30131 strings out of 474878
+ 576909 string characters out of 5762516
+ 1927627 words of memory out of 5000000
+ 51768 multiletter control sequences out of 15000+600000
+ 566178 words of font info for 91 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 85i,12n,93p,331b,480s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 85i,12n,93p,1160b,3875s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on PLA_lab4_report.pdf (16 pages).
+Output written on PLA_lab4_report.pdf (17 pages).
