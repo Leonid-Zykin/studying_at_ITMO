@@ -64,9 +64,17 @@ def create_sharpening_kernel():
 def image_sharpening():
     """Увеличение резкости изображений"""
     
-    # Создаем тестовое изображение
-    print("Создание тестового изображения...")
-    original_image = create_test_image()
+    # Загружаем готовое изображение
+    print("Загрузка исходного изображения...")
+    try:
+        from PIL import Image
+        img_path = '../images/task3/original_image.png'
+        img_pil = Image.open(img_path).convert('L')
+        original_image = np.array(img_pil) / 255.0
+        print(f"Загружено изображение размером {original_image.shape}")
+    except FileNotFoundError:
+        print("Файл original_image.png не найден, создаем тестовое изображение...")
+        original_image = create_test_image()
     
     # Сохраняем исходное изображение
     plt.figure(figsize=(8, 6))
@@ -93,11 +101,11 @@ def image_sharpening():
     
     # Применяем увеличение резкости с помощью свёртки
     print("Применение увеличения резкости с помощью свёртки...")
-    sharpened_conv = ndimage.convolve(original_image, sharpening_kernel, mode='constant', cval=0)
+    sharpened_conv = ndimage.convolve(original_image, sharpening_kernel, mode='wrap')
     
     # Применяем увеличение резкости несколько раз
-    sharpened_conv_2x = ndimage.convolve(sharpened_conv, sharpening_kernel, mode='constant', cval=0)
-    sharpened_conv_3x = ndimage.convolve(sharpened_conv_2x, sharpening_kernel, mode='constant', cval=0)
+    sharpened_conv_2x = ndimage.convolve(sharpened_conv, sharpening_kernel, mode='wrap')
+    sharpened_conv_3x = ndimage.convolve(sharpened_conv_2x, sharpening_kernel, mode='wrap')
     
     # Визуализация результатов свёртки
     plt.figure(figsize=(15, 10))

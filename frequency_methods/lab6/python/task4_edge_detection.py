@@ -78,9 +78,17 @@ def create_edge_detection_kernel():
 def edge_detection():
     """Выделение краёв изображений"""
     
-    # Создаем тестовое изображение
-    print("Создание тестового изображения...")
-    original_image = create_test_image()
+    # Загружаем готовое изображение
+    print("Загрузка исходного изображения...")
+    try:
+        from PIL import Image
+        img_path = '../images/task4/original_image.png'
+        img_pil = Image.open(img_path).convert('L')
+        original_image = np.array(img_pil) / 255.0
+        print(f"Загружено изображение размером {original_image.shape}")
+    except FileNotFoundError:
+        print("Файл original_image.png не найден, создаем тестовое изображение...")
+        original_image = create_test_image()
     
     # Сохраняем исходное изображение
     plt.figure(figsize=(8, 6))
@@ -107,13 +115,13 @@ def edge_detection():
     
     # Применяем выделение краёв с помощью свёртки
     print("Применение выделения краёв с помощью свёртки...")
-    edge_conv = ndimage.convolve(original_image, edge_kernel, mode='constant', cval=0)
+    edge_conv = ndimage.convolve(original_image, edge_kernel, mode='wrap')
     
     # Нормализуем результат
     edge_conv_normalized = np.clip(edge_conv, 0, 1)
     
     # Применяем выделение краёв несколько раз
-    edge_conv_2x = ndimage.convolve(edge_conv_normalized, edge_kernel, mode='constant', cval=0)
+    edge_conv_2x = ndimage.convolve(edge_conv_normalized, edge_kernel, mode='wrap')
     edge_conv_2x_normalized = np.clip(edge_conv_2x, 0, 1)
     
     # Визуализация результатов свёртки

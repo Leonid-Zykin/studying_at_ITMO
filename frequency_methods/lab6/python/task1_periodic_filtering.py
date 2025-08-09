@@ -43,9 +43,17 @@ def create_test_image_with_periodicity():
 def periodic_filtering():
     """Фильтрация изображений с периодичностью"""
     
-    # Создаем тестовое изображение с периодичностью
-    print("Создание тестового изображения с периодичностью...")
-    original_image = create_test_image_with_periodicity()
+    # Загружаем готовое изображение
+    print("Загрузка исходного изображения...")
+    try:
+        # Загружаем изображение из файла
+        img_path = '../images/task1/original_image.png'
+        img_pil = Image.open(img_path).convert('L')  # Конвертируем в градации серого
+        original_image = np.array(img_pil) / 255.0  # Нормализуем к [0, 1]
+        print(f"Загружено изображение размером {original_image.shape}")
+    except FileNotFoundError:
+        print("Файл original_image.png не найден, создаем тестовое изображение...")
+        original_image = create_test_image_with_periodicity()
     
     # Сохраняем исходное изображение
     plt.figure(figsize=(10, 8))

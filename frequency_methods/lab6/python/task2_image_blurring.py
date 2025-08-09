@@ -64,9 +64,17 @@ def create_gaussian_kernel(n):
 def image_blurring():
     """Размытие изображений"""
     
-    # Создаем тестовое изображение
-    print("Создание тестового изображения...")
-    original_image = create_test_image()
+    # Загружаем готовое изображение
+    print("Загрузка исходного изображения...")
+    try:
+        from PIL import Image
+        img_path = '../images/task2/original_image.png'
+        img_pil = Image.open(img_path).convert('L')
+        original_image = np.array(img_pil) / 255.0
+        print(f"Загружено изображение размером {original_image.shape}")
+    except FileNotFoundError:
+        print("Файл original_image.png не найден, создаем тестовое изображение...")
+        original_image = create_test_image()
     
     # Сохраняем исходное изображение
     plt.figure(figsize=(8, 6))
@@ -113,11 +121,11 @@ def image_blurring():
     gaussian_results = {}
     
     for n in n_values:
-        # Блочное размытие
-        block_results[n] = ndimage.convolve(original_image, block_kernels[n], mode='constant', cval=0)
+        # Блочное размытие (используем 'wrap' для циклической свертки, аналогичной FFT)
+        block_results[n] = ndimage.convolve(original_image, block_kernels[n], mode='wrap')
         
         # Гауссовское размытие
-        gaussian_results[n] = ndimage.convolve(original_image, gaussian_kernels[n], mode='constant', cval=0)
+        gaussian_results[n] = ndimage.convolve(original_image, gaussian_kernels[n], mode='wrap')
     
     # Визуализация результатов свёртки
     plt.figure(figsize=(15, 10))
@@ -151,39 +159,28 @@ def image_blurring():
     fft_original = fft2(original_image)
     
     for n in n_values:
-        # Создаем ядра того же размера, что и изображение
+        # Создаем ядра того же размера, что и изображение (для циклической свертки)
         h, w = original_image.shape
-        k, l = n, n
         
-        # Создаем расширенные ядра
-        block_kernel_extended = np.zeros((h + k - 1, w + l - 1))
-        gaussian_kernel_extended = np.zeros((h + k - 1, w + l - 1))
+        # Создаем ядра размером с изображение
+        block_kernel_full = np.zeros((h, w))
+        gaussian_kernel_full = np.zeros((h, w))
         
-        # Размещаем ядра в центре
-        start_h = (h + k - 1 - k) // 2
-        start_w = (w + l - 1 - l) // 2
-        
-        block_kernel_extended[start_h:start_h+k, start_w:start_w+l] = block_kernels[n]
-        gaussian_kernel_extended[start_h:start_h+k, start_w:start_w+l] = gaussian_kernels[n]
+        # Размещаем ядра в левом верхнем углу (для циклической свертки)
+        block_kernel_full[:n, :n] = block_kernels[n]
+        gaussian_kernel_full[:n, :n] = gaussian_kernels[n]
         
         # Фурье-образы ядер
-        fft_block_kernel = fft2(block_kernel_extended)
-        fft_gaussian_kernel = fft2(gaussian_kernel_extended)
+        fft_block_kernel = fft2(block_kernel_full)
+        fft_gaussian_kernel = fft2(gaussian_kernel_full)
         
-        # Создаем Фурье-образ изображения того же размера
-        fft_original_extended = fft2(original_image, s=(h + k - 1, w + l - 1))
-        
-        # Поэлементное умножение
-        fft_block_result = fft_original_extended * fft_block_kernel
-        fft_gaussian_result = fft_original_extended * fft_gaussian_kernel
+        # Поэлементное умножение в частотной области (циклическая свертка)
+        fft_block_result = fft_original * fft_block_kernel
+        fft_gaussian_result = fft_original * fft_gaussian_kernel
         
         # Обратное преобразование
-        block_fft_result = np.real(ifft2(fft_block_result))
-        gaussian_fft_result = np.real(ifft2(fft_gaussian_result))
-        
-        # Обрезаем до исходного размера
-        block_fft_results[n] = block_fft_result[:h, :w]
-        gaussian_fft_results[n] = gaussian_fft_result[:h, :w]
+        block_fft_results[n] = np.real(ifft2(fft_block_result))
+        gaussian_fft_results[n] = np.real(ifft2(fft_gaussian_result))
     
     # Визуализация результатов Фурье-метода
     plt.figure(figsize=(15, 10))
@@ -210,45 +207,57 @@ def image_blurring():
     
     # Сравнение методов
     print("Сравнение методов размытия...")
-    plt.figure(figsize=(20, 15))
+    plt.figure(figsize=(25, 20))
+    
+    # Исходное изображение
+    plt.subplot(6, 6, 1)
+    plt.imshow(original_image, cmap='gray', vmin=0, vmax=1)
+    plt.title('Исходное изображение', fontsize=14, fontweight='bold')
+    plt.axis('off')
     
     for i, n in enumerate(n_values):
-        # Блочное размытие
-        plt.subplot(3, 4, i+1)
-        plt.imshow(block_results[n], cmap='gray')
-        plt.title(f'Блочное размытие (свёртка) n={n}')
+        row_offset = i * 2
+        
+        # Блочное размытие - свертка
+        plt.subplot(6, 6, 7 + row_offset * 6)
+        plt.imshow(block_results[n], cmap='gray', vmin=0, vmax=1)
+        plt.title(f'Блочное (свёртка) n={n}', fontsize=12)
         plt.axis('off')
         
-        plt.subplot(3, 4, i+5)
-        plt.imshow(block_fft_results[n], cmap='gray')
-        plt.title(f'Блочное размытие (FFT) n={n}')
+        # Блочное размытие - FFT
+        plt.subplot(6, 6, 8 + row_offset * 6)
+        plt.imshow(block_fft_results[n], cmap='gray', vmin=0, vmax=1)
+        plt.title(f'Блочное (FFT) n={n}', fontsize=12)
         plt.axis('off')
         
-        # Разность методов
+        # Разность блочного размытия
         diff_block = np.abs(block_results[n] - block_fft_results[n])
-        plt.subplot(3, 4, i+9)
-        plt.imshow(diff_block, cmap='hot')
-        plt.title(f'Разность блочного n={n}')
-        plt.colorbar()
+        max_diff_block = np.max(diff_block)
+        plt.subplot(6, 6, 9 + row_offset * 6)
+        im_diff = plt.imshow(diff_block, cmap='hot', vmin=0, vmax=max_diff_block)
+        plt.title(f'Разность блочного\nМакс: {max_diff_block:.6f}', fontsize=10)
+        plt.colorbar(im_diff, fraction=0.046)
         plt.axis('off')
         
-        # Гауссовское размытие
-        plt.subplot(3, 4, i+2)
-        plt.imshow(gaussian_results[n], cmap='gray')
-        plt.title(f'Гауссовское размытие (свёртка) n={n}')
+        # Гауссовское размытие - свертка
+        plt.subplot(6, 6, 10 + row_offset * 6)
+        plt.imshow(gaussian_results[n], cmap='gray', vmin=0, vmax=1)
+        plt.title(f'Гауссовское (свёртка) n={n}', fontsize=12)
         plt.axis('off')
         
-        plt.subplot(3, 4, i+6)
-        plt.imshow(gaussian_fft_results[n], cmap='gray')
-        plt.title(f'Гауссовское размытие (FFT) n={n}')
+        # Гауссовское размытие - FFT
+        plt.subplot(6, 6, 11 + row_offset * 6)
+        plt.imshow(gaussian_fft_results[n], cmap='gray', vmin=0, vmax=1)
+        plt.title(f'Гауссовское (FFT) n={n}', fontsize=12)
         plt.axis('off')
         
-        # Разность методов
+        # Разность гауссовского размытия
         diff_gaussian = np.abs(gaussian_results[n] - gaussian_fft_results[n])
-        plt.subplot(3, 4, i+10)
-        plt.imshow(diff_gaussian, cmap='hot')
-        plt.title(f'Разность гауссовского n={n}')
-        plt.colorbar()
+        max_diff_gaussian = np.max(diff_gaussian)
+        plt.subplot(6, 6, 12 + row_offset * 6)
+        im_diff_g = plt.imshow(diff_gaussian, cmap='hot', vmin=0, vmax=max_diff_gaussian)
+        plt.title(f'Разность гауссовского\nМакс: {max_diff_gaussian:.6f}', fontsize=10)
+        plt.colorbar(im_diff_g, fraction=0.046)
         plt.axis('off')
     
     plt.tight_layout()
