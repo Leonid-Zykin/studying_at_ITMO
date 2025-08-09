@@ -205,62 +205,118 @@ def image_blurring():
     plt.savefig('../images/task2/fft_results.png', dpi=300, bbox_inches='tight')
     plt.close()
     
-    # Сравнение методов
-    print("Сравнение методов размытия...")
-    plt.figure(figsize=(25, 20))
+    # Создаем отдельные графики для каждого метода размытия
+    print("Создание отдельных графиков сравнения методов...")
+    
+    # График 1: Блочное размытие
+    plt.figure(figsize=(20, 15))
     
     # Исходное изображение
-    plt.subplot(6, 6, 1)
+    plt.subplot(3, 4, 1)
     plt.imshow(original_image, cmap='gray', vmin=0, vmax=1)
-    plt.title('Исходное изображение', fontsize=14, fontweight='bold')
+    plt.title('Исходное изображение', fontsize=16, fontweight='bold')
     plt.axis('off')
     
     for i, n in enumerate(n_values):
-        row_offset = i * 2
-        
         # Блочное размытие - свертка
-        plt.subplot(6, 6, 7 + row_offset * 6)
+        plt.subplot(3, 4, i+2)
         plt.imshow(block_results[n], cmap='gray', vmin=0, vmax=1)
-        plt.title(f'Блочное (свёртка) n={n}', fontsize=12)
+        plt.title(f'Блочное размытие\n(свёртка) n={n}', fontsize=14)
         plt.axis('off')
         
         # Блочное размытие - FFT
-        plt.subplot(6, 6, 8 + row_offset * 6)
+        plt.subplot(3, 4, i+6)
         plt.imshow(block_fft_results[n], cmap='gray', vmin=0, vmax=1)
-        plt.title(f'Блочное (FFT) n={n}', fontsize=12)
+        plt.title(f'Блочное размытие\n(FFT) n={n}', fontsize=14)
         plt.axis('off')
         
         # Разность блочного размытия
         diff_block = np.abs(block_results[n] - block_fft_results[n])
         max_diff_block = np.max(diff_block)
-        plt.subplot(6, 6, 9 + row_offset * 6)
+        plt.subplot(3, 4, i+10)
         im_diff = plt.imshow(diff_block, cmap='hot', vmin=0, vmax=max_diff_block)
-        plt.title(f'Разность блочного\nМакс: {max_diff_block:.6f}', fontsize=10)
-        plt.colorbar(im_diff, fraction=0.046)
+        plt.title(f'Разность методов\nn={n}, макс: {max_diff_block:.6f}', fontsize=12)
+        plt.colorbar(im_diff, fraction=0.046, pad=0.04)
         plt.axis('off')
-        
+    
+    plt.suptitle('Сравнение методов блочного размытия', fontsize=20, fontweight='bold', y=0.98)
+    plt.tight_layout()
+    plt.subplots_adjust(top=0.93)
+    plt.savefig('../images/task2/block_blur_comparison.png', dpi=300, bbox_inches='tight')
+    plt.close()
+    
+    # График 2: Гауссовское размытие
+    plt.figure(figsize=(20, 15))
+    
+    # Исходное изображение
+    plt.subplot(3, 4, 1)
+    plt.imshow(original_image, cmap='gray', vmin=0, vmax=1)
+    plt.title('Исходное изображение', fontsize=16, fontweight='bold')
+    plt.axis('off')
+    
+    for i, n in enumerate(n_values):
         # Гауссовское размытие - свертка
-        plt.subplot(6, 6, 10 + row_offset * 6)
+        plt.subplot(3, 4, i+2)
         plt.imshow(gaussian_results[n], cmap='gray', vmin=0, vmax=1)
-        plt.title(f'Гауссовское (свёртка) n={n}', fontsize=12)
+        plt.title(f'Гауссовское размытие\n(свёртка) n={n}', fontsize=14)
         plt.axis('off')
         
         # Гауссовское размытие - FFT
-        plt.subplot(6, 6, 11 + row_offset * 6)
+        plt.subplot(3, 4, i+6)
         plt.imshow(gaussian_fft_results[n], cmap='gray', vmin=0, vmax=1)
-        plt.title(f'Гауссовское (FFT) n={n}', fontsize=12)
+        plt.title(f'Гауссовское размытие\n(FFT) n={n}', fontsize=14)
         plt.axis('off')
         
         # Разность гауссовского размытия
         diff_gaussian = np.abs(gaussian_results[n] - gaussian_fft_results[n])
         max_diff_gaussian = np.max(diff_gaussian)
-        plt.subplot(6, 6, 12 + row_offset * 6)
+        plt.subplot(3, 4, i+10)
         im_diff_g = plt.imshow(diff_gaussian, cmap='hot', vmin=0, vmax=max_diff_gaussian)
-        plt.title(f'Разность гауссовского\nМакс: {max_diff_gaussian:.6f}', fontsize=10)
-        plt.colorbar(im_diff_g, fraction=0.046)
+        plt.title(f'Разность методов\nn={n}, макс: {max_diff_gaussian:.6f}', fontsize=12)
+        plt.colorbar(im_diff_g, fraction=0.046, pad=0.04)
         plt.axis('off')
     
+    plt.suptitle('Сравнение методов гауссовского размытия', fontsize=20, fontweight='bold', y=0.98)
     plt.tight_layout()
+    plt.subplots_adjust(top=0.93)
+    plt.savefig('../images/task2/gaussian_blur_comparison.png', dpi=300, bbox_inches='tight')
+    plt.close()
+    
+    # График 3: Общее сравнение (более компактный)
+    plt.figure(figsize=(24, 12))
+    
+    # Исходное изображение
+    plt.subplot(2, 7, 1)
+    plt.imshow(original_image, cmap='gray', vmin=0, vmax=1)
+    plt.title('Исходное\nизображение', fontsize=14, fontweight='bold')
+    plt.axis('off')
+    
+    for i, n in enumerate(n_values):
+        # Блочное размытие
+        plt.subplot(2, 7, i+2)
+        plt.imshow(block_results[n], cmap='gray', vmin=0, vmax=1)
+        plt.title(f'Блочное\n(свёртка) n={n}', fontsize=12)
+        plt.axis('off')
+        
+        plt.subplot(2, 7, i+5)
+        plt.imshow(block_fft_results[n], cmap='gray', vmin=0, vmax=1)
+        plt.title(f'Блочное\n(FFT) n={n}', fontsize=12)
+        plt.axis('off')
+        
+        # Гауссовское размытие
+        plt.subplot(2, 7, i+9)
+        plt.imshow(gaussian_results[n], cmap='gray', vmin=0, vmax=1)
+        plt.title(f'Гауссовское\n(свёртка) n={n}', fontsize=12)
+        plt.axis('off')
+        
+        plt.subplot(2, 7, i+12)
+        plt.imshow(gaussian_fft_results[n], cmap='gray', vmin=0, vmax=1)
+        plt.title(f'Гауссовское\n(FFT) n={n}', fontsize=12)
+        plt.axis('off')
+    
+    plt.suptitle('Общее сравнение методов размытия', fontsize=18, fontweight='bold', y=0.95)
+    plt.tight_layout()
+    plt.subplots_adjust(top=0.88)
     plt.savefig('../images/task2/method_comparison.png', dpi=300, bbox_inches='tight')
     plt.close()
     
