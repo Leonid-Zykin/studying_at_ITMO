@@ -29,38 +29,38 @@ a, & |t| \le b \\
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{rect_function_b0.5.png}
+    \includegraphics[width=0.8\textwidth]{python/rect_function_b0.5.png}
     \caption{Прямоугольная функция $f(t)$ при $b = 0.5$}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{rect_fourier_b0.5.png}
-    \caption{Амплитудный спектр $|\hat{f}(\omega)|$ при $b = 0.5$}
+    \includegraphics[width=0.8\textwidth]{python/rect_fourier_b0.5.png}
+    \caption{Фурье-образ $\hat{f}(\omega)$ при $b = 0.5$}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{rect_function_b1.png}
+    \includegraphics[width=0.8\textwidth]{python/rect_function_b1.png}
     \caption{Прямоугольная функция $f(t)$ при $b = 1$}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{rect_fourier_b1.png}
-    \caption{Амплитудный спектр $|\hat{f}(\omega)|$ при $b = 1$}
+    \includegraphics[width=0.8\textwidth]{python/rect_fourier_b1.png}
+    \caption{Фурье-образ $\hat{f}(\omega)$ при $b = 1$}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{rect_function_b2.png}
+    \includegraphics[width=0.8\textwidth]{python/rect_function_b2.png}
     \caption{Прямоугольная функция $f(t)$ при $b = 2$}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{rect_fourier_b2.png}
-    \caption{Амплитудный спектр $|\hat{f}(\omega)|$ при $b = 2$}
+    \includegraphics[width=0.8\textwidth]{python/rect_fourier_b2.png}
+    \caption{Фурье-образ $\hat{f}(\omega)$ при $b = 2$}
 \end{figure}
 
 \textbf{Проверка равенства Парсеваля:}
@@ -129,38 +129,38 @@ a - \frac{a |t|}{b}, & |t| \le b \\
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{triangle_function_b0.5.png}
+    \includegraphics[width=0.8\textwidth]{python/triangle_function_b0.5.png}
     \caption{Треугольная функция $f(t)$ при $b = 0.5$}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{triangle_spectrum_b0.5.png}
-    \caption{Амплитудный спектр $|\hat{f}(\omega)|$ при $b = 0.5$}
+    \includegraphics[width=0.8\textwidth]{python/triangle_fourier_b0.5.png}
+    \caption{Фурье-образ $\hat{f}(\omega)$ при $b = 0.5$}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{triangle_function_b1.png}
+    \includegraphics[width=0.8\textwidth]{python/triangle_function_b1.png}
     \caption{Треугольная функция $f(t)$ при $b = 1$}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{triangle_spectrum_b1.png}
-    \caption{Амплитудный спектр $|\hat{f}(\omega)|$ при $b = 1$}
+    \includegraphics[width=0.8\textwidth]{python/triangle_fourier_b1.png}
+    \caption{Фурье-образ $\hat{f}(\omega)$ при $b = 1$}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{triangle_function_b2.png}
+    \includegraphics[width=0.8\textwidth]{python/triangle_function_b2.png}
     \caption{Треугольная функция $f(t)$ при $b = 2$}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{triangle_spectrum_b2.png}
-    \caption{Амплитудный спектр $|\hat{f}(\omega)|$ при $b = 2$}
+    \includegraphics[width=0.8\textwidth]{python/triangle_fourier_b2.png}
+    \caption{Фурье-образ $\hat{f}(\omega)$ при $b = 2$}
 \end{figure}
 
 \textbf{Проверка равенства Парсеваля:}
@@ -197,41 +197,55 @@ f(t) = a \cdot \mathrm{sinc}(bt) = a \cdot \frac{\sin(\pi b t)}{\pi b t}
 \hat{f}(\omega) = \frac{a}{\sqrt{2\pi}} \cdot \chi_{[-\pi b, \pi b]}(\omega)
 \]
 
+\textbf{Объяснение функции $\chi_{[-\pi b, \pi b]}(\omega)$:}
+
+Функция $\chi_{[-\pi b, \pi b]}(\omega)$ — это характеристическая функция (индикаторная функция) интервала $[-\pi b, \pi b]$, которая определяется следующим образом:
+
+\[
+\chi_{[-\pi b, \pi b]}(\omega) = 
+\begin{cases}
+1, & \text{если } \omega \in [-\pi b, \pi b] \\
+0, & \text{если } \omega \notin [-\pi b, \pi b]
+\end{cases}
+\]
+
+Эта функция "вырезает" прямоугольный спектр в частотной области, ограничивая частоты диапазоном $[-\pi b, \pi b]$. Таким образом, Фурье-образ sinc-функции представляет собой прямоугольную функцию в частотной области, что является проявлением дуальности между временной и частотной областями.
+
 \textbf{Графики:}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{sinc_function_b0.5.png}
+    \includegraphics[width=0.8\textwidth]{python/sinc_function_b0.5.png}
     \caption{Функция $f(t) = a \cdot \mathrm{sinc}(bt)$ при $b = 0.5$}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{sinc_spectrum_b0.5.png}
+    \includegraphics[width=0.8\textwidth]{python/sinc_fourier_b0.5.png}
     \caption{Фурье-образ $\hat{f}(\omega)$ — прямоугольная функция при $b = 0.5$}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{sinc_function_b1.png}
+    \includegraphics[width=0.8\textwidth]{python/sinc_function_b1.png}
     \caption{Функция $f(t) = a \cdot \mathrm{sinc}(bt)$ при $b = 1$}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{sinc_spectrum_b1.png}
+    \includegraphics[width=0.8\textwidth]{python/sinc_fourier_b1.png}
     \caption{Фурье-образ $\hat{f}(\omega)$ — прямоугольная функция при $b = 1$}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{sinc_function_b2.png}
+    \includegraphics[width=0.8\textwidth]{python/sinc_function_b2.png}
     \caption{Функция $f(t) = a \cdot \mathrm{sinc}(bt)$ при $b = 2$}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{sinc_spectrum_b2.png}
+    \includegraphics[width=0.8\textwidth]{python/sinc_fourier_b2.png}
     \caption{Фурье-образ $\hat{f}(\omega)$ — прямоугольная функция при $b = 2$}
 \end{figure}
 
@@ -279,37 +293,37 @@ f(t) = a \cdot e^{-b t^2}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{gauss_function_b0.5.png}
+    \includegraphics[width=0.8\textwidth]{python/gauss_function_b0.5.png}
     \caption{Гауссовская функция $f(t)$ при $b = 0.5$}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{gauss_spectrum_b0.5.png}
+    \includegraphics[width=0.8\textwidth]{python/gauss_fourier_b0.5.png}
     \caption{Фурье-образ $\hat{f}(\omega)$ — тоже Гаусс при $b = 0.5$}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{gauss_function_b1.png}
+    \includegraphics[width=0.8\textwidth]{python/gauss_function_b1.png}
     \caption{Гауссовская функция $f(t)$ при $b = 1$}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{gauss_spectrum_b1.png}
+    \includegraphics[width=0.8\textwidth]{python/gauss_fourier_b1.png}
     \caption{Фурье-образ $\hat{f}(\omega)$ — тоже Гаусс при $b = 1$}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{gauss_function_b2.png}
+    \includegraphics[width=0.8\textwidth]{python/gauss_function_b2.png}
     \caption{Гауссовская функция $f(t)$ при $b = 2$}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{gauss_spectrum_b2.png}
+    \includegraphics[width=0.8\textwidth]{python/gauss_fourier_b2.png}
     \caption{Фурье-образ $\hat{f}(\omega)$ — тоже Гаусс при $b = 2$}
 \end{figure}
 
@@ -373,38 +387,38 @@ f(t) = a \cdot e^{-b |t|}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{exp_function_b0.5.png}
+    \includegraphics[width=0.8\textwidth]{python/exp_function_b0.5.png}
     \caption{Экспоненциальная функция $f(t)$ при $b = 0.5$}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{exp_spectrum_b0.5.png}
-    \caption{Спектр $\hat{f}(\omega)$ — функция Лоренца при $b = 0.5$}
+    \includegraphics[width=0.8\textwidth]{python/exp_fourier_b0.5.png}
+    \caption{Фурье-образ $\hat{f}(\omega)$ — функция Лоренца при $b = 0.5$}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{exp_function_b1.png}
+    \includegraphics[width=0.8\textwidth]{python/exp_function_b1.png}
     \caption{Экспоненциальная функция $f(t)$ при $b = 1$}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{exp_spectrum_b1.png}
-    \caption{Спектр $\hat{f}(\omega)$ — функция Лоренца при $b = 1$}
+    \includegraphics[width=0.8\textwidth]{python/exp_fourier_b1.png}
+    \caption{Фурье-образ $\hat{f}(\omega)$ — функция Лоренца при $b = 1$}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{exp_function_b2.png}
+    \includegraphics[width=0.8\textwidth]{python/exp_function_b2.png}
     \caption{Экспоненциальная функция $f(t)$ при $b = 2$}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{exp_spectrum_b2.png}
-    \caption{Спектр $\hat{f}(\omega)$ — функция Лоренца при $b = 2$}
+    \includegraphics[width=0.8\textwidth]{python/exp_fourier_b2.png}
+    \caption{Фурье-образ $\hat{f}(\omega)$ — функция Лоренца при $b = 2$}
 \end{figure}
 
 \textbf{Проверка равенства Парсеваля:}
@@ -523,7 +537,7 @@ g(t) = f(t + c) = a \cdot e^{-b (t + c)^2}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{g_hat_magnitude_c-2.png}
-    \caption{Амплитудный спектр $|\hat{g}(\omega)|$ при $c = -2$}
+    \caption{Модуль Фурье-образа $|\hat{g}(\omega)|$ при $c = -2$}
 \end{figure}
 
 \begin{figure}[H]
@@ -535,7 +549,7 @@ g(t) = f(t + c) = a \cdot e^{-b (t + c)^2}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{g_hat_magnitude_c0.png}
-    \caption{Амплитудный спектр $|\hat{g}(\omega)|$ при $c = 0$}
+    \caption{Модуль Фурье-образа $|\hat{g}(\omega)|$ при $c = 0$}
 \end{figure}
 
 \begin{figure}[H]
@@ -547,7 +561,7 @@ g(t) = f(t + c) = a \cdot e^{-b (t + c)^2}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{g_hat_magnitude_c2.png}
-    \caption{Амплитудный спектр $|\hat{g}(\omega)|$ при $c = 2$}
+    \caption{Модуль Фурье-образа $|\hat{g}(\omega)|$ при $c = 2$}
 \end{figure}
 
 \textbf{Анализ влияния параметра c:}
@@ -562,7 +576,7 @@ g(t) = f(t + c) = a \cdot e^{-b (t + c)^2}
     
     \item \textbf{Влияние на Фурье-образ $\hat{g}(\omega)$:}
     \begin{itemize}
-        \item \textbf{Модуль спектра $|\hat{g}(\omega)|$ не зависит от $c$} — это фундаментальное свойство сдвига
+        \item \textbf{Модуль Фурье-образа $|\hat{g}(\omega)|$ не зависит от $c$} — это фундаментальное свойство сдвига
         \item \textbf{Фаза спектра} изменяется: $\arg(\hat{g}(\omega)) = \omega c + \arg(\hat{f}(\omega))$
         \item \textbf{Реальная и мнимая части} зависят от $c$:
         \begin{align*}
@@ -574,7 +588,7 @@ g(t) = f(t + c) = a \cdot e^{-b (t + c)^2}
     \item \textbf{Физический смысл:}
     \begin{itemize}
         \item Сдвиг во времени вызывает фазовый множитель $e^{i \omega c}$ в частотной области
-        \item Амплитудный спектр остается неизменным — это означает, что энергия сигнала не зависит от его положения во времени
+        \item Модуль Фурье-образа остается неизменным — это означает, что энергия сигнала не зависит от его положения во времени
         \item Фазовая информация кодирует временное положение сигнала
     \end{itemize}
     
@@ -594,7 +608,7 @@ g(t) = f(t + c) = a \cdot e^{-b (t + c)^2}
 
 \begin{enumerate}
     \item Временной сдвиг соответствует фазовому сдвигу в частотной области
-    \item Амплитудный спектр инвариантен относительно временного сдвига
+    \item Модуль Фурье-образа инвариантен относительно временного сдвига
     \item Фазовая информация содержит информацию о временном положении сигнала
     \item Это свойство широко используется в обработке сигналов и анализе данных
 \end{enumerate}
@@ -643,7 +657,7 @@ g(t) = f(t + c) = a \cdot e^{-b (t + c)^2}
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.8\textwidth]{audio_spectrum.png}
-    \caption{Амплитудный спектр $|\hat{f}(\nu)|$}
+    \caption{Модуль Фурье-образа $|\hat{f}(\nu)|$}
 \end{figure}
 
 \textbf{Анализ графика Фурье-образа:}
@@ -754,7 +768,7 @@ g(t) = f(t + c) = a \cdot e^{-b (t + c)^2}
     \item \textbf{Исследовано свойство сдвига:}
     \begin{itemize}
         \item Временной сдвиг соответствует фазовому сдвигу в частотной области
-        \item Амплитудный спектр инвариантен относительно временного сдвига
+        \item Модуль Фурье-образа инвариантен относительно временного сдвига
         \item Фазовая информация содержит информацию о временном положении сигнала
     \end{itemize}
     
