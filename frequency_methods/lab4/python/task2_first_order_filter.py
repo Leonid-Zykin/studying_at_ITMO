@@ -25,7 +25,7 @@ g[mask] = a
 
 # Создаем зашумлённый сигнал
 np.random.seed(42)
-b = 0.3  # амплитуда случайного шума
+b = 0.5  # амплитуда случайного шума
 c = 0.0  # амплитуда гармонической помехи (нулевая для этого задания)
 noise = b * (np.random.rand(N) - 0.5)
 u = g + noise
@@ -72,9 +72,9 @@ for i, T in enumerate(T_values):
     # Показываем только окрестность интервала [t1, t2]
     mask_plot = (t >= t1-1) & (t <= t2+1)
     
-    plt.plot(t[mask_plot], g[mask_plot], 'b-', linewidth=2, label='Исходный сигнал g(t)')
+    plt.plot(t[mask_plot], g[mask_plot], 'g-', linewidth=2, label='Исходный сигнал g(t)')
     plt.plot(t[mask_plot], u[mask_plot], 'r-', alpha=0.7, linewidth=1, label='Зашумлённый сигнал u(t)')
-    plt.plot(t[mask_plot], u_filtered[mask_plot], 'g-', linewidth=2, label=f'Отфильтрованный (T={T})')
+    plt.plot(t[mask_plot], u_filtered[mask_plot], 'b-', linewidth=2, label=f'Отфильтрованный (T={T})')
     
     plt.xlabel('Время t')
     plt.ylabel('Амплитуда')
@@ -132,18 +132,19 @@ for i, T in enumerate(T_values):
     magnitude = 1 / np.sqrt(1 + (omega * T)**2)
     
     plt.subplot(2, 2, i+1)
-    plt.semilogx(f_theoretical, 20 * np.log10(magnitude), 'b-', linewidth=2, label=f'Теоретическая АЧХ (T={T})')
+    plt.plot(f_theoretical, magnitude, 'b-', linewidth=2, label=f'АЧХ (T={T})')
     
     # Частота среза: ω_c = 1/T
     f_cutoff = 1 / (2 * np.pi * T)
     plt.axvline(x=f_cutoff, color='red', linestyle='--', alpha=0.7, label=f'Частота среза {f_cutoff:.3f} Гц')
     
     plt.xlabel('Частота f (Гц)')
-    plt.ylabel('АЧХ (дБ)')
+    plt.ylabel('|W(jω)|')
     plt.title(f'АЧХ фильтра первого порядка, T = {T}')
     plt.legend()
     plt.grid(True, alpha=0.3)
-    plt.ylim(-40, 5)
+    plt.xlim(0, 10)  # Показываем только до 10 Гц для наглядности
+    plt.ylim(0, 1.1)
 
 plt.tight_layout()
 plt.savefig('../images/task2/first_order_filter_frequency_response.png', dpi=300, bbox_inches='tight')
@@ -167,9 +168,9 @@ for i, b_val in enumerate(b_values):
     plt.subplot(2, 2, i+1)
     mask_plot = (t >= t1-1) & (t <= t2+1)
     
-    plt.plot(t[mask_plot], g[mask_plot], 'b-', linewidth=2, label='Исходный сигнал')
+    plt.plot(t[mask_plot], g[mask_plot], 'g-', linewidth=2, label='Исходный сигнал')
     plt.plot(t[mask_plot], u_b[mask_plot], 'r-', alpha=0.7, linewidth=1, label=f'Зашумлённый (b={b_val})')
-    plt.plot(t[mask_plot], u_filtered_b[mask_plot], 'g-', linewidth=2, label='Отфильтрованный')
+    plt.plot(t[mask_plot], u_filtered_b[mask_plot], 'b-', linewidth=2, label='Отфильтрованный')
     
     plt.xlabel('Время t')
     plt.ylabel('Амплитуда')
