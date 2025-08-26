@@ -40,6 +40,56 @@ def create_test_image_with_periodicity():
     
     return image
 
+# === Новая реализация: узконаправленное подавление периодических гармоник (notch) ===
+
+def build_notch_mask(magnitude: np.ndarray, num_peaks: int = 20, dc_exclude_radius: int = 15,
+                     notch_sigma: float = 8.0) -> np.ndarray:
+    """Создает маску подавления спектральных пиков (notch) вокруг ярких гармоник.
+    - num_peaks: сколько ярких точек учитывать (будут учитываться попарно симметричные)
+    - dc_exclude_radius: зона вокруг центра (DC), которую не трогаем
+    - notch_sigma: ширина гауссовых провалов
+    """
+    H, W = magnitude.shape
+    cy, cx = H // 2, W // 2
+
+    # Нормализованный лог-модуль для поиска пиков
+    log_mag = np.log(magnitude + 1e-9)
+    norm = (log_mag - log_mag.min()) / (log_mag.max() - log_mag.min() + 1e-12)
+
+    # Обнулим центральную область, чтобы не ловить DC/низкие
+    yy, xx = np.ogrid[:H, :W]
+    dist = np.sqrt((yy - cy)**2 + (xx - cx)**2)
+    norm_masked = norm.copy()
+    norm_masked[dist < dc_exclude_radius] = 0.0
+
+    # Выберем num_peaks самых ярких точек
+    flat_idx = np.argpartition(norm_masked.ravel(), -num_peaks)[-num_peaks:]
+    peak_coords = np.column_stack(np.unravel_index(flat_idx, (H, W)))
+
+    # Маска-передаточная функция: стартуем с единиц
+    notch_mask = np.ones((H, W), dtype=float)
+
+    # Применим гауссовы вычитания в окрестностях пиков и их симметрий
+    for (py, px) in peak_coords:
+        # симметричная точка относительно центра
+        sy = int(2 * cy - py)
+        sx = int(2 * cx - px)
+
+        # Избегаем выхода за границы
+        sy = np.clip(sy, 0, H - 1)
+        sx = np.clip(sx, 0, W - 1)
+
+        for (qy, qx) in [(py, px), (sy, sx)]:
+            # Гауссов провал вокруг (qy, qx)
+            notch = np.exp(-(((yy - qy)**2 + (xx - qx)**2) / (2.0 * notch_sigma**2)))
+            # Ослабляем амплитуду на этих частотах
+            notch_mask *= (1.0 - 0.95 * notch)  # до ~ -26 дБ в центре провала
+
+    # Небольшое сглаживание маски центре, чтобы сохранить НЧ
+    lowpass = np.exp(-(dist**2) / (2.0 * (dc_exclude_radius * 1.2)**2))
+    notch_mask = np.maximum(notch_mask, lowpass)
+    return np.clip(notch_mask, 0.0, 1.0)
+
 def periodic_filtering():
     """Фильтрация изображений с периодичностью"""
     
@@ -115,14 +165,13 @@ def periodic_filtering():
     # Анализ пиков периодичности
     print("Анализ пиков периодичности...")
     
-    # Находим пики в спектре
     from scipy.signal import find_peaks
     
     # Анализируем горизонтальные и вертикальные срезы
     center_row = normalized_log_magnitude[normalized_log_magnitude.shape[0]//2, :]
     center_col = normalized_log_magnitude[:, normalized_log_magnitude.shape[1]//2]
     
-    # Находим пики
+    # Находим пики (для иллюстрации на графиках)
     peaks_row, _ = find_peaks(center_row, height=0.5, distance=10)
     peaks_col, _ = find_peaks(center_col, height=0.5, distance=10)
     
@@ -169,25 +218,13 @@ def periodic_filtering():
     plt.close()
     
     # Шаг 5: Редактирование спектра для удаления гармоник
-    print("Редактирование спектра...")
-    
-    # Создаем маску для удаления высокочастотных компонентов
-    # (симуляция редактирования в программе обработки изображений)
-    mask = np.ones_like(magnitude)
-    
-    # Удаляем высокочастотные компоненты (внешние области)
-    center_y, center_x = magnitude.shape[0]//2, magnitude.shape[1]//2
-    radius = min(center_y, center_x) // 4  # Радиус для сохранения низких частот
-    
-    y, x = np.ogrid[:magnitude.shape[0], :magnitude.shape[1]]
-    distance_from_center = np.sqrt((x - center_x)**2 + (y - center_y)**2)
-    
-    # Создаем плавную маску
-    mask = np.exp(-distance_from_center**2 / (2 * (radius/3)**2))
-    
-    # Применяем маску к спектру
-    filtered_magnitude = magnitude * mask
-    filtered_fft = filtered_magnitude * np.exp(1j * phase)
+    print("Редактирование спектра (notch-подавление гармоник)...")
+
+    # Создаем узкополосную маску подавления вокруг ярких гармоник
+    notch_mask = build_notch_mask(magnitude, num_peaks=30, dc_exclude_radius=15, notch_sigma=8.0)
+
+    # Применяем маску к спектру (мягкое подавление гармоник)
+    filtered_fft = (magnitude * notch_mask) * np.exp(1j * phase)
     
     # Шаг 6: Обратное преобразование Фурье
     filtered_image = np.real(ifft2(ifftshift(filtered_fft)))
@@ -209,8 +246,8 @@ def periodic_filtering():
     plt.axis('off')
     
     plt.subplot(2, 3, 3)
-    plt.imshow(mask, cmap='gray')
-    plt.title('Маска фильтрации')
+    plt.imshow(notch_mask, cmap='gray')
+    plt.title('Маска подавления гармоник (notch)')
     plt.axis('off')
     
     plt.subplot(2, 3, 4)
@@ -219,8 +256,8 @@ def periodic_filtering():
     plt.axis('off')
     
     plt.subplot(2, 3, 5)
-    filtered_log_magnitude = np.log(filtered_magnitude + 1)
-    filtered_normalized = (filtered_log_magnitude - filtered_log_magnitude.min()) / (filtered_log_magnitude.max() - filtered_log_magnitude.min())
+    filtered_log_magnitude = np.log(np.abs(filtered_fft))
+    filtered_normalized = (filtered_log_magnitude - filtered_log_magnitude.min()) / (filtered_log_magnitude.max() - filtered_log_magnitude.min() + 1e-12)
     plt.imshow(filtered_normalized, cmap='gray')
     plt.title('Спектр отфильтрованного изображения')
     plt.axis('off')
@@ -271,6 +308,8 @@ def periodic_filtering():
     # Радиальные профили
     plt.subplot(2, 2, 3)
     angles = np.linspace(0, 2*np.pi, 360)
+    H, W = normalized_log_magnitude.shape
+    center_y, center_x = H // 2, W // 2
     radii = np.arange(0, min(center_y, center_x), 5)
     
     original_radial = []
