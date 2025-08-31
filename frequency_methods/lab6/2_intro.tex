@@ -106,7 +106,7 @@
     \item Гауссовское размытие с ядром f(x,y) = exp(-9/n²((x-n+1/2)²+(y-n+1/2)²))
 \end{itemize}
 
-Исследуемые значения n: 3, 5, 7 (нечётные числа ≥ 3). Для каждого типа размытия необходимо:
+Исследуемые значения n: 5, 9 (нечётные числа для лучшей видимости результатов). Для каждого типа размытия необходимо:
 \begin{itemize}
     \item Создать ядра размытия согласно формулам
     \item Выполнить свёртку исходного изображения с ядрами
@@ -147,44 +147,100 @@ K_{gauss}(x,y) = \frac{e^{-\frac{9}{n^2}\left((x-\frac{n+1}{2})^2 + (y-\frac{n+1
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{images/task2/blur_kernels.png}
-    \caption{Ядра размытия для различных значений n}
-    \label{fig:blur_kernels}
+    \includegraphics[width=0.6\textwidth]{images/task2/block_kernel_n5.png}
+    \caption{Блочное ядро размытия n=5}
+    \label{fig:block_kernel_n5}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{images/task2/convolution_results.png}
-    \caption{Результаты размытия с помощью свёртки}
-    \label{fig:convolution_blur}
+    \includegraphics[width=0.6\textwidth]{images/task2/gaussian_kernel_n5.png}
+    \caption{Гауссовское ядро размытия n=5}
+    \label{fig:gaussian_kernel_n5}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{images/task2/fft_results.png}
-    \caption{Результаты размытия с помощью FFT}
-    \label{fig:fft_blur}
+    \includegraphics[width=0.6\textwidth]{images/task2/block_kernel_n9.png}
+    \caption{Блочное ядро размытия n=9}
+    \label{fig:block_kernel_n9}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{images/task2/block_blur_comparison.png}
-    \caption{Детальное сравнение методов блочного размытия}
-    \label{fig:block_blur_comparison}
+    \includegraphics[width=0.6\textwidth]{images/task2/gaussian_kernel_n9.png}
+    \caption{Гауссовское ядро размытия n=9}
+    \label{fig:gaussian_kernel_n9}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{images/task2/gaussian_blur_comparison.png}
-    \caption{Детальное сравнение методов гауссовского размытия}
-    \label{fig:gaussian_blur_comparison}
+    \includegraphics[width=0.7\textwidth]{images/task2/block_blur_n5.png}
+    \caption{Блочное размытие n=5 (свёртка)}
+    \label{fig:block_blur_n5}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{images/task2/method_comparison.png}
-    \caption{Общее сравнение методов размытия}
-    \label{fig:method_comparison_blur}
+    \includegraphics[width=0.7\textwidth]{images/task2/gaussian_blur_n5.png}
+    \caption{Гауссовское размытие n=5 (свёртка)}
+    \label{fig:gaussian_blur_n5}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/task2/block_blur_n9.png}
+    \caption{Блочное размытие n=9 (свёртка)}
+    \label{fig:block_blur_n9}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/task2/gaussian_blur_n9.png}
+    \caption{Гауссовское размытие n=9 (свёртка)}
+    \label{fig:gaussian_blur_n9}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/task2/block_blur_fft_n5.png}
+    \caption{Блочное размытие n=5 (FFT)}
+    \label{fig:block_blur_fft_n5}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/task2/gaussian_blur_fft_n5.png}
+    \caption{Гауссовское размытие n=5 (FFT)}
+    \label{fig:gaussian_blur_fft_n5}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/task2/block_blur_fft_n9.png}
+    \caption{Блочное размытие n=9 (FFT)}
+    \label{fig:block_blur_fft_n9}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/task2/gaussian_blur_fft_n9.png}
+    \caption{Гауссовское размытие n=9 (FFT)}
+    \label{fig:gaussian_blur_fft_n9}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/task2/comparison_n5.png}
+    \caption{Сравнение методов размытия для n=5}
+    \label{fig:comparison_n5}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/task2/comparison_n9.png}
+    \caption{Сравнение методов размытия для n=9}
+    \label{fig:comparison_n9}
 \end{figure}
 
 \begin{figure}[H]
@@ -194,28 +250,37 @@ K_{gauss}(x,y) = \frac{e^{-\frac{9}{n^2}\left((x-\frac{n+1}{2})^2 + (y-\frac{n+1
     \label{fig:quality_analysis_blur}
 \end{figure}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{images/task2/spectrum_analysis.png}
-    \caption{Анализ спектров ядер размытия}
-    \label{fig:spectrum_analysis_blur}
-\end{figure}
+
+
 
 \textbf{Анализ результатов:}
 \begin{itemize}
-    \item \textbf{Реализация ядер:} Созданы блочное и гауссовское ядра размытия для n = 3, 5, 7 согласно формулам из задания.
+    \item \textbf{Реализация ядер:} Созданы блочное и гауссовское ядра размытия для n = 5, 9 согласно формулам из задания. Каждое ядро представлено на отдельном изображении для лучшей видимости.
     
-    \item \textbf{Детальное сравнение блочного размытия:} Отдельный анализ показывает высокую точность соответствия между методами свёртки и FFT. Максимальная разность составляет менее 0.007 для всех размеров ядер.
+    \item \textbf{Качество размытия:} 
+    \begin{itemize}
+        \item \textbf{n=5:} Блочное размытие - MSE: 0.006910, Гауссовское - MSE: 0.003993
+        \item \textbf{n=9:} Блочное размытие - MSE: 0.011617, Гауссовское - MSE: 0.007820
+        \item \textbf{Вывод:} Гауссовское размытие обеспечивает лучшее качество (меньший MSE)
+    \end{itemize}
     
-    \item \textbf{Детальное сравнение гауссовского размытия:} Аналогично блочному размытию, методы показывают отличное соответствие с максимальной разностью менее 0.013.
+    \item \textbf{Сравнение методов (свёртка vs FFT):} 
+    \begin{itemize}
+        \item \textbf{Разность методов:} Минимальна для всех случаев (0.006-0.014)
+        \item \textbf{Корректность:} Результаты подтверждают эквивалентность методов
+        \item \textbf{Визуализация:} Каждый результат представлен на отдельном изображении для лучшей видимости
+    \end{itemize}
+    
+    \item \textbf{Влияние размера ядра:} 
+    \begin{itemize}
+        \item \textbf{n=5:} Умеренное размытие, сохранение деталей
+        \item \textbf{n=9:} Сильное размытие, потеря мелких деталей
+        \item \textbf{Оптимальность:} n=5 обеспечивает баланс между размытием и качеством
+    \end{itemize}
     
     \item \textbf{Сравнение типов размытия:} Гауссовское размытие дает более естественные и плавные результаты по сравнению с блочным размытием, что видно на детальных изображениях.
     
     \item \textbf{Корректность реализации:} Использование циклической свёртки (mode='wrap') обеспечивает точное соответствие с FFT методом, что подтверждает теоретическую эквивалентность методов.
-    
-    \item \textbf{Влияние размера ядра:} С увеличением n размытие становится более сильным, что четко видно на крупных изображениях. MSE увеличивается пропорционально силе размытия.
-    
-    \item \textbf{Качество размытия:} Гауссовское размытие имеет меньшую MSE по сравнению с блочным для всех значений n, что указывает на его лучшую способность сохранять важные детали изображения.
 \end{itemize}
 
 \section*{Задание 3. Увеличение резкости}
