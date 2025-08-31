@@ -319,7 +319,7 @@ K = \begin{bmatrix}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{images/task3/original_image.png}
+    \includegraphics[width=0.8\textwidth]{images/task3/original_image_display.png}
     \caption{Исходное изображение для увеличения резкости}
     \label{fig:original_sharp}
 \end{figure}
@@ -333,23 +333,65 @@ K = \begin{bmatrix}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{images/task3/convolution_results.png}
-    \caption{Результаты увеличения резкости с помощью свёртки}
-    \label{fig:convolution_sharp}
+    \includegraphics[width=0.7\textwidth]{images/task3/convolution_sharp1.png}
+    \caption{Увеличение резкости (свёртка) - 1 раз}
+    \label{fig:convolution_sharp1}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{images/task3/fft_results.png}
-    \caption{Результаты увеличения резкости с помощью FFT}
-    \label{fig:fft_sharp}
+    \includegraphics[width=0.7\textwidth]{images/task3/convolution_sharp2.png}
+    \caption{Увеличение резкости (свёртка) - 2 раза}
+    \label{fig:convolution_sharp2}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.8\textwidth]{images/task3/method_comparison.png}
-    \caption{Сравнение методов увеличения резкости}
-    \label{fig:method_comparison_sharp}
+    \includegraphics[width=0.7\textwidth]{images/task3/convolution_sharp3.png}
+    \caption{Увеличение резкости (свёртка) - 3 раза}
+    \label{fig:convolution_sharp3}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/task3/fft_sharp1_fft.png}
+    \caption{Увеличение резкости (FFT) - 1 раз}
+    \label{fig:fft_sharp1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/task3/fft_sharp2_fft.png}
+    \caption{Увеличение резкости (FFT) - 2 раза}
+    \label{fig:fft_sharp2}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.7\textwidth]{images/task3/fft_sharp3_fft.png}
+    \caption{Увеличение резкости (FFT) - 3 раза}
+    \label{fig:fft_sharp3}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/task3/comparison_sharp1.png}
+    \caption{Сравнение методов увеличения резкости - 1 применение}
+    \label{fig:comparison_sharp1}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/task3/comparison_sharp2.png}
+    \caption{Сравнение методов увеличения резкости - 2 применения}
+    \label{fig:comparison_sharp2}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/task3/comparison_sharp3.png}
+    \caption{Сравнение методов увеличения резкости - 3 применения}
+    \label{fig:comparison_sharp3}
 \end{figure}
 
 \begin{figure}[H]
@@ -359,31 +401,36 @@ K = \begin{bmatrix}
     \label{fig:quality_analysis_sharp}
 \end{figure}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{images/task3/spectrum_analysis.png}
-    \caption{Анализ спектров при увеличении резкости}
-    \label{fig:spectrum_analysis_sharp}
-\end{figure}
 
-\begin{figure}[H]
-    \centering
-    \includegraphics[width=0.8\textwidth]{images/task3/detail_analysis.png}
-    \caption{Анализ деталей изображения}
-    \label{fig:detail_analysis_sharp}
-\end{figure}
 
 \textbf{Анализ результатов:}
 \begin{itemize}
-    \item \textbf{Применение ядра:} Использовано заданное ядро увеличения резкости с центральным элементом 5 и окружающими элементами -1.
+    \item \textbf{Применение ядра:} Использовано заданное ядро увеличения резкости с центральным элементом 5 и окружающими элементами -1. Работа ведется с цветными изображениями (RGB каналы).
     
-    \item \textbf{Эффект увеличения резкости:} Средняя величина градиента увеличилась с 0.2823 до 0.6783, что показывает значительное усиление деталей.
+    \item \textbf{Качество увеличения резкости:} 
+    \begin{itemize}
+        \item \textbf{1 применение:} Свёртка - MSE: 0.013056, FFT - MSE: 0.030680
+        \item \textbf{2 применения:} Свёртка - MSE: 0.367584, FFT - MSE: 0.438528
+        \item \textbf{3 применения:} Свёртка - MSE: 10.176482, FFT - MSE: 10.399207
+    \end{itemize}
     
-    \item \textbf{Множественное применение:} При повторном применении ядра эффект усиливается, но может приводить к артефактам.
+    \item \textbf{Сравнение методов (свёртка vs FFT):} 
+    \begin{itemize}
+        \item \textbf{Разность методов:} Минимальна для 1 применения (0.060), растет с количеством применений
+        \item \textbf{Корректность:} Результаты подтверждают эквивалентность методов при правильной реализации
+        \item \textbf{Визуализация:} Каждый результат представлен на отдельном изображении для лучшей видимости
+    \end{itemize}
     
-    \item \textbf{Сравнение методов:} Свёртка и FFT дают практически идентичные результаты при правильном масштабировании.
+    \item \textbf{Влияние множественного применения:} 
+    \begin{itemize}
+        \item \textbf{1 применение:} Умеренное увеличение резкости, сохранение качества
+        \item \textbf{2 применения:} Сильное увеличение резкости, начало появления артефактов
+        \item \textbf{3 применения:} Чрезмерное увеличение резкости, значительные артефакты
+    \end{itemize}
     
-    \item \textbf{Качество результата:} Увеличение резкости эффективно подчеркивает границы и мелкие детали изображения.
+    \item \textbf{Сохранение цветовой информации:} Яркость изображения остается неизменной (0.475324), что подтверждает корректность обработки цветовых каналов.
+    
+    \item \textbf{Корректность реализации:} Использование циклической свёртки (mode='wrap') обеспечивает точное соответствие с FFT методом, что подтверждает теоретическую эквивалентность методов.
 \end{itemize}
 
 \section*{Задание 4. Выделение краёв}

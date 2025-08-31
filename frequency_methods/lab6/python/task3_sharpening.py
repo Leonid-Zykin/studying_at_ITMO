@@ -65,13 +65,14 @@ def image_sharpening():
     height, width, numberOfColorChannels = original_image.shape
     print(f"Размеры: {height}x{width}, каналов: {numberOfColorChannels}")
     
-    # Сохраняем исходное изображение
+    # НЕ сохраняем исходное изображение - только читаем его!
+    # Сохраняем копию для отображения в отчете
     plt.figure(figsize=(12, 10))
     plt.imshow(original_image)
     plt.title('Исходное изображение', fontsize=18, fontweight='bold')
     plt.axis('off')
     plt.tight_layout()
-    plt.savefig('../images/task3/original_image.png', dpi=300, bbox_inches='tight')
+    plt.savefig('../images/task3/original_image_display.png', dpi=300, bbox_inches='tight')
     plt.close()
     
     # Разделяем на цветовые каналы (как в MATLAB)
@@ -356,7 +357,7 @@ def image_sharpening():
     print("\nУвеличение резкости завершено!")
     print("Результаты сохранены в папке images/task3/")
     print("\nСозданные изображения:")
-    print("- original_image.png - исходное изображение")
+    print("- original_image_display.png - отображение исходного изображения")
     print("- sharpening_kernel.png - ядро увеличения резкости")
     for i in range(1, 4):
         print(f"- convolution_sharp{i}.png - увеличение резкости (свёртка) {i} раз")
