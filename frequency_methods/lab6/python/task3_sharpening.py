@@ -2,6 +2,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.fft import fft2, ifft2, fftshift, ifftshift
 from scipy import ndimage
+from PIL import Image
 import os
 
 # Отключаем интерактивный режим matplotlib
@@ -11,43 +12,25 @@ plt.ioff()
 os.makedirs('../images/task3', exist_ok=True)
 
 def create_test_image():
-    """Создает тестовое изображение для увеличения резкости"""
-    # Создаем изображение 256x256
+    """Создает тестовое цветное изображение для увеличения резкости"""
+    # Создаем изображение 256x256x3 (RGB)
     size = 256
-    image = np.zeros((size, size))
+    image = np.zeros((size, size, 3))
     
-    # Добавляем различные объекты с размытыми краями
-    # Круг с размытыми краями
+    # Красный канал - круг
     y, x = np.ogrid[:size, :size]
-    distance = np.sqrt((x - size//4)**2 + (y - size//4)**2)
-    circle = np.exp(-(distance - size//8)**2 / (2 * 5**2))
-    image += 0.6 * circle
+    circle = (x - size//4)**2 + (y - size//4)**2 <= (size//8)**2
+    image[circle, 0] = 0.8  # Red channel
     
-    # Прямоугольник с размытыми краями
-    rect_center_y, rect_center_x = size//2, size//2
-    rect_width, rect_height = 40, 30
+    # Зеленый канал - прямоугольник
+    image[size//2-30:size//2+30, size//2-20:size//2+20, 1] = 0.6  # Green channel
     
-    for i in range(size):
-        for j in range(size):
-            if (abs(i - rect_center_y) < rect_height/2 and 
-                abs(j - rect_center_x) < rect_width/2):
-                # Размытые края
-                edge_dist_y = abs(abs(i - rect_center_y) - rect_height/2)
-                edge_dist_x = abs(abs(j - rect_center_x) - rect_width/2)
-                edge_dist = min(edge_dist_y, edge_dist_x)
-                if edge_dist < 5:
-                    image[i, j] += 0.4 * np.exp(-edge_dist**2 / (2 * 2**2))
-                else:
-                    image[i, j] += 0.4
-    
-    # Добавляем мелкие детали
+    # Синий канал - диагональные линии
     for i in range(0, size, 20):
-        for j in range(0, size, 25):
-            if np.random.random() > 0.7:
-                image[i:i+3, j:j+3] = 0.8
+        image[i:i+3, :, 2] = 0.4  # Blue channel
     
     # Добавляем шум
-    noise = np.random.normal(0, 0.02, (size, size))
+    noise = np.random.normal(0, 0.05, (size, size, 3))
     image += noise
     
     # Ограничиваем значения
@@ -55,217 +38,216 @@ def create_test_image():
     
     return image
 
-def create_sharpening_kernel():
-    """Создает ядро увеличения резкости"""
-    return np.array([[0, -1, 0],
-                     [-1, 5, -1],
-                     [0, -1, 0]])
-
 def image_sharpening():
     """Увеличение резкости изображений"""
     
     # Загружаем готовое изображение
     print("Загрузка исходного изображения...")
     try:
-        from PIL import Image
         img_path = '../images/task3/original_image.png'
-        img_pil = Image.open(img_path).convert('L')
+        img_pil = Image.open(img_path)
         original_image = np.array(img_pil) / 255.0
         print(f"Загружено изображение размером {original_image.shape}")
+        
+        # Проверяем, что изображение цветное
+        if len(original_image.shape) == 2:
+            print("Изображение черно-белое, конвертируем в RGB...")
+            original_image = np.stack([original_image] * 3, axis=-1)
+        elif original_image.shape[2] == 4:  # RGBA
+            print("Изображение RGBA, конвертируем в RGB...")
+            original_image = original_image[:, :, :3]
+            
     except FileNotFoundError:
         print("Файл original_image.png не найден, создаем тестовое изображение...")
         original_image = create_test_image()
     
+    # Получаем размеры изображения
+    height, width, numberOfColorChannels = original_image.shape
+    print(f"Размеры: {height}x{width}, каналов: {numberOfColorChannels}")
+    
     # Сохраняем исходное изображение
-    plt.figure(figsize=(8, 6))
-    plt.imshow(original_image, cmap='gray')
-    plt.title('Исходное изображение')
+    plt.figure(figsize=(12, 10))
+    plt.imshow(original_image)
+    plt.title('Исходное изображение', fontsize=18, fontweight='bold')
     plt.axis('off')
     plt.tight_layout()
     plt.savefig('../images/task3/original_image.png', dpi=300, bbox_inches='tight')
     plt.close()
     
-    # Создаем ядро увеличения резкости
-    print("Создание ядра увеличения резкости...")
-    sharpening_kernel = create_sharpening_kernel()
+    # Разделяем на цветовые каналы (как в MATLAB)
+    IR = original_image[:, :, 0]  # Red channel
+    IG = original_image[:, :, 1]  # Green channel  
+    IB = original_image[:, :, 2]  # Blue channel
     
-    # Визуализация ядра
+    # Создаем матрицу ядра увеличения резкости (точно как в MATLAB)
+    sharp = np.array([[0, -1, 0], [-1, 5, -1], [0, -1, 0]]).reshape(3, 3)
+    print("Ядро увеличения резкости:")
+    print(sharp)
+    
+    # Сохраняем ядро
     plt.figure(figsize=(8, 6))
-    plt.imshow(sharpening_kernel, cmap='gray', interpolation='nearest')
-    plt.title('Ядро увеличения резкости')
-    plt.colorbar()
+    plt.imshow(sharp, cmap='RdBu', vmin=-1, vmax=5)
+    plt.title('Ядро увеличения резкости', fontsize=16, fontweight='bold')
+    plt.colorbar(fraction=0.046, pad=0.04)
     plt.axis('off')
     plt.tight_layout()
     plt.savefig('../images/task3/sharpening_kernel.png', dpi=300, bbox_inches='tight')
     plt.close()
     
-    # Применяем увеличение резкости с помощью свёртки
+    # Теперь будем сворачивать с изображением (как в MATLAB)
     print("Применение увеличения резкости с помощью свёртки...")
-    sharpened_conv = ndimage.convolve(original_image, sharpening_kernel, mode='wrap')
     
-    # Применяем увеличение резкости несколько раз
-    sharpened_conv_2x = ndimage.convolve(sharpened_conv, sharpening_kernel, mode='wrap')
-    sharpened_conv_3x = ndimage.convolve(sharpened_conv_2x, sharpening_kernel, mode='wrap')
+    # 1 раз
+    IR_SHARP1 = ndimage.convolve(IR, sharp, mode='wrap')
+    IG_SHARP1 = ndimage.convolve(IG, sharp, mode='wrap')
+    IB_SHARP1 = ndimage.convolve(IB, sharp, mode='wrap')
     
-    # Визуализация результатов свёртки
-    plt.figure(figsize=(15, 10))
+    # 2 раза
+    IR_SHARP2 = ndimage.convolve(IR_SHARP1, sharp, mode='wrap')
+    IG_SHARP2 = ndimage.convolve(IG_SHARP1, sharp, mode='wrap')
+    IB_SHARP2 = ndimage.convolve(IB_SHARP1, sharp, mode='wrap')
     
-    plt.subplot(2, 2, 1)
-    plt.imshow(original_image, cmap='gray')
-    plt.title('Исходное изображение')
-    plt.axis('off')
+    # 3 раза
+    IR_SHARP3 = ndimage.convolve(IR_SHARP2, sharp, mode='wrap')
+    IG_SHARP3 = ndimage.convolve(IG_SHARP2, sharp, mode='wrap')
+    IB_SHARP3 = ndimage.convolve(IB_SHARP2, sharp, mode='wrap')
     
-    plt.subplot(2, 2, 2)
-    plt.imshow(sharpened_conv, cmap='gray')
-    plt.title('Увеличение резкости (1 раз)')
-    plt.axis('off')
+    # Сохраняем результаты свёртки (как в MATLAB)
+    I_SHARP1 = np.stack([IR_SHARP1, IG_SHARP1, IB_SHARP1], axis=-1)
+    I_SHARP2 = np.stack([IR_SHARP2, IG_SHARP2, IB_SHARP2], axis=-1)
+    I_SHARP3 = np.stack([IR_SHARP3, IG_SHARP3, IB_SHARP3], axis=-1)
     
-    plt.subplot(2, 2, 3)
-    plt.imshow(sharpened_conv_2x, cmap='gray')
-    plt.title('Увеличение резкости (2 раза)')
-    plt.axis('off')
+    # Нормализуем и сохраняем
+    for i, (sharp_img, name) in enumerate([(I_SHARP1, 'sharp1'), (I_SHARP2, 'sharp2'), (I_SHARP3, 'sharp3')]):
+        # Нормализация в диапазон [0, 1]
+        sharp_img_norm = np.clip(sharp_img, 0, 1)
+        
+        plt.figure(figsize=(12, 10))
+        plt.imshow(sharp_img_norm)
+        plt.title(f'Увеличение резкости (свёртка) - {i+1} раз', fontsize=18, fontweight='bold')
+        plt.axis('off')
+        plt.tight_layout()
+        plt.savefig(f'../images/task3/convolution_{name}.png', dpi=300, bbox_inches='tight')
+        plt.close()
     
-    plt.subplot(2, 2, 4)
-    plt.imshow(sharpened_conv_3x, cmap='gray')
-    plt.title('Увеличение резкости (3 раза)')
-    plt.axis('off')
-    
-    plt.tight_layout()
-    plt.savefig('../images/task3/convolution_results.png', dpi=300, bbox_inches='tight')
-    plt.close()
-    
-    # Применяем увеличение резкости с помощью Фурье-преобразования
+    # Теперь переходим к анализу Фурье-образов (как в MATLAB)
     print("Применение увеличения резкости с помощью Фурье-преобразования...")
     
-    # Фурье-образ исходного изображения
-    fft_original = fft2(original_image)
+    # Фурье-образы исходного изображения
+    IR_FFT = fft2(IR)
+    IG_FFT = fft2(IG)
+    IB_FFT = fft2(IB)
     
-    # Создаем ядро того же размера, что и изображение
-    h, w = original_image.shape
-    k, l = 3, 3
+    # Фурье-образ ядра (с заполнением нулями до размера изображения)
+    # Создаем ядро размером с изображение
+    sharp_padded = np.zeros((height, width))
+    sharp_padded[:3, :3] = sharp
+    SHARP_FFT = fft2(sharp_padded)
     
-    # Создаем расширенное ядро
-    kernel_extended = np.zeros((h + k - 1, w + l - 1))
+    # Применяем теорему о свёртке (как в MATLAB)
+    # 1 раз
+    IR_SHARP1_FFT = IR_FFT * SHARP_FFT
+    IG_SHARP1_FFT = IG_FFT * SHARP_FFT
+    IB_SHARP1_FFT = IB_FFT * SHARP_FFT
     
-    # Размещаем ядро в центре
-    start_h = (h + k - 1 - k) // 2
-    start_w = (w + l - 1 - l) // 2
+    # 2 раза (ассоциативность)
+    IR_SHARP2_FFT = IR_FFT * SHARP_FFT * SHARP_FFT
+    IG_SHARP2_FFT = IG_FFT * SHARP_FFT * SHARP_FFT
+    IB_SHARP2_FFT = IB_FFT * SHARP_FFT * SHARP_FFT
     
-    kernel_extended[start_h:start_h+k, start_w:start_w+l] = sharpening_kernel
+    # 3 раза
+    IR_SHARP3_FFT = IR_FFT * SHARP_FFT * SHARP_FFT * SHARP_FFT
+    IG_SHARP3_FFT = IG_FFT * SHARP_FFT * SHARP_FFT * SHARP_FFT
+    IB_SHARP3_FFT = IB_FFT * SHARP_FFT * SHARP_FFT * SHARP_FFT
     
-    # Фурье-образ ядра
-    fft_kernel = fft2(kernel_extended)
+    # Обратное преобразование Фурье
+    IR_SHARP1_FFT_result = np.real(ifft2(IR_SHARP1_FFT))
+    IG_SHARP1_FFT_result = np.real(ifft2(IG_SHARP1_FFT))
+    IB_SHARP1_FFT_result = np.real(ifft2(IB_SHARP1_FFT))
     
-    # Создаем Фурье-образ изображения того же размера
-    fft_original_extended = fft2(original_image, s=(h + k - 1, w + l - 1))
+    IR_SHARP2_FFT_result = np.real(ifft2(IR_SHARP2_FFT))
+    IG_SHARP2_FFT_result = np.real(ifft2(IG_SHARP2_FFT))
+    IB_SHARP2_FFT_result = np.real(ifft2(IB_SHARP2_FFT))
     
-    # Поэлементное умножение
-    fft_result = fft_original_extended * fft_kernel
+    IR_SHARP3_FFT_result = np.real(ifft2(IR_SHARP3_FFT))
+    IG_SHARP3_FFT_result = np.real(ifft2(IG_SHARP3_FFT))
+    IB_SHARP3_FFT_result = np.real(ifft2(IB_SHARP3_FFT))
     
-    # Обратное преобразование
-    sharpened_fft_result = np.real(ifft2(fft_result))
-    sharpened_fft = sharpened_fft_result[:h, :w]
+    # Сохраняем результаты FFT (как в MATLAB)
+    I_SHARP1_FFT = np.stack([IR_SHARP1_FFT_result, IG_SHARP1_FFT_result, IB_SHARP1_FFT_result], axis=-1)
+    I_SHARP2_FFT = np.stack([IR_SHARP2_FFT_result, IG_SHARP2_FFT_result, IB_SHARP2_FFT_result], axis=-1)
+    I_SHARP3_FFT = np.stack([IR_SHARP3_FFT_result, IG_SHARP3_FFT_result, IB_SHARP3_FFT_result], axis=-1)
     
-    # Применяем увеличение резкости несколько раз через FFT
-    sharpened_fft_2x_result = np.real(ifft2(fft_result * fft_kernel))
-    sharpened_fft_2x = sharpened_fft_2x_result[:h, :w]
+    # Нормализуем и сохраняем результаты FFT
+    for i, (sharp_img, name) in enumerate([(I_SHARP1_FFT, 'sharp1_fft'), (I_SHARP2_FFT, 'sharp2_fft'), (I_SHARP3_FFT, 'sharp3_fft')]):
+        # Нормализация в диапазон [0, 1]
+        sharp_img_norm = np.clip(sharp_img, 0, 1)
+        
+        plt.figure(figsize=(12, 10))
+        plt.imshow(sharp_img_norm)
+        plt.title(f'Увеличение резкости (FFT) - {i+1} раз', fontsize=18, fontweight='bold')
+        plt.axis('off')
+        plt.tight_layout()
+        plt.savefig(f'../images/task3/fft_{name}.png', dpi=300, bbox_inches='tight')
+        plt.close()
     
-    sharpened_fft_3x_result = np.real(ifft2(fft_result * fft_kernel * fft_kernel))
-    sharpened_fft_3x = sharpened_fft_3x_result[:h, :w]
+    # Создаем сравнение методов для каждого количества применений
+    print("Создание сравнения методов...")
     
-    # Визуализация результатов Фурье-метода
-    plt.figure(figsize=(15, 10))
-    
-    plt.subplot(2, 2, 1)
-    plt.imshow(original_image, cmap='gray')
-    plt.title('Исходное изображение')
-    plt.axis('off')
-    
-    plt.subplot(2, 2, 2)
-    plt.imshow(sharpened_fft, cmap='gray')
-    plt.title('Увеличение резкости (FFT, 1 раз)')
-    plt.axis('off')
-    
-    plt.subplot(2, 2, 3)
-    plt.imshow(sharpened_fft_2x, cmap='gray')
-    plt.title('Увеличение резкости (FFT, 2 раза)')
-    plt.axis('off')
-    
-    plt.subplot(2, 2, 4)
-    plt.imshow(sharpened_fft_3x, cmap='gray')
-    plt.title('Увеличение резкости (FFT, 3 раза)')
-    plt.axis('off')
-    
-    plt.tight_layout()
-    plt.savefig('../images/task3/fft_results.png', dpi=300, bbox_inches='tight')
-    plt.close()
-    
-    # Сравнение методов
-    print("Сравнение методов увеличения резкости...")
-    plt.figure(figsize=(20, 15))
-    
-    # Результаты свёртки
-    plt.subplot(3, 3, 1)
-    plt.imshow(original_image, cmap='gray')
-    plt.title('Исходное изображение')
-    plt.axis('off')
-    
-    plt.subplot(3, 3, 2)
-    plt.imshow(sharpened_conv, cmap='gray')
-    plt.title('Свёртка (1 раз)')
-    plt.axis('off')
-    
-    plt.subplot(3, 3, 3)
-    plt.imshow(sharpened_conv_2x, cmap='gray')
-    plt.title('Свёртка (2 раза)')
-    plt.axis('off')
-    
-    # Результаты FFT
-    plt.subplot(3, 3, 4)
-    plt.imshow(sharpened_fft, cmap='gray')
-    plt.title('FFT (1 раз)')
-    plt.axis('off')
-    
-    plt.subplot(3, 3, 5)
-    plt.imshow(sharpened_fft_2x, cmap='gray')
-    plt.title('FFT (2 раза)')
-    plt.axis('off')
-    
-    # Разности методов
-    diff_1x = np.abs(sharpened_conv - sharpened_fft)
-    diff_2x = np.abs(sharpened_conv_2x - sharpened_fft_2x)
-    
-    plt.subplot(3, 3, 6)
-    plt.imshow(diff_1x, cmap='hot')
-    plt.title('Разность методов (1 раз)')
-    plt.colorbar()
-    plt.axis('off')
-    
-    plt.subplot(3, 3, 7)
-    plt.imshow(diff_2x, cmap='hot')
-    plt.title('Разность методов (2 раза)')
-    plt.colorbar()
-    plt.axis('off')
-    
-    # Детали изображений
-    crop_size = 50
-    center_y, center_x = original_image.shape[0]//2, original_image.shape[1]//2
-    crop_y = slice(center_y-crop_size//2, center_y+crop_size//2)
-    crop_x = slice(center_x-crop_size//2, center_x+crop_size//2)
-    
-    plt.subplot(3, 3, 8)
-    plt.imshow(original_image[crop_y, crop_x], cmap='gray')
-    plt.title('Деталь исходного')
-    plt.axis('off')
-    
-    plt.subplot(3, 3, 9)
-    plt.imshow(sharpened_conv[crop_y, crop_x], cmap='gray')
-    plt.title('Деталь увеличенной резкости')
-    plt.axis('off')
-    
-    plt.tight_layout()
-    plt.savefig('../images/task3/method_comparison.png', dpi=300, bbox_inches='tight')
-    plt.close()
+    for i, (conv_img, fft_img, name) in enumerate([
+        (I_SHARP1, I_SHARP1_FFT, 'sharp1'),
+        (I_SHARP2, I_SHARP2_FFT, 'sharp2'),
+        (I_SHARP3, I_SHARP3_FFT, 'sharp3')
+    ]):
+        plt.figure(figsize=(20, 15))
+        
+        # Исходное изображение
+        plt.subplot(2, 3, 1)
+        plt.imshow(original_image)
+        plt.title('Исходное изображение', fontsize=16, fontweight='bold')
+        plt.axis('off')
+        
+        # Свёртка
+        plt.subplot(2, 3, 2)
+        conv_norm = np.clip(conv_img, 0, 1)
+        plt.imshow(conv_norm)
+        plt.title(f'Свёртка - {i+1} раз', fontsize=16)
+        plt.axis('off')
+        
+        # FFT
+        plt.subplot(2, 3, 3)
+        fft_norm = np.clip(fft_img, 0, 1)
+        plt.imshow(fft_norm)
+        plt.title(f'FFT - {i+1} раз', fontsize=16)
+        plt.axis('off')
+        
+        # Разность методов
+        diff = np.abs(conv_img - fft_img)
+        max_diff = np.max(diff)
+        
+        plt.subplot(2, 3, 4)
+        plt.imshow(diff, cmap='hot', vmin=0, vmax=max_diff)
+        plt.title(f'Разность методов - {i+1} раз\nмакс: {max_diff:.6f}', fontsize=14)
+        plt.colorbar(fraction=0.046, pad=0.04)
+        plt.axis('off')
+        
+        # Детализация исходного
+        plt.subplot(2, 3, 5)
+        plt.imshow(original_image[height//4:3*height//4, width//4:3*width//4])
+        plt.title('Детализация исходного', fontsize=14)
+        plt.axis('off')
+        
+        # Детализация результата
+        plt.subplot(2, 3, 6)
+        plt.imshow(conv_norm[height//4:3*height//4, width//4:3*width//4])
+        plt.title(f'Детализация результата - {i+1} раз', fontsize=14)
+        plt.axis('off')
+        
+        plt.suptitle(f'Сравнение методов увеличения резкости - {i+1} применение', fontsize=20, fontweight='bold', y=0.98)
+        plt.tight_layout()
+        plt.subplots_adjust(top=0.93)
+        plt.savefig(f'../images/task3/comparison_{name}.png', dpi=300, bbox_inches='tight')
+        plt.close()
     
     # Анализ качества увеличения резкости
     print("Анализ качества увеличения резкости...")
@@ -273,210 +255,114 @@ def image_sharpening():
     # Вычисляем метрики качества
     metrics = {}
     
-    # Для однократного применения
-    conv_mse_1x = np.mean((original_image - sharpened_conv)**2)
-    fft_mse_1x = np.mean((original_image - sharpened_fft)**2)
-    method_diff_1x = np.mean((sharpened_conv - sharpened_fft)**2)
-    
-    # Для двукратного применения
-    conv_mse_2x = np.mean((original_image - sharpened_conv_2x)**2)
-    fft_mse_2x = np.mean((original_image - sharpened_fft_2x)**2)
-    method_diff_2x = np.mean((sharpened_conv_2x - sharpened_fft_2x)**2)
-    
-    # Для трехкратного применения
-    conv_mse_3x = np.mean((original_image - sharpened_conv_3x)**2)
-    fft_mse_3x = np.mean((original_image - sharpened_fft_3x)**2)
-    method_diff_3x = np.mean((sharpened_conv_3x - sharpened_fft_3x)**2)
-    
-    metrics = {
-        '1x': {'conv_mse': conv_mse_1x, 'fft_mse': fft_mse_1x, 'method_diff': method_diff_1x},
-        '2x': {'conv_mse': conv_mse_2x, 'fft_mse': fft_mse_2x, 'method_diff': method_diff_2x},
-        '3x': {'conv_mse': conv_mse_3x, 'fft_mse': fft_mse_3x, 'method_diff': method_diff_3x}
-    }
+    for i, (conv_img, fft_img, name) in enumerate([
+        (I_SHARP1, I_SHARP1_FFT, 'sharp1'),
+        (I_SHARP2, I_SHARP2_FFT, 'sharp2'),
+        (I_SHARP3, I_SHARP3_FFT, 'sharp3')
+    ]):
+        # MSE между исходным и результатом
+        conv_mse = np.mean((original_image - conv_img)**2)
+        fft_mse = np.mean((original_image - fft_img)**2)
+        
+        # Разность между методами
+        method_diff = np.mean((conv_img - fft_img)**2)
+        
+        # Средняя яркость (показатель изменения контраста)
+        conv_brightness = np.mean(conv_img)
+        fft_brightness = np.mean(fft_img)
+        original_brightness = np.mean(original_image)
+        
+        metrics[name] = {
+            'conv_mse': conv_mse,
+            'fft_mse': fft_mse,
+            'method_diff': method_diff,
+            'conv_brightness': conv_brightness,
+            'fft_brightness': fft_brightness,
+            'original_brightness': original_brightness
+        }
     
     # График анализа качества
     plt.figure(figsize=(15, 10))
     
     # MSE для разных методов
     plt.subplot(2, 2, 1)
-    iterations = ['1x', '2x', '3x']
-    conv_mses = [metrics[it]['conv_mse'] for it in iterations]
-    fft_mses = [metrics[it]['fft_mse'] for it in iterations]
+    names = ['1 раз', '2 раза', '3 раза']
+    conv_mses = [metrics[f'sharp{i+1}']['conv_mse'] for i in range(3)]
+    fft_mses = [metrics[f'sharp{i+1}']['fft_mse'] for i in range(3)]
     
-    plt.plot(iterations, conv_mses, 'bo-', label='Свёртка')
-    plt.plot(iterations, fft_mses, 'ro-', label='FFT')
-    plt.xlabel('Количество применений')
-    plt.ylabel('MSE')
-    plt.title('Среднеквадратичная ошибка')
-    plt.legend()
+    plt.plot(range(1, 4), conv_mses, 'bo-', label='Свёртка', linewidth=2, markersize=8)
+    plt.plot(range(1, 4), fft_mses, 'rs--', label='FFT', linewidth=2, markersize=8)
+    plt.xlabel('Количество применений', fontsize=12)
+    plt.ylabel('MSE', fontsize=12)
+    plt.title('Среднеквадратичная ошибка', fontsize=14, fontweight='bold')
+    plt.legend(fontsize=11)
     plt.grid(True, alpha=0.3)
     
     # Разность между методами
     plt.subplot(2, 2, 2)
-    method_diffs = [metrics[it]['method_diff'] for it in iterations]
+    method_diffs = [metrics[f'sharp{i+1}']['method_diff'] for i in range(3)]
     
-    plt.plot(iterations, method_diffs, 'go-')
-    plt.xlabel('Количество применений')
-    plt.ylabel('Разность методов')
-    plt.title('Разность между свёрткой и FFT')
+    plt.plot(range(1, 4), method_diffs, 'go-', linewidth=2, markersize=8)
+    plt.xlabel('Количество применений', fontsize=12)
+    plt.ylabel('Разность методов', fontsize=12)
+    plt.title('Разность между свёрткой и FFT', fontsize=14, fontweight='bold')
     plt.grid(True, alpha=0.3)
     
-    # Сравнение с исходным изображением
+    # Изменение яркости
     plt.subplot(2, 2, 3)
-    plt.plot(iterations, conv_mses, 'bo-', label='Свёртка')
-    plt.plot(iterations, fft_mses, 'ro-', label='FFT')
-    plt.xlabel('Количество применений')
-    plt.ylabel('MSE относительно исходного')
-    plt.title('Сравнение с исходным изображением')
-    plt.legend()
+    conv_brightnesses = [metrics[f'sharp{i+1}']['conv_brightness'] for i in range(3)]
+    fft_brightnesses = [metrics[f'sharp{i+1}']['fft_brightness'] for i in range(3)]
+    original_brightness = metrics['sharp1']['original_brightness']
+    
+    plt.axhline(y=original_brightness, color='k', linestyle='--', label='Исходная яркость')
+    plt.plot(range(1, 4), conv_brightnesses, 'bo-', label='Свёртка', linewidth=2, markersize=8)
+    plt.plot(range(1, 4), fft_brightnesses, 'rs--', label='FFT', linewidth=2, markersize=8)
+    plt.xlabel('Количество применений', fontsize=12)
+    plt.ylabel('Средняя яркость', fontsize=12)
+    plt.title('Изменение яркости', fontsize=14, fontweight='bold')
+    plt.legend(fontsize=11)
     plt.grid(True, alpha=0.3)
     
-    # Детальный анализ для 1x
+    # Сравнение для 2 применений
     plt.subplot(2, 2, 4)
-    methods = ['Исходное', 'Свёртка (1x)', 'FFT (1x)']
-    mses = [0, metrics['1x']['conv_mse'], metrics['1x']['fft_mse']]
+    n = 2
+    methods = ['Исходное', 'Свёртка\n(2 раза)', 'FFT\n(2 раза)']
+    mses = [0, metrics[f'sharp{n}']['conv_mse'], metrics[f'sharp{n}']['fft_mse']]
     
-    plt.bar(methods, mses)
-    plt.ylabel('MSE')
-    plt.title('Сравнение методов для однократного применения')
-    plt.xticks(rotation=45)
+    bars = plt.bar(methods, mses, color=['lightblue', 'blue', 'red'])
+    plt.ylabel('MSE', fontsize=12)
+    plt.title(f'Сравнение методов для {n} применений', fontsize=14, fontweight='bold')
     plt.grid(True, alpha=0.3)
+    
+    # Добавляем значения на столбцы
+    for bar, mse in zip(bars, mses):
+        if mse > 0:
+            plt.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.0001, 
+                    f'{mse:.6f}', ha='center', va='bottom', fontsize=10)
     
     plt.tight_layout()
     plt.savefig('../images/task3/quality_analysis.png', dpi=300, bbox_inches='tight')
     plt.close()
     
-    # Детальный анализ спектров
-    print("Детальный анализ спектров...")
-    
-    # Фурье-образы
-    fft_original_shifted = fftshift(fft2(original_image))
-    fft_kernel_shifted = fftshift(fft2(kernel_extended))
-    
-    # Визуализация спектров
-    plt.figure(figsize=(15, 10))
-    
-    plt.subplot(2, 3, 1)
-    plt.imshow(original_image, cmap='gray')
-    plt.title('Исходное изображение')
-    plt.axis('off')
-    
-    plt.subplot(2, 3, 2)
-    log_magnitude_original = np.log(np.abs(fft_original_shifted) + 1)
-    plt.imshow(log_magnitude_original, cmap='gray')
-    plt.title('Спектр исходного изображения')
-    plt.axis('off')
-    
-    plt.subplot(2, 3, 3)
-    log_magnitude_kernel = np.log(np.abs(fft_kernel_shifted) + 1)
-    plt.imshow(log_magnitude_kernel, cmap='gray')
-    plt.title('Спектр ядра увеличения резкости')
-    plt.axis('off')
-    
-    plt.subplot(2, 3, 4)
-    plt.imshow(sharpened_conv, cmap='gray')
-    plt.title('Результат увеличения резкости')
-    plt.axis('off')
-    
-    plt.subplot(2, 3, 5)
-    fft_result_shifted = fftshift(fft_result)
-    log_magnitude_result = np.log(np.abs(fft_result_shifted) + 1)
-    plt.imshow(log_magnitude_result, cmap='gray')
-    plt.title('Спектр результата')
-    plt.axis('off')
-    
-    plt.subplot(2, 3, 6)
-    # Сравнение профилей
-    center_y, center_x = log_magnitude_original.shape[0]//2, log_magnitude_original.shape[1]//2
-    
-    # Горизонтальный срез
-    original_slice = log_magnitude_original[center_y, :]
-    kernel_slice = log_magnitude_kernel[center_y, :]
-    result_slice = log_magnitude_result[center_y, :]
-    
-    plt.plot(original_slice, 'b-', label='Исходный', alpha=0.7)
-    plt.plot(kernel_slice, 'r-', label='Ядро', alpha=0.7)
-    plt.plot(result_slice, 'g-', label='Результат', alpha=0.7)
-    plt.title('Горизонтальный срез спектров')
-    plt.xlabel('Частота')
-    plt.ylabel('Логарифм амплитуды')
-    plt.legend()
-    plt.grid(True, alpha=0.3)
-    
-    plt.tight_layout()
-    plt.savefig('../images/task3/spectrum_analysis.png', dpi=300, bbox_inches='tight')
-    plt.close()
-    
-    # Анализ деталей
-    print("Анализ деталей изображения...")
-    
-    # Вычисляем градиенты для оценки резкости
-    from scipy.ndimage import sobel
-    
-    grad_original = np.sqrt(sobel(original_image, axis=0)**2 + sobel(original_image, axis=1)**2)
-    grad_sharpened = np.sqrt(sobel(sharpened_conv, axis=0)**2 + sobel(sharpened_conv, axis=1)**2)
-    
-    # Визуализация градиентов
-    plt.figure(figsize=(15, 10))
-    
-    plt.subplot(2, 3, 1)
-    plt.imshow(original_image, cmap='gray')
-    plt.title('Исходное изображение')
-    plt.axis('off')
-    
-    plt.subplot(2, 3, 2)
-    plt.imshow(grad_original, cmap='hot')
-    plt.title('Градиент исходного изображения')
-    plt.colorbar()
-    plt.axis('off')
-    
-    plt.subplot(2, 3, 3)
-    plt.imshow(sharpened_conv, cmap='gray')
-    plt.title('Увеличенная резкость')
-    plt.axis('off')
-    
-    plt.subplot(2, 3, 4)
-    plt.imshow(grad_sharpened, cmap='hot')
-    plt.title('Градиент увеличенной резкости')
-    plt.colorbar()
-    plt.axis('off')
-    
-    plt.subplot(2, 3, 5)
-    # Гистограммы градиентов
-    plt.hist(grad_original.flatten(), bins=50, alpha=0.7, label='Исходное', density=True)
-    plt.hist(grad_sharpened.flatten(), bins=50, alpha=0.7, label='Увеличенная резкость', density=True)
-    plt.xlabel('Величина градиента')
-    plt.ylabel('Плотность')
-    plt.title('Распределение градиентов')
-    plt.legend()
-    plt.grid(True, alpha=0.3)
-    
-    plt.subplot(2, 3, 6)
-    # Сравнение деталей
-    detail_enhancement = grad_sharpened - grad_original
-    plt.imshow(detail_enhancement, cmap='hot')
-    plt.title('Усиление деталей')
-    plt.colorbar()
-    plt.axis('off')
-    
-    plt.tight_layout()
-    plt.savefig('../images/task3/detail_analysis.png', dpi=300, bbox_inches='tight')
-    plt.close()
-    
     # Вывод результатов
     print("\nРезультаты анализа увеличения резкости:")
-    for iteration in ['1x', '2x', '3x']:
-        print(f"\n{iteration} применение:")
-        print(f"  Свёртка - MSE: {metrics[iteration]['conv_mse']:.6f}")
-        print(f"  FFT - MSE: {metrics[iteration]['fft_mse']:.6f}")
-        print(f"  Разность методов: {metrics[iteration]['method_diff']:.6f}")
+    for i, name in enumerate(['sharp1', 'sharp2', 'sharp3']):
+        print(f"\n{i+1} применение:")
+        print(f"  Свёртка - MSE: {metrics[name]['conv_mse']:.6f}")
+        print(f"  FFT - MSE: {metrics[name]['fft_mse']:.6f}")
+        print(f"  Разность методов: {metrics[name]['method_diff']:.6f}")
+        print(f"  Изменение яркости: {metrics[name]['conv_brightness']:.6f} (было {metrics[name]['original_brightness']:.6f})")
     
-    print(f"\nСредняя величина градиента исходного изображения: {np.mean(grad_original):.4f}")
-    print(f"Средняя величина градиента увеличенной резкости: {np.mean(grad_sharpened):.4f}")
-    print(f"Усиление деталей: {np.mean(grad_sharpened - grad_original):.4f}")
-    
-    print("\nУвеличение резкости изображений завершено!")
+    print("\nУвеличение резкости завершено!")
     print("Результаты сохранены в папке images/task3/")
+    print("\nСозданные изображения:")
+    print("- original_image.png - исходное изображение")
+    print("- sharpening_kernel.png - ядро увеличения резкости")
+    for i in range(1, 4):
+        print(f"- convolution_sharp{i}.png - увеличение резкости (свёртка) {i} раз")
+        print(f"- fft_sharp{i}_fft.png - увеличение резкости (FFT) {i} раз")
+        print(f"- comparison_sharp{i}.png - сравнение методов {i} раз")
+    print("- quality_analysis.png - анализ качества")
 
 if __name__ == "__main__":
     image_sharpening() 
