@@ -122,14 +122,14 @@ def image_sharpening():
     for i, (sharp_img, name) in enumerate([(I_SHARP1, 'sharp1'), (I_SHARP2, 'sharp2'), (I_SHARP3, 'sharp3')]):
         # Нормализация в диапазон [0, 1]
         sharp_img_norm = np.clip(sharp_img, 0, 1)
-        
+    
         plt.figure(figsize=(12, 10))
         plt.imshow(sharp_img_norm)
         plt.title(f'Увеличение резкости (свёртка) - {i+1} раз', fontsize=18, fontweight='bold')
-        plt.axis('off')
-        plt.tight_layout()
+    plt.axis('off')
+    plt.tight_layout()
         plt.savefig(f'../images/task3/convolution_{name}.png', dpi=300, bbox_inches='tight')
-        plt.close()
+    plt.close()
     
     # Теперь переходим к анализу Фурье-образов (как в MATLAB)
     print("Применение увеличения резкости с помощью Фурье-преобразования...")
@@ -183,14 +183,14 @@ def image_sharpening():
     for i, (sharp_img, name) in enumerate([(I_SHARP1_FFT, 'sharp1_fft'), (I_SHARP2_FFT, 'sharp2_fft'), (I_SHARP3_FFT, 'sharp3_fft')]):
         # Нормализация в диапазон [0, 1]
         sharp_img_norm = np.clip(sharp_img, 0, 1)
-        
+    
         plt.figure(figsize=(12, 10))
         plt.imshow(sharp_img_norm)
         plt.title(f'Увеличение резкости (FFT) - {i+1} раз', fontsize=18, fontweight='bold')
-        plt.axis('off')
-        plt.tight_layout()
+    plt.axis('off')
+    plt.tight_layout()
         plt.savefig(f'../images/task3/fft_{name}.png', dpi=300, bbox_inches='tight')
-        plt.close()
+    plt.close()
     
     # Создаем сравнение методов для каждого количества применений
     print("Создание сравнения методов...")
@@ -200,55 +200,55 @@ def image_sharpening():
         (I_SHARP2, I_SHARP2_FFT, 'sharp2'),
         (I_SHARP3, I_SHARP3_FFT, 'sharp3')
     ]):
-        plt.figure(figsize=(20, 15))
-        
+    plt.figure(figsize=(20, 15))
+    
         # Исходное изображение
         plt.subplot(2, 3, 1)
         plt.imshow(original_image)
         plt.title('Исходное изображение', fontsize=16, fontweight='bold')
-        plt.axis('off')
-        
+    plt.axis('off')
+    
         # Свёртка
         plt.subplot(2, 3, 2)
         conv_norm = np.clip(conv_img, 0, 1)
         plt.imshow(conv_norm)
         plt.title(f'Свёртка - {i+1} раз', fontsize=16)
-        plt.axis('off')
-        
+    plt.axis('off')
+    
         # FFT
         plt.subplot(2, 3, 3)
         fft_norm = np.clip(fft_img, 0, 1)
         plt.imshow(fft_norm)
         plt.title(f'FFT - {i+1} раз', fontsize=16)
-        plt.axis('off')
-        
+    plt.axis('off')
+    
         # Разность методов
         diff = np.abs(conv_img - fft_img)
         max_diff = np.max(diff)
-        
+    
         plt.subplot(2, 3, 4)
         plt.imshow(diff, cmap='hot', vmin=0, vmax=max_diff)
         plt.title(f'Разность методов - {i+1} раз\nмакс: {max_diff:.6f}', fontsize=14)
         plt.colorbar(fraction=0.046, pad=0.04)
-        plt.axis('off')
-        
+    plt.axis('off')
+    
         # Детализация исходного
         plt.subplot(2, 3, 5)
         plt.imshow(original_image[height//4:3*height//4, width//4:3*width//4])
         plt.title('Детализация исходного', fontsize=14)
-        plt.axis('off')
-        
+    plt.axis('off')
+    
         # Детализация результата
         plt.subplot(2, 3, 6)
         plt.imshow(conv_norm[height//4:3*height//4, width//4:3*width//4])
         plt.title(f'Детализация результата - {i+1} раз', fontsize=14)
-        plt.axis('off')
-        
+    plt.axis('off')
+    
         plt.suptitle(f'Сравнение методов увеличения резкости - {i+1} применение', fontsize=20, fontweight='bold', y=0.98)
-        plt.tight_layout()
+    plt.tight_layout()
         plt.subplots_adjust(top=0.93)
         plt.savefig(f'../images/task3/comparison_{name}.png', dpi=300, bbox_inches='tight')
-        plt.close()
+    plt.close()
     
     # Анализ качества увеличения резкости
     print("Анализ качества увеличения резкости...")
@@ -267,12 +267,12 @@ def image_sharpening():
         
         # Разность между методами
         method_diff = np.mean((conv_img - fft_img)**2)
-        
+    
         # Средняя яркость (показатель изменения контраста)
         conv_brightness = np.mean(conv_img)
         fft_brightness = np.mean(fft_img)
         original_brightness = np.mean(original_image)
-        
+    
         metrics[name] = {
             'conv_mse': conv_mse,
             'fft_mse': fft_mse,
@@ -280,7 +280,7 @@ def image_sharpening():
             'conv_brightness': conv_brightness,
             'fft_brightness': fft_brightness,
             'original_brightness': original_brightness
-        }
+    }
     
     # График анализа качества
     plt.figure(figsize=(15, 10))

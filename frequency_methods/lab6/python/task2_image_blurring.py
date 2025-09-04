@@ -115,9 +115,9 @@ def image_blurring():
         plt.title(f'Гауссовское ядро размытия n={n}', fontsize=16, fontweight='bold')
         plt.colorbar(fraction=0.046, pad=0.04)
         plt.axis('off')
-        plt.tight_layout()
+    plt.tight_layout()
         plt.savefig(f'../images/task2/gaussian_kernel_n{n}.png', dpi=300, bbox_inches='tight')
-        plt.close()
+    plt.close()
     
     # Применяем размытие с помощью свёртки
     print("Применение размытия с помощью свёртки...")
@@ -147,9 +147,9 @@ def image_blurring():
         plt.imshow(gaussian_results[n], cmap='gray')
         plt.title(f'Гауссовское размытие n={n}', fontsize=18, fontweight='bold')
         plt.axis('off')
-        plt.tight_layout()
+    plt.tight_layout()
         plt.savefig(f'../images/task2/gaussian_blur_n{n}.png', dpi=300, bbox_inches='tight')
-        plt.close()
+    plt.close()
     
     # Применяем размытие с помощью Фурье-преобразования
     print("Применение размытия с помощью Фурье-преобразования...")
@@ -199,20 +199,20 @@ def image_blurring():
         plt.imshow(gaussian_fft_results[n], cmap='gray')
         plt.title(f'Гауссовское размытие (FFT) n={n}', fontsize=18, fontweight='bold')
         plt.axis('off')
-        plt.tight_layout()
+    plt.tight_layout()
         plt.savefig(f'../images/task2/gaussian_blur_fft_n{n}.png', dpi=300, bbox_inches='tight')
-        plt.close()
+    plt.close()
     
     # Создаем ОДНУ общую картинку сравнения методов для каждого n
     for n in n_values:
-        plt.figure(figsize=(20, 15))
-        
-        # Исходное изображение
+    plt.figure(figsize=(20, 15))
+    
+    # Исходное изображение
         plt.subplot(2, 3, 1)
-        plt.imshow(original_image, cmap='gray', vmin=0, vmax=1)
-        plt.title('Исходное изображение', fontsize=16, fontweight='bold')
-        plt.axis('off')
-        
+    plt.imshow(original_image, cmap='gray', vmin=0, vmax=1)
+    plt.title('Исходное изображение', fontsize=16, fontweight='bold')
+    plt.axis('off')
+    
         # Блочное размытие - свертка
         plt.subplot(2, 3, 2)
         plt.imshow(block_results[n], cmap='gray', vmin=0, vmax=1)
@@ -247,10 +247,10 @@ def image_blurring():
         plt.axis('off')
         
         plt.suptitle(f'Сравнение методов размытия для n={n}', fontsize=20, fontweight='bold', y=0.98)
-        plt.tight_layout()
+    plt.tight_layout()
         plt.subplots_adjust(top=0.93)
         plt.savefig(f'../images/task2/comparison_n{n}.png', dpi=300, bbox_inches='tight')
-        plt.close()
+    plt.close()
     
     # Анализ качества размытия
     print("Анализ качества размытия...")
