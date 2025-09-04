@@ -11,6 +11,9 @@ os.makedirs('../images/task1', exist_ok=True)
 # Отключаем интерактивный режим matplotlib
 plt.ioff()
 
+# Фиксируем зерно генератора случайных чисел для воспроизводимости
+np.random.seed(42)
+
 # Создаем социальную сеть с явными сообществами
 def create_social_network():
     """Создание социальной сети с тремя сообществами"""
@@ -133,6 +136,9 @@ def plot_eigenvalues(eigenvalues, title, filename):
     plt.ylabel('Собственное число')
     plt.title(title)
     plt.grid(True, alpha=0.3)
+    # Обеспечим целочисленные деления по оси X и явные пределы
+    plt.xlim(1, len(eigenvalues))
+    plt.xticks(np.arange(1, len(eigenvalues) + 1, 1))
     plt.tight_layout()
     plt.savefig(f'../images/task1/{filename}.png', dpi=300, bbox_inches='tight')
     plt.close()
