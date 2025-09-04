@@ -4,16 +4,25 @@ import json
 import csv
 import argparse
 from typing import List, Tuple, Dict
+import inspect
+from collections import namedtuple
+
+# Compatibility for libraries expecting inspect.getargspec on Python 3.12+
+if not hasattr(inspect, 'getargspec'):
+    def _compat_getargspec(func):
+        fs = inspect.getfullargspec(func)
+        ArgSpec = namedtuple('ArgSpec', 'args varargs keywords defaults')
+        return ArgSpec(fs.args, fs.varargs, fs.varkw, fs.defaults)
+    inspect.getargspec = _compat_getargspec
 
 import numpy as np
 import matplotlib.pyplot as plt
-from wordcloud import WordCloud
+try:
+    from wordcloud import WordCloud  # optional
+except Exception:
+    WordCloud = None
 
-# NLP
-import nltk
-from nltk.corpus import stopwords
-from nltk.tokenize import wordpunct_tokenize
-from nltk.stem.snowball import SnowballStemmer
+# NLP-lite: no nltk
 import pymorphy2
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -67,46 +76,26 @@ def normalize_text(s: str) -> str:
 
 
 def preprocess_docs(docs: List[str]) -> Tuple[List[List[str]], List[str]]:
-    try:
-        nltk.data.find('corpora/stopwords')
-    except LookupError:
-        try:
-            nltk.download('stopwords')
-        except Exception:
-            pass
-    try:
-        stop_ru = set(stopwords.words('russian'))
-    except Exception:
-        stop_ru = set(RU_STOPWORDS_FALLBACK)
+    stop_ru = set(RU_STOPWORDS_FALLBACK)
 
-    # Try pymorphy2, else fallback to Snowball stemmer
-    morph = None
-    use_morph = False
+    # Enforce pymorphy2 lemmatization as per lab requirements
     try:
         morph = pymorphy2.MorphAnalyzer()
-        use_morph = True
-    except Exception:
-        use_morph = False
-    stemmer = SnowballStemmer('russian')
+    except Exception as e:
+        raise RuntimeError('pymorphy2 is required for lemmatization in this lab') from e
 
     tokenized_docs: List[List[str]] = []
     vocab_set: set = set()
 
     for doc in docs:
         norm = normalize_text(doc)
-        tokens = [t for t in wordpunct_tokenize(norm) if t.isalpha()]
+        tokens = re.findall(r"[a-zа-яё]+", norm)
         lemmas: List[str] = []
         for t in tokens:
             if t in stop_ru:
                 continue
-            if use_morph and morph is not None:
-                try:
-                    p = morph.parse(t)[0]
-                    lemma = p.normal_form
-                except Exception:
-                    lemma = stemmer.stem(t)
-            else:
-                lemma = stemmer.stem(t)
+            p = morph.parse(t)[0]
+            lemma = p.normal_form
             if lemma in stop_ru:
                 continue
             lemmas.append(lemma)
@@ -166,9 +155,45 @@ def analyze_svd(M: np.ndarray, vocab: List[str], doc_titles: List[str], top_k: i
 
 def save_wordcloud(words_weights: List[Tuple[str, float]], path: str):
     freqs = {w: abs(wt) for w, wt in words_weights}
-    wc = WordCloud(width=1200, height=800, background_color='white', collocations=False)
-    img = wc.generate_from_frequencies(freqs)
-    img.to_file(path)
+    if WordCloud is not None:
+        wc = WordCloud(width=1200, height=800, background_color='white', collocations=False)
+        img = wc.generate_from_frequencies(freqs)
+        img.to_file(path)
+        return
+    # Fallback: simple bar chart if WordCloud not available
+    words = list(freqs.keys())
+    vals = list(freqs.values())
+    plt.figure(figsize=(8, 4), dpi=150)
+    plt.bar(words, vals)
+    plt.xticks(rotation=30, ha='right')
+    plt.title('Word weights')
+    plt.tight_layout()
+    plt.savefig(path)
+    plt.close()
+
+
+def save_global_wordcloud(tokenized_docs: List[List[str]], path: str):
+    freqs: Dict[str, float] = {}
+    for doc in tokenized_docs:
+        for w in doc:
+            freqs[w] = freqs.get(w, 0.0) + 1.0
+    if WordCloud is not None:
+        wc = WordCloud(width=1400, height=900, background_color='white', collocations=False)
+        img = wc.generate_from_frequencies(freqs)
+        img.to_file(path)
+        return
+    # Fallback: show top-N words by frequency
+    items = sorted(freqs.items(), key=lambda x: x[1], reverse=True)[:30]
+    words = [w for w, _ in items]
+    vals = [v for _, v in items]
+    plt.figure(figsize=(10, 6), dpi=150)
+    plt.barh(range(len(words)), vals)
+    plt.yticks(range(len(words)), words)
+    plt.gca().invert_yaxis()
+    plt.title('Global word frequencies (fallback)')
+    plt.tight_layout()
+    plt.savefig(path)
+    plt.close()
 
 
 def plot_top_words(words_weights: List[Tuple[str, float]], path: str, title: str):
@@ -210,6 +235,9 @@ def main():
         wc_path = os.path.join(IMAGES_DIR, f'topic{idx+1}_wordcloud.png')
         plot_top_words(words_weights, bar_path, title=f'Topic {idx+1}: top-5 words')
         save_wordcloud(words_weights, wc_path)
+
+    # Save global word cloud over the entire corpus vocabulary
+    save_global_wordcloud(tokenized_docs, os.path.join(IMAGES_DIR, 'global_wordcloud.png'))
 
     # Save singular values plot
     plt.figure(figsize=(7, 5), dpi=150)

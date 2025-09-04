@@ -28,6 +28,14 @@ def svd_compress(A: np.ndarray, k: int) -> np.ndarray:
     return Ak
 
 
+def reconstruct_from_svd(U: np.ndarray, S: np.ndarray, Vt: np.ndarray, k: int) -> np.ndarray:
+    Uk = U[:, :k]
+    Sk = S[:k]
+    Vtk = Vt[:k, :]
+    Ak = (Uk * Sk) @ Vtk
+    return np.clip(Ak, 0.0, 1.0)
+
+
 def save_image(arr: np.ndarray, path: str) -> None:
     img = Image.fromarray((arr * 255.0).astype(np.uint8))
     img.save(path)
@@ -63,17 +71,26 @@ def main():
         max(80, max_k // 5),
         max(100, max_k // 4)
     ]))
-    k_values = [k for k in k_values if k <= max_k]
+    # Ensure presence of very small k
+    k_values = sorted(set([k for k in k_values if k <= max_k] + [1, 2, 3]))
+    k_values = [k for k in k_values if 1 <= k <= max_k]
     if len(k_values) < 9:
         # fallback to linear spread of 9 values
         k_values = np.linspace(1, max_k, num=9, dtype=int).tolist()
+        k_values = sorted(set(k_values + [1, 2, 3]))
+    # Make sure we still keep at least 9 after de-dup
+    if len(k_values) > 9:
+        k_values = k_values[:max(9, len(k_values))]
 
     # Save original copy for report
     save_image(A, os.path.join(IMAGES_DIR, 'svd_original.png'))
 
+    # Compute SVD once
+    U, S, Vt = np.linalg.svd(A, full_matrices=False)
+
     ratios = []
     for k in k_values:
-        Ak = svd_compress(A, k)
+        Ak = reconstruct_from_svd(U, S, Vt, k)
         out_path = os.path.join(IMAGES_DIR, f'svd_k{k}.png')
         save_image(Ak, out_path)
         ratio = compute_storage_ratio(m, n, k)
@@ -83,7 +100,7 @@ def main():
     # Plot quality vs k (MSE) and compression ratio
     mses = []
     for k in k_values:
-        Ak = svd_compress(A, k)
+        Ak = reconstruct_from_svd(U, S, Vt, k)
         mse = float(np.mean((A - Ak) ** 2))
         mses.append(mse)
 
@@ -113,7 +130,7 @@ def main():
     rows = int(np.ceil(len(grid_ks) / cols))
     plt.figure(figsize=(12, 4 * rows), dpi=150)
     for idx, k in enumerate(grid_ks, start=1):
-        Ak = svd_compress(A, k)
+        Ak = reconstruct_from_svd(U, S, Vt, k)
         plt.subplot(rows, cols, idx)
         plt.imshow(Ak, cmap='gray', vmin=0, vmax=1)
         plt.title(f'k={k}')
