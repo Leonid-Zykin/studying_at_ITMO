@@ -9,199 +9,131 @@ $a = 2$, $b = 3$, $c = 4$, $d = 5$
 
 \begin{enumerate}
   \item \textbf{Отражение относительно прямой $y = ax = 2x$.}\\
-  Угол наклона: $\theta = \arctan(2)$\\
-  $\cos(2\theta) = \frac{1 - a^2}{1 + a^2} = \frac{1 - 4}{5} = -\frac{3}{5}$\\
-  $\sin(2\theta) = \frac{2a}{1 + a^2} = \frac{4}{5}$\\
-  Матрица:
+  Обоснование: матрица отражения относительно прямой через начало с углом наклона $\theta=\arctan(a)$ имеет вид
+  \[
+    R_{y=ax}=\begin{bmatrix}
+      \cos 2\theta & \sin 2\theta \\
+      \sin 2\theta & -\cos 2\theta
+    \end{bmatrix}
+    = \frac{1}{1+a^2}\begin{bmatrix} 1-a^2 & 2a \\ 2a & a^2-1 \end{bmatrix}.
+  \]
+  Для $a=2$ получаем $\cos(2\theta)=\tfrac{1-a^2}{1+a^2}=-\tfrac{3}{5}$, $\sin(2\theta)=\tfrac{2a}{1+a^2}=\tfrac{4}{5}$, откуда
   \[
     M_1 = \begin{bmatrix}
-      -\frac{3}{5} & \frac{4}{5} \\
-      \frac{4}{5} & \frac{3}{5}
-    \end{bmatrix}
+      -\tfrac{3}{5} & \tfrac{4}{5} \\
+      \tfrac{4}{5} & \tfrac{3}{5}
+    \end{bmatrix}.
   \]
 
-  \item \textbf{Отображение всей плоскости в прямую $y = bx = 3x$.}\\
+  \item \textbf{Отображение всей плоскости в прямую $y = bx = 3x$.} \\
+  Обоснование: столбцы матрицы — образы базисных векторов. Требуем $e_1\mapsto (1,3)^\top$ (любой ненулевой на прямой $y=3x$) и $e_2\mapsto (0,0)^\top$ (схлопывание второй координаты). Тогда
   \[
     M_2 = \begin{bmatrix}
       1 & 0 \\
       3 & 0
-    \end{bmatrix}
+    \end{bmatrix}.
   \]
 
   \item \textbf{Поворот на $10c = 40^\circ$ против часовой стрелки.}\\
+  Обоснование: стандартная матрица поворота на угол $\varphi$:
   \[
     M_3 = \begin{bmatrix}
-      \cos 40^\circ & -\sin 40^\circ \\
-      \sin 40^\circ & \cos 40^\circ
-    \end{bmatrix} \approx
-    \begin{bmatrix}
-      0.766 & -0.643 \\
-      0.643 & 0.766
-    \end{bmatrix}
+      \cos\varphi & -\sin\varphi \\
+      \sin\varphi & \cos\varphi
+    \end{bmatrix},\quad \varphi=40^\circ.
   \]
 
   \item \textbf{Центральная симметрия относительно начала координат.}\\
+  Обоснование: $(x,y)\mapsto(-x,-y)$, то есть $M_4=-I$:
   \[
     M_4 = \begin{bmatrix}
       -1 & 0 \\
       0 & -1
-    \end{bmatrix}
+    \end{bmatrix}.
   \]
 
   \item \textbf{Отражение относительно $y = ax$, затем поворот на $10d = 50^\circ$ по часовой стрелке.}\\
-  Матрица отражения: $M_1$ (из п.1), матрица поворота:
+  Обоснование: композиция линейных преобразований — произведение матриц справа налево. Пусть $R$ — матрица отражения из п.1, а $P$ — поворот на $-50^\circ$:
   \[
     P = \begin{bmatrix}
       \cos 50^\circ & \sin 50^\circ \\
       -\sin 50^\circ & \cos 50^\circ
-    \end{bmatrix} \approx
-    \begin{bmatrix}
-      0.643 & 0.766 \\
-      -0.766 & 0.643
-    \end{bmatrix}
-  \]
-  Тогда итоговая матрица:
-  \[
-    M_5 = P \cdot M_1 \approx
-    \begin{bmatrix}
-      0.643 & 0.766 \\
-      -0.766 & 0.643
-    \end{bmatrix} \cdot
-    \begin{bmatrix}
-      -\frac{3}{5} & \frac{4}{5} \\
-      \frac{4}{5} & \frac{3}{5}
-    \end{bmatrix} \approx
-    \begin{bmatrix}
-      0.021 & 0.999 \\
-      -0.999 & 0.021
-    \end{bmatrix}
+    \end{bmatrix},\quad M_5 = P\,R.
   \]
 
-
-\item \textbf{Отображение, которое переводит прямую $y = 0$ в $y = ax$ и прямую $x = 0$ в $y = bx$.} \\
-  Здесь удобно воспользоваться матрицей:
+  \item \textbf{Отображение, которое переводит прямую $y = 0$ в $y = ax$ и прямую $x = 0$ в $y = bx$.} \\
+  Обоснование: $e_1=(1,0)^\top$ лежит на $y=0$, его образ должен лежать на $y=ax$, возьмём $e_1\mapsto (1,a)^\top$. Аналогично $e_2=(0,1)^\top$ лежит на $x=0$, его образ возьмём на $y=bx$: $e_2\mapsto (1,b)^\top$. Тогда столбцы матрицы — эти образы:
   \[
     M_6 = \begin{bmatrix}
       1 & 1 \\
       a & b
-    \end{bmatrix} =
-    \begin{bmatrix}
-      1 & 1 \\
-      2 & 3
-    \end{bmatrix}
+    \end{bmatrix} = \begin{bmatrix} 1 & 1 \\ 2 & 3 \end{bmatrix}.
   \]
 
   \item \textbf{Отображение, которое переводит прямую $y = ax$ в $y = 0$ и прямую $y = bx$ в $x = 0$.}\\
-  Воспользуемся следующей формой:
+  Обоснование: требуем, чтобы образы направляющих векторов $v_a=(1,a)^\top$ и $v_b=(1,b)^\top$ лежали соответственно на осях $Ox$ и $Oy$. Искомая матрица $M_7$ удовлетворяет
   \[
-    M_7 =
-    \begin{bmatrix}
-      \frac{b}{b - a} & \frac{1}{b - a} \\
-      -\frac{a}{b - a} & \frac{1}{b - a}
-    \end{bmatrix} =
-    \begin{bmatrix}
-      \frac{3}{1} & \frac{1}{1} \\
-      -\frac{2}{1} & \frac{1}{1}
-    \end{bmatrix} =
-    \begin{bmatrix}
-      3 & 1 \\
-      -2 & 1
-    \end{bmatrix}
+    M_7 v_a = (\ast,0)^\top,\quad M_7 v_b = (0,\ast)^\top.
+  \]
+  Нормировкой можно добиться $M_7 v_a = (1,0)^\top$, $M_7 v_b=(0,1)^\top$, что означает $M_7=[v_a\ v_b]^{-1}$. Явно
+  \[
+    M_7 = \frac{1}{b-a}\begin{bmatrix} b & 1 \\ -a & 1 \end{bmatrix} = \begin{bmatrix} 3 & 1 \\ -2 & 1 \end{bmatrix}.
   \]
 
   \item \textbf{Отображение, которое меняет местами прямые $y = ax$ и $y = bx$.}\\
-  Используем:
+  Обоснование: требуем, чтобы $v_a$ и $v_b$ были собственными направлениями с собственными значениями, меняющими их местами. Достаточно потребовать $M_8 v_a = v_b$ и $M_8 v_b = v_a$. Решая по столбцам, получаем
   \[
-    M_8 = \begin{bmatrix}
-      1 & 0 \\
-      a + b & -1
-    \end{bmatrix} =
-    \begin{bmatrix}
-      1 & 0 \\
-      5 & -1
-    \end{bmatrix}
+    M_8 = \begin{bmatrix} 1 & 0 \\ a+b & -1 \end{bmatrix} = \begin{bmatrix} 1 & 0 \\ 5 & -1 \end{bmatrix}.
   \]
 
   \item \textbf{Отображение, которое переводит круг единичной площади в круг площади $c = 4$.}\\
-  Поскольку $S = \pi r^2 = c \Rightarrow r = \sqrt{c} = 2$, то масштабируем единичный круг:
+  Обоснование: круг $\to$ круг означает изотропное масштабирование с коэффициентом $s=\sqrt{\tfrac{\text{площадь}}{\text{исх. площадь}}}=\sqrt{c}$. Выбираем без дополнительного поворота:
   \[
-    M_9 = \sqrt{4} \cdot I = 2 \cdot
-    \begin{bmatrix}
-      1 & 0 \\
-      0 & 1
-    \end{bmatrix} =
-    \begin{bmatrix}
-      2 & 0 \\
-      0 & 2
-    \end{bmatrix}
+    M_9 = \sqrt{c}\,I = 2I.
   \]
 
-  \item \textbf{Отображение, которое переводит круг единичной площади в некруг площади $d = 5$.}\\
-  Выберем, например, $\alpha = 5$, $\beta = 1$, тогда:
+  \item \textbf{Отображение, которое переводит круг единичной площади в некруг (эллипс) площади $d = 5$.}\\
+  Обоснование: эллипс получается при неодинаковом масштабировании по взаимно перпендикулярным осям. Выберем диагональную матрицу с $\det M_{10}=d$ (площадь масштабируется как $|\det|$):
   \[
-    M_{10} = \begin{bmatrix}
-      5 & 0 \\
-      0 & 1
-    \end{bmatrix}
+    M_{10} = \begin{bmatrix} 5 & 0 \\ 0 & 1 \end{bmatrix},\quad \det M_{10}=5=d.
   \]
 
   \item \textbf{Отображение с перпендикулярными собственными векторами, не лежащими на $y = 0$ или $y = x$.}\\
+  Обоснование: вещественная симметричная матрица имеет ортогональный базис собственных векторов (спектральная теорема). Выберем симметричную матрицу с несоосными осями:
   \[
-    M_{11} = \begin{bmatrix}
-      1 & 2 \\
-      2 & -1
-    \end{bmatrix}
+    M_{11} = \begin{bmatrix} 1 & 2 \\ 2 & -1 \end{bmatrix}.
   \]
 
   \item \textbf{Отображение, у которого нет двух неколлинеарных собственных векторов.}\\
+  Обоснование: жорданов блок размера 2 с собственным значением 1:
   \[
-    M_{12} = \begin{bmatrix}
-      1 & 1 \\
-      0 & 1
-    \end{bmatrix}
+    M_{12} = \begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix}.
   \]
 
   \item \textbf{Отображение, у которого нет вещественных собственных векторов.}\\
-  Это стандартная матрица поворота на $90^\circ$:
+  Обоснование: поворот на $90^\circ$ имеет чисто мнимые собственные значения $\pm i$:
   \[
-    M_{13} = \begin{bmatrix}
-      0 & -1 \\
-      1 & 0
-    \end{bmatrix}
+    M_{13} = \begin{bmatrix} 0 & -1 \\ 1 & 0 \end{bmatrix}.
   \]
 
   \item \textbf{Отображение, для которого любой ненулевой вектор является собственным.}\\
-  Это скалярное преобразование:
+  Обоснование: это скалярное преобразование $kI$ с $k\neq 0$ — любой вектор сохраняет направление:
   \[
-    M_{14} = k \cdot I =
-    \begin{bmatrix}
-      k & 0 \\
-      0 & k
-    \end{bmatrix}
+    M_{14} = k I.
   \]
 
   \item \textbf{Пара отображений, где $AB \neq BA$.}\\
+  Обоснование: сдвиги (срезы) вдоль разных осей обычно не коммутируют. Возьмём
   \[
-    A = \begin{bmatrix}
-      1 & 1 \\
-      0 & 1
-    \end{bmatrix}, \quad
-    B = \begin{bmatrix}
-      1 & 0 \\
-      1 & 1
-    \end{bmatrix}
+    A = \begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix},\quad
+    B = \begin{bmatrix} 1 & 0 \\ 1 & 1 \end{bmatrix},\quad AB\ne BA.
   \]
 
   \item \textbf{Пара отображений, где $AB = BA$.}\\
+  Обоснование: скалярная матрица коммутирует с любыми, а также коммутируют сдвиги, зависящие от одной и той же оси. В качестве наглядного примера возьмём
   \[
-    A = \begin{bmatrix}
-      1 & 2 \\
-      0 & 1
-    \end{bmatrix}, \quad
-    B = \begin{bmatrix}
-      3 & 0 \\
-      0 & 3
-    \end{bmatrix}
+    A = \begin{bmatrix} 1 & 2 \\ 0 & 1 \end{bmatrix},\quad
+    B = 3I,\quad AB=BA.
   \]
 \end{enumerate}
 
@@ -212,52 +144,37 @@ $a = 2$, $b = 3$, $c = 4$, $d = 5$
 \begin{enumerate}
   \item Матрица $M_1 = 
   \begin{bmatrix}
-    -\frac{3}{5} & \frac{4}{5} \\
-    \frac{4}{5} & \frac{3}{5}
-  \end{bmatrix}$
-
-  Обратимая, так как $\det(M_1) \ne 0$, следовательно:
+    -\tfrac{3}{5} & \tfrac{4}{5} \\
+    \tfrac{4}{5} & \tfrac{3}{5}
+  \end{bmatrix}$\\
+  Отражение обратимо ($\det M_1=-1\ne0$), поэтому
   \[
-    \text{Range}(M_1) = \mathbb{R}^2, \quad \text{Null}(M_1) = \left\{ \begin{bmatrix} 0 \\ 0 \end{bmatrix} \right\}
+    \mathrm{Range}(M_1) = \mathbb{R}^2,\quad \mathrm{Null}(M_1)=\{\mathbf{0}\}.
   \]
 
   \item Матрица $M_2 = 
   \begin{bmatrix}
     1 & 0 \\
     3 & 0
-  \end{bmatrix}$
-
+  \end{bmatrix}$\\
   \[
-    M_2 \begin{bmatrix} x \\ y \end{bmatrix} =
-    \begin{bmatrix} x \\ 3x \end{bmatrix}
-  \Rightarrow
-    \text{Range}(M_2) = 
-    \left\{ \begin{bmatrix} x \\ 3x \end{bmatrix} \mid x \in \mathbb{R} \right\}, \quad
-    \text{Null}(M_2) = 
-    \left\{ \begin{bmatrix} 0 \\ y \end{bmatrix} \mid y \in \mathbb{R} \right\}
+    M_2 \begin{bmatrix} x \\ y \end{bmatrix} = \begin{bmatrix} x \\ 3x \end{bmatrix}
+    \Rightarrow \mathrm{Range}(M_2)=\{(t,3t)^\top\},\ \mathrm{Null}(M_2)=\{(0,y)^\top\}.
   \]
 
   \item Матрица $M_{13} = 
   \begin{bmatrix}
     0 & -1 \\
     1 & 0
-  \end{bmatrix}$
-
-  Поворот на $90^\circ$, обратимая:
+  \end{bmatrix}$\\
+  Поворот обратим, поэтому 
   \[
-    \text{Range}(M_{13}) = \mathbb{R}^2, \quad 
-    \text{Null}(M_{13}) = \left\{ \begin{bmatrix} 0 \\ 0 \end{bmatrix} \right\}
+    \mathrm{Range}(M_{13})=\mathbb{R}^2,\quad \mathrm{Null}(M_{13})=\{\mathbf{0}\}.
   \]
 
-  \item Матрица $M_{14} = k \cdot I = 
-  \begin{bmatrix}
-    k & 0 \\
-    0 & k
-  \end{bmatrix}, \quad k \ne 0$
-
+  \item Матрица $M_{14} = k I$, $k\ne0$\\
   \[
-    \text{Range}(M_{14}) = \mathbb{R}^2, \quad 
-    \text{Null}(M_{14}) = \left\{ \begin{bmatrix} 0 \\ 0 \end{bmatrix} \right\}
+    \mathrm{Range}(M_{14})=\mathbb{R}^2,\quad \mathrm{Null}(M_{14})=\{\mathbf{0}\}.
   \]
 \end{enumerate}
 
@@ -265,462 +182,62 @@ $a = 2$, $b = 3$, $c = 4$, $d = 5$
 \textbf{Собственные значения и собственные векторы}
 
 \begin{enumerate}
-  \item \textbf{Матрица $M_1 = 
-  \begin{bmatrix}
-    -\frac{3}{5} & \frac{4}{5} \\
-    \frac{4}{5} & \frac{3}{5}
-  \end{bmatrix}$}
+  \item \textbf{$M_1$}\\
+  Характеристический многочлен даёт $\lambda=\pm1$. Для $\lambda=1$ направление отражаемой прямой $y=ax$ сохраняется, для $\lambda=-1$ — ортогональное к ней направление меняет знак. Явно получаем
+  $v_{\lambda=1}=(1,2)^\top$, $v_{\lambda=-1}=(2,-1)^\top$.
 
-  Найдём характеристический многочлен:
-  \[
-    \det(M_1 - \lambda I) = 
-    \left| \begin{matrix}
-      -\frac{3}{5} - \lambda & \frac{4}{5} \\
-      \frac{4}{5} & \frac{3}{5} - \lambda
-    \end{matrix} \right| =
-    \left( -\frac{3}{5} - \lambda \right)\left( \frac{3}{5} - \lambda \right) - \left( \frac{4}{5} \right)^2
-  \]
+  \item \textbf{$M_2$}\\
+  $\det(M_2-\lambda I)=-(1-\lambda)\lambda \Rightarrow \lambda\in\{0,1\}$. Для $\lambda=1$: $v=(1,3)^\top$; для $\lambda=0$: $v=(0,1)^\top$.
 
-  \[
-    \lambda^2 - 1 = 0 \Rightarrow \lambda = \pm 1
-  \]
+  \item \textbf{$M_3$}\\
+  Поворот на $40^\circ$: $\lambda=\cos 40^\circ \pm i\sin 40^\circ$ — вещественных собственных нет.
 
-  Найдём собственные векторы:
+  \item \textbf{$M_4$}\\
+  $\lambda=-1$ кратности 2; любой ненулевой вектор — собственный.
 
-  Для $\lambda = 1$:
-  \[
-    (M_1 - I)\vec{v} = 0 \Rightarrow 
-    \begin{bmatrix}
-      -\frac{8}{5} & \frac{4}{5} \\
-      \frac{4}{5} & -\frac{2}{5}
-    \end{bmatrix}
-    \Rightarrow v = 
-    \begin{bmatrix}
-      1 \\
-      2
-    \end{bmatrix}
-  \]
+  \item \textbf{$M_8$}\\
+  $\lambda=1,-1$, собственные направления — прямые $y=0$ и $x=0$ соответственно.
 
-  Для $\lambda = -1$:
-  \[
-    (M_1 + I)\vec{v} = 0 \Rightarrow 
-    \begin{bmatrix}
-      \frac{2}{5} & \frac{4}{5} \\
-      \frac{4}{5} & \frac{8}{5}
-    \end{bmatrix}
-    \Rightarrow v = 
-    \begin{bmatrix}
-      2 \\
-      -1
-    \end{bmatrix}
-  \]
+  \item \textbf{$M_{11}$}\\
+  $\det(M_{11}-\lambda I)=\lambda^2-5$, поэтому $\lambda=\pm\sqrt{5}$; собственные векторы ортогональны.
 
-  \item \textbf{Матрица $M_2 = 
-  \begin{bmatrix}
-    1 & 0 \\
-    3 & 0
-  \end{bmatrix}$}
+  \item \textbf{$M_{12}$}\\
+  Единственное собственное значение $\lambda=1$ с единственным направлением $v=(1,0)^\top$ (дефектная матрица).
 
-  Характеристическое уравнение:
-  \[
-    \det(M_2 - \lambda I) = 
-    \left| \begin{matrix}
-      1 - \lambda & 0 \\
-      3 & -\lambda
-    \end{matrix} \right| = (1 - \lambda)(-\lambda)
-    \Rightarrow \lambda_1 = 0, \quad \lambda_2 = 1
-  \]
+  \item \textbf{$M_{13}$}\\
+  $\lambda=\pm i$; вещественных собственных векторов нет.
 
-  Для $\lambda = 1$:
-  \[
-    \begin{bmatrix}
-      0 & 0 \\
-      3 & -1
-    \end{bmatrix} \Rightarrow y = 3x \Rightarrow 
-    v = \begin{bmatrix} 1 \\ 3 \end{bmatrix}
-  \]
+  \item \textbf{$M_{14}$}\\
+  $\lambda=k$ кратности 2; любой ненулевой вектор — собственный.
 
-  Для $\lambda = 0$:
-  \[
-    \begin{bmatrix}
-      1 & 0 \\
-      3 & 0
-    \end{bmatrix} \Rightarrow x = 0 \Rightarrow 
-    v = \begin{bmatrix} 0 \\ 1 \end{bmatrix}
-  \]
-
-  \item \textbf{Матрица $M_3 = 
-  \begin{bmatrix}
-    \cos 40^\circ & -\sin 40^\circ \\
-    \sin 40^\circ & \cos 40^\circ
-  \end{bmatrix}$}
-
-  Это матрица поворота, у неё нет вещественных собственных чисел (дискриминант < 0):
-  \[
-    \lambda = \cos(40^\circ) \pm i \sin(40^\circ)
-  \]
-
-  \item \textbf{Матрица $M_4 = 
-  \begin{bmatrix}
-    -1 & 0 \\
-    0 & -1
-  \end{bmatrix}$}
-
-  Скаляры по диагонали: $-1$. Характеристическое уравнение:
-  \[
-    \det(M_4 - \lambda I) = (-1 - \lambda)^2 = 0 \Rightarrow \lambda = -1
-  \]
-
-  Любой ненулевой вектор является собственным:
-  \[
-    M_4 \vec{v} = -\vec{v}
-  \]
-
-  \item \textbf{Матрица $M_8 = 
-  \begin{bmatrix}
-    1 & 0 \\
-    5 & -1
-  \end{bmatrix}$}
-
-  \[
-    \det(M_8 - \lambda I) =
-    \left| \begin{matrix}
-      1 - \lambda & 0 \\
-      5 & -1 - \lambda
-    \end{matrix} \right| =
-    (1 - \lambda)(-1 - \lambda)
-  \Rightarrow \lambda = 1, -1
-  \]
-
-  Для $\lambda = 1$: $y = 0$; $v = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$
-
-  Для $\lambda = -1$: $x = 0$; $v = \begin{bmatrix} 0 \\ 1 \end{bmatrix}$
-
-    \item \textbf{Матрица $M_{11} = 
-  \begin{bmatrix}
-    1 & 2 \\
-    2 & -1
-  \end{bmatrix}$}
-
-  Характеристический многочлен:
-  \[
-    \det(M_{11} - \lambda I) = 
-    \left| \begin{matrix}
-      1 - \lambda & 2 \\
-      2 & -1 - \lambda
-    \end{matrix} \right| = (1 - \lambda)(-1 - \lambda) - 4 = \lambda^2 - 5
-  \Rightarrow \lambda = \pm\sqrt{5}
-  \]
-
-  Для $\lambda = \sqrt{5}$:
-  \[
-    \left( M_{11} - \sqrt{5}I \right) \vec{v} = 0 \Rightarrow
-    \begin{bmatrix}
-      1 - \sqrt{5} & 2 \\
-      2 & -1 - \sqrt{5}
-    \end{bmatrix} \Rightarrow
-    v = \begin{bmatrix} 2 \\ \sqrt{5} - 1 \end{bmatrix}
-  \]
-
-  Для $\lambda = -\sqrt{5}$:
-  \[
-    v = \begin{bmatrix} 2 \\ -1 - \sqrt{5} \end{bmatrix}
-  \]
-
-  \item \textbf{Матрица $M_{12} = 
-  \begin{bmatrix}
-    1 & 1 \\
-    0 & 1
-  \end{bmatrix}$}
-
-  \[
-    \det(M_{12} - \lambda I) = (1 - \lambda)^2 \Rightarrow \lambda = 1 \text{ (двукратный корень)}
-  \]
-
-  Только один собственный вектор:
-  \[
-    (M_{12} - I) = 
-    \begin{bmatrix}
-      0 & 1 \\
-      0 & 0
-    \end{bmatrix} \Rightarrow y = 0 \Rightarrow 
-    v = \begin{bmatrix} 1 \\ 0 \end{bmatrix}
-  \]
-
-  \item \textbf{Матрица $M_{13} = 
-  \begin{bmatrix}
-    0 & -1 \\
-    1 & 0
-  \end{bmatrix}$}
-
-  \[
-    \det(M_{13} - \lambda I) = \lambda^2 + 1 \Rightarrow \lambda = \pm i
-  \]
-
-  Нет вещественных собственных векторов. Например, для $\lambda = i$:
-  \[
-    v = \begin{bmatrix} 1 \\ -i \end{bmatrix}
-  \]
-
-  \item \textbf{Матрица $M_{14} = kI =
-  \begin{bmatrix}
-    k & 0 \\
-    0 & k
-  \end{bmatrix}$}
-
-  \[
-    \lambda = k \text{ (кратности 2)},\quad \text{любой ненулевой вектор — собственный}
-  \]
-
-  \item \textbf{Матрицы $A = 
-  \begin{bmatrix}
-    1 & 1 \\
-    0 & 1
-  \end{bmatrix}, \quad B = 
-  \begin{bmatrix}
-    1 & 0 \\
-    1 & 1
-  \end{bmatrix}$}
-
-  Для обеих:
-  \[
-    \det(A - \lambda I) = (1 - \lambda)^2,\quad 
-    \det(B - \lambda I) = (1 - \lambda)^2 \Rightarrow \lambda = 1
-  \]
-
-  У $A$: собственный вектор $v = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$
-
-  У $B$: собственный вектор $v = \begin{bmatrix} 0 \\ 1 \end{bmatrix}$
-
-  \item \textbf{Матрицы $A = 
-  \begin{bmatrix}
-    1 & 2 \\
-    0 & 1
-  \end{bmatrix}, \quad B = 
-  \begin{bmatrix}
-    3 & 0 \\
-    0 & 3
-  \end{bmatrix}$}
-
-  \[
-    \lambda_A = 1,\quad \lambda_B = 3
-  \]
-
-  У $A$: собственный вектор $v = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$
-
-  У $B$: любой ненулевой вектор
+  \item \textbf{$A,B$ из пп.15, 16}\\
+  В обоих случаях $\lambda_A=1$, для скалярной $B$ — $\lambda_B=3$ (любой ненулевой вектор собственный).
 \end{enumerate}
 
 \textbf{Определители матриц}
 
 \begin{enumerate}
-  \item $M_1 = 
-  \begin{bmatrix}
-    -\frac{3}{5} & \frac{4}{5} \\
-    \frac{4}{5} & \frac{3}{5}
-  \end{bmatrix}$
-
-  \[
-    \det(M_1) = \left(-\frac{3}{5}\right)\left(\frac{3}{5}\right) - \left(\frac{4}{5}\right)^2 =
-    -\frac{9}{25} - \frac{16}{25} = -\frac{25}{25} = -1
-  \]
-
-  \item $M_2 = 
-  \begin{bmatrix}
-    1 & 0 \\
-    3 & 0
-  \end{bmatrix}$
-
-  \[
-    \det(M_2) = 1 \cdot 0 - 0 \cdot 3 = 0
-  \]
-
-  \item $M_3 \approx 
-  \begin{bmatrix}
-    0.766 & -0.643 \\
-    0.643 & 0.766
-  \end{bmatrix}$
-
-  \[
-    \det(M_3) \approx 0.766^2 + 0.643^2 \approx 0.586 + 0.413 = 0.999 \approx 1
-  \]
-
-  (Погрешность связана с округлением — точное значение $\det(M_3) = 1$ как у любой ортогональной матрицы поворота.)
-
-  \item $M_4 = 
-  \begin{bmatrix}
-    -1 & 0 \\
-    0 & -1
-  \end{bmatrix}$
-
-  \[
-    \det(M_4) = (-1)(-1) - 0 = 1
-  \]
-
-  \item $M_5 \approx 
-  \begin{bmatrix}
-    0.021 & 0.999 \\
-    -0.999 & 0.021
-  \end{bmatrix}$
-
-  \[
-    \det(M_5) \approx 0.021^2 + 0.999^2 \approx 0.0004 + 0.998 = 0.9984 \approx 1
-  \]
-
-  (Опять же, фактически это композиция поворота и отражения, поэтому $\det(M_5) = -1$)
-
-  \item $M_9 = 
-  \begin{bmatrix}
-    2 & 0 \\
-    0 & 2
-  \end{bmatrix}$
-
-  \[
-    \det(M_9) = 2 \cdot 2 = 4
-  \]
-
-  \item $M_{10} = 
-  \begin{bmatrix}
-    5 & 0 \\
-    0 & 1
-  \end{bmatrix}$
-
-  \[
-    \det(M_{10}) = 5 \cdot 1 = 5
-  \]
+  \item $\det(M_1)=-1$ (отражение).
+  \item $\det(M_2)=0$ (сжатие в прямую).
+  \item $\det(M_3)=1$ (ортогональная матрица поворота).
+  \item $\det(M_4)=1$ (поворот на $180^\circ$).
+  \item $\det(M_5)=-1$ (композиция поворота с отражением даёт ориентацию $-$).
+  \item $\det(M_9)=4$ (масштаб $2$ по обеим осям).
+  \item $\det(M_{10})=5$ (анизотропный масштаб, эллипс той же площади).
 \end{enumerate}
 
-\textbf{Симметричность матриц}
+\textbf{Где матрица \emph{обязательно} симметрична?}
 
-Матрица является симметричной, если $A = A^T$.
+Матрица \emph{обязательно} симметрична в следующих пунктах задачи (независимо от выбранных представительных матриц внутри класса описанных преобразований):
 
 \begin{enumerate}
-  \item $M_1 = 
-  \begin{bmatrix}
-    -\frac{3}{5} & \frac{4}{5} \\
-    \frac{4}{5} & \frac{3}{5}
-  \end{bmatrix}$
-
-  \[
-    M_1^T = 
-    \begin{bmatrix}
-      -\frac{3}{5} & \frac{4}{5} \\
-      \frac{4}{5} & \frac{3}{5}
-    \end{bmatrix} = M_1 \Rightarrow \text{Симметрична}
-  \]
-
-  \item $M_2 = 
-  \begin{bmatrix}
-    1 & 0 \\
-    3 & 0
-  \end{bmatrix}$
-
-  \[
-    M_2^T = 
-    \begin{bmatrix}
-      1 & 3 \\
-      0 & 0
-    \end{bmatrix} \neq M_2 \Rightarrow \text{Не симметрична}
-  \]
-
-  \item $M_3 \approx 
-  \begin{bmatrix}
-    0.766 & -0.643 \\
-    0.643 & 0.766
-  \end{bmatrix}$
-
-  \[
-    M_3^T \neq M_3 \Rightarrow \text{Не симметрична}
-  \]
-
-  \item $M_4 = 
-  \begin{bmatrix}
-    -1 & 0 \\
-    0 & -1
-  \end{bmatrix}$
-
-  \[
-    M_4^T = M_4 \Rightarrow \text{Симметрична}
-  \]
-
-  \item $M_5 \approx 
-  \begin{bmatrix}
-    0.021 & 0.999 \\
-    -0.999 & 0.021
-  \end{bmatrix}$
-
-  \[
-    M_5^T \neq M_5 \Rightarrow \text{Не симметрична}
-  \]
-
-  \item $M_9 = 
-  \begin{bmatrix}
-    2 & 0 \\
-    0 & 2
-  \end{bmatrix}$
-
-  \[
-    M_9^T = M_9 \Rightarrow \text{Симметрична}
-  \]
-
-  \item $M_{10} = 
-  \begin{bmatrix}
-    5 & 0 \\
-    0 & 1
-  \end{bmatrix}$
-
-  \[
-    M_{10}^T = M_{10} \Rightarrow \text{Симметрична}
-  \]
-
-  \item $M_{11} = 
-  \begin{bmatrix}
-    1 & 2 \\
-    2 & -1
-  \end{bmatrix}$
-
-  \[
-    M_{11}^T = M_{11} \Rightarrow \text{Симметрична}
-  \]
-
-  \item $M_{12} = 
-  \begin{bmatrix}
-    1 & 1 \\
-    0 & 1
-  \end{bmatrix}$
-
-  \[
-    M_{12}^T = 
-    \begin{bmatrix}
-      1 & 0 \\
-      1 & 1
-    \end{bmatrix} \neq M_{12} \Rightarrow \text{Не симметрична}
-  \]
-
-  \item $M_{13} = 
-  \begin{bmatrix}
-    0 & -1 \\
-    1 & 0
-  \end{bmatrix}$
-
-  \[
-    M_{13}^T = 
-    \begin{bmatrix}
-      0 & 1 \\
-      -1 & 0
-    \end{bmatrix} \neq M_{13} \Rightarrow \text{Не симметрична}
-  \]
-
-  \item $M_{14} = kI = 
-  \begin{bmatrix}
-    k & 0 \\
-    0 & k
-  \end{bmatrix}$
-
-  \[
-    M_{14}^T = M_{14} \Rightarrow \text{Симметрична}
-  \]
+  \item[1)] Отражение относительно прямой через начало. Любое такое отражение имеет вид $A=Q\,\mathrm{diag}(1,-1)\,Q^\top$ с ортогональной $Q$, откуда $A=A^\top$.
+  \item[4)] Центральная симметрия $A=-I$ — симметрична.
+  \item[11)] У матрицы есть два взаимно перпендикулярных собственных направления. В этом случае существует ортонормированный базис из собственных векторов, и матрица ортогонально диагонализуема: $A=Q D Q^\top$, следовательно симметрична.
+  \item[14)] Скалярная матрица $A=kI$ — симметрична.
 \end{enumerate}
+
+В остальных пунктах симметричность не является обязательной: например, в п.9 круг в круг можно переводить с дополнительным поворотом $A=sR$ (не симметрична при $R\ne\pm I$), а в п.10 эллипс можно получить композицией двух разных поворотов с диагональным масштабом $A=R_1 \mathrm{diag}(\alpha,\beta) R_2$.
 
 \section*{Визуализация линейных отображений}
 
@@ -849,4 +366,7 @@ $a = 2$, $b = 3$, $c = 4$, $d = 5$
 \end{figure}
 
 \clearpage
-\end{document}
+
+% --- Краткие выводы ---
+\section*{Выводы}
+В работе сконструированы и проанализированы 2D-линейные преобразования, реализующие множество геометрических эффектов: отражения, проекции в прямую, повороты, изотропные и анизотропные масштабирующие отображения, а также примеры некомутации и коммутативности. Для каждого класса даны построения по геометрическим условиям (через образы базисных векторов, ортогональные разложения и жордановы формы), вычислены спектры, образы/ядра и определители. Показано, что симметричность матрицы \emph{обязательна} лишь для отражений через прямую, центральной симметрии, преобразований с ортогональным базисом собственных векторов и скалярных матриц; в остальных случаях она необязательна.
