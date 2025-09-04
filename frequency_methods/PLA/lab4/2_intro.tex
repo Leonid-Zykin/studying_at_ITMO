@@ -186,25 +186,29 @@ x(k + 1) = Ax(k), \quad x(k) \in \mathbb{R}^2, \quad A \in \mathbb{R}^{2 \times 
 
 \subsection*{Матрицы систем (Задание 2)}
 
-В расчётах использованы следующие матрицы $A$ (каждая матрица не является диагональной или жордановой, за исключением случаев с вещественными кратными собственными числами, где специально показаны эффекты масштабирования):
+Во всех случаях матрицы строились как подобные заданным жордановым/реальным блочно-вращательным формам $J$:
+\[
+A = P J P^{-1},\quad P = \begin{pmatrix}1 & 2\\ 3 & 5\end{pmatrix},\ \det P=-1\neq 0.
+\]
+Выбор подобия исключает диагональный или канонический жорданов вид у $A$, сохраняя нужные собственные числа.
 
+\noindent Базовые формы $J$:
 \begin{align}
-A_1 &= \begin{pmatrix} -1 & 0 \\ 0 & -1 \end{pmatrix}, &
-A_2 &= \begin{pmatrix} -\tfrac{1}{\sqrt{2}} & -\tfrac{1}{\sqrt{2}} \\ \tfrac{1}{\sqrt{2}} & -\tfrac{1}{\sqrt{2}} \end{pmatrix}, &
-A_3 &= \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}, \\
-A_4 &= \begin{pmatrix} \tfrac{1}{\sqrt{2}} & -\tfrac{1}{\sqrt{2}} \\ \tfrac{1}{\sqrt{2}} & \tfrac{1}{\sqrt{2}} \end{pmatrix}, &
-A_5 &= \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}. &&
+J_{-1} &= \begin{pmatrix}-1 & 1\\ 0 & -1\end{pmatrix}, &
+J_{1} &= \begin{pmatrix}1 & 1\\ 0 & 1\end{pmatrix}, &
+J_{0} &= \begin{pmatrix}0 & 1\\ 0 & 0\end{pmatrix}, \\
+R(a,b) &= \begin{pmatrix}a & -b\\ b & a\end{pmatrix} \ (a\pm bi).
 \end{align}
 
-Масштабированные системы:
+\noindent Соответствующие матрицы $A = PJP^{-1}$:
 \begin{align}
-A_6 &= 0.5\,A_1 = \begin{pmatrix} -0.5 & 0 \\ 0 & -0.5 \end{pmatrix}, &
-A_8 &= 0.5\,A_3 = \begin{pmatrix} 0 & -0.5 \\ 0.5 & 0 \end{pmatrix}, &
-A_{10} &= 0.5\,A_5 = \begin{pmatrix} 0.5 & 0 \\ 0 & 0.5 \end{pmatrix}, \\
-A_9 &= 2\,A_1 = \begin{pmatrix} -2 & 0 \\ 0 & -2 \end{pmatrix}, &
-A_{11} &= 2\,A_3 = \begin{pmatrix} 0 & -2 \\ 2 & 0 \end{pmatrix}, &
-A_{13} &= 2\,A_5 = \begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix}, \\
-A_{12} &= \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}. &&
+A_1 &= P J_{-1} P^{-1}, & A_2 &= P R\!\left(-\tfrac{1}{\sqrt{2}},\tfrac{1}{\sqrt{2}}\right) P^{-1}, & A_3 &= P R(0,1) P^{-1}, \\
+A_4 &= P R\!\left(\tfrac{1}{\sqrt{2}},\tfrac{1}{\sqrt{2}}\right) P^{-1}, & A_5 &= P J_{1} P^{-1}, & A_{12} &= P J_{0} P^{-1}.
+\end{align}
+Масштабирования выполнялись умножением базовых форм: $c=0.5$, $d=2$:
+\begin{align}
+A_6 &= P (c J_{-1}) P^{-1}, & A_7 &= P (c R(0,1)) P^{-1}, & A_8 &= P (c J_{1}) P^{-1}, \\
+A_9 &= P (d J_{-1}) P^{-1}, & A_{10} &= P (d R(0,1)) P^{-1}, & A_{11} &= P (d J_{1}) P^{-1}.
 \end{align}
 
 \subsection*{Траектории всех систем (Задание 2)}
@@ -247,14 +251,14 @@ A_{12} &= \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}. &&
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{images/task2/system8_lambda_pure_imaginary_scaled.png}
-    \caption{Система 8: $\lambda_{1,2} = 0.5\cdot(\pm i)$}
+    \includegraphics[width=0.9\textwidth]{images/task2/system7_lambda_pure_imaginary_scaled.png}
+    \caption{Система 7: $\lambda_{1,2} = 0.5\cdot(\pm i)$}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{images/task2/system10_lambda_plus1_scaled.png}
-    \caption{Система 10: $\lambda_{1,2} = 0.5\cdot 1$}
+    \includegraphics[width=0.9\textwidth]{images/task2/system8_lambda_plus1_scaled.png}
+    \caption{Система 8: $\lambda_{1,2} = 0.5\cdot 1$}
 \end{figure}
 
 \begin{figure}[H]
@@ -265,14 +269,14 @@ A_{12} &= \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}. &&
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{images/task2/system11_lambda_pure_imaginary_scaled_up.png}
-    \caption{Система 11: $\lambda_{1,2} = 2\cdot(\pm i)$}
+    \includegraphics[width=0.9\textwidth]{images/task2/system10_lambda_pure_imaginary_scaled_up.png}
+    \caption{Система 10: $\lambda_{1,2} = 2\cdot(\pm i)$}
 \end{figure}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.9\textwidth]{images/task2/system13_lambda_plus1_scaled_up.png}
-    \caption{Система 13: $\lambda_{1,2} = 2\cdot 1$}
+    \includegraphics[width=0.9\textwidth]{images/task2/system11_lambda_plus1_scaled_up.png}
+    \caption{Система 11: $\lambda_{1,2} = 2\cdot 1$}
 \end{figure}
 
 \begin{figure}[H]
