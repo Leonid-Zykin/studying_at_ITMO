@@ -56,6 +56,12 @@ def plot_system(A, title, filename_base, eigenvalues, eigenvectors):
     plt.title(f'{title}\nx1(t)')
     plt.legend()
     plt.grid(True, alpha=0.3)
+    # Если это система 3, ограничим масштаб по красной траектории (x(0)=v1)
+    if filename_base == "system3_unstable_v1_to_zero":
+        red_solution = odeint(system_ode, v1, t, args=(A,))
+        y_span = np.max(np.abs(red_solution[:, 0]))
+        y_span = max(y_span, 1e-6)
+        plt.ylim(-1.2 * y_span, 1.2 * y_span)
     
     plt.subplot(1, 3, 2)
     for i, x0 in enumerate(x0_list):
@@ -66,6 +72,11 @@ def plot_system(A, title, filename_base, eigenvalues, eigenvectors):
     plt.title(f'{title}\nx2(t)')
     plt.legend()
     plt.grid(True, alpha=0.3)
+    if filename_base == "system3_unstable_v1_to_zero":
+        red_solution = odeint(system_ode, v1, t, args=(A,))
+        y_span = np.max(np.abs(red_solution[:, 1]))
+        y_span = max(y_span, 1e-6)
+        plt.ylim(-1.2 * y_span, 1.2 * y_span)
     
     # График 2: Фазовая плоскость
     plt.subplot(1, 3, 3)

@@ -184,6 +184,103 @@ x(k + 1) = Ax(k), \quad x(k) \in \mathbb{R}^2, \quad A \in \mathbb{R}^{2 \times 
     \item $\lambda_{1,2} = 1$ - система с положительными собственными числами
 \end{enumerate}
 
+\subsection*{Матрицы систем (Задание 2)}
+
+В расчётах использованы следующие матрицы $A$ (каждая матрица не является диагональной или жордановой, за исключением случаев с вещественными кратными собственными числами, где специально показаны эффекты масштабирования):
+
+\begin{align}
+A_1 &= \begin{pmatrix} -1 & 0 \\ 0 & -1 \end{pmatrix}, &
+A_2 &= \begin{pmatrix} -\tfrac{1}{\sqrt{2}} & -\tfrac{1}{\sqrt{2}} \\ \tfrac{1}{\sqrt{2}} & -\tfrac{1}{\sqrt{2}} \end{pmatrix}, &
+A_3 &= \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}, \\
+A_4 &= \begin{pmatrix} \tfrac{1}{\sqrt{2}} & -\tfrac{1}{\sqrt{2}} \\ \tfrac{1}{\sqrt{2}} & \tfrac{1}{\sqrt{2}} \end{pmatrix}, &
+A_5 &= \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}. &&
+\end{align}
+
+Масштабированные системы:
+\begin{align}
+A_6 &= 0.5\,A_1 = \begin{pmatrix} -0.5 & 0 \\ 0 & -0.5 \end{pmatrix}, &
+A_8 &= 0.5\,A_3 = \begin{pmatrix} 0 & -0.5 \\ 0.5 & 0 \end{pmatrix}, &
+A_{10} &= 0.5\,A_5 = \begin{pmatrix} 0.5 & 0 \\ 0 & 0.5 \end{pmatrix}, \\
+A_9 &= 2\,A_1 = \begin{pmatrix} -2 & 0 \\ 0 & -2 \end{pmatrix}, &
+A_{11} &= 2\,A_3 = \begin{pmatrix} 0 & -2 \\ 2 & 0 \end{pmatrix}, &
+A_{13} &= 2\,A_5 = \begin{pmatrix} 2 & 0 \\ 0 & 2 \end{pmatrix}, \\
+A_{12} &= \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}. &&
+\end{align}
+
+\subsection*{Траектории всех систем (Задание 2)}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/task2/system1_lambda_minus1.png}
+    \caption{Система 1: $\lambda_{1,2} = -1$}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/task2/system2_lambda_complex_stable.png}
+    \caption{Система 2: $\lambda_{1,2} = -\tfrac{1}{\sqrt{2}} \pm \tfrac{1}{\sqrt{2}}i$}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/task2/system3_lambda_pure_imaginary.png}
+    \caption{Система 3: $\lambda_{1,2} = \pm i$}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/task2/system4_lambda_complex_unstable.png}
+    \caption{Система 4: $\lambda_{1,2} = \tfrac{1}{\sqrt{2}} \pm \tfrac{1}{\sqrt{2}}i$}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/task2/system5_lambda_plus1.png}
+    \caption{Система 5: $\lambda_{1,2} = 1$}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/task2/system6_lambda_minus1_scaled.png}
+    \caption{Система 6: $\lambda_{1,2} = 0.5\cdot(-1)$}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/task2/system8_lambda_pure_imaginary_scaled.png}
+    \caption{Система 8: $\lambda_{1,2} = 0.5\cdot(\pm i)$}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/task2/system10_lambda_plus1_scaled.png}
+    \caption{Система 10: $\lambda_{1,2} = 0.5\cdot 1$}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/task2/system9_lambda_minus1_scaled_up.png}
+    \caption{Система 9: $\lambda_{1,2} = 2\cdot(-1)$}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/task2/system11_lambda_pure_imaginary_scaled_up.png}
+    \caption{Система 11: $\lambda_{1,2} = 2\cdot(\pm i)$}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/task2/system13_lambda_plus1_scaled_up.png}
+    \caption{Система 13: $\lambda_{1,2} = 2\cdot 1$}
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.9\textwidth]{images/task2/system12_lambda_zero.png}
+    \caption{Система 12: $\lambda_{1,2} = 0$}
+\end{figure}
+
 \begin{figure}[H]
     \centering
     \includegraphics[width=0.9\textwidth]{images/task2/eigenvalues_complex_plane.png}
