@@ -5,10 +5,24 @@
 
 \section{Построение куба в пространстве}
 
-Используем код Python для выполнения заданий.
+<<<<<<< HEAD
+Для начала реализуем построение куба в трёхмерном пространстве с помощью MATLAB. 
+=======
+Используем код python для выполнения заданий.
+>>>>>>> 153dd74 (manual report task 1)
 
 \textbf{Краткое описание алгоритма:}
 \begin{enumerate}
+<<<<<<< HEAD
+    \item \texttt{verticesCube} --- содержит координаты восьми вершин куба: строки соответствуют координатам $x$, $y$, $z$ и однородной координате $w=1$.
+    \item \texttt{facesCube} --- определяет, какие вершины соединяются для формирования граней (по четыре индекса на каждую грань).
+    \item \texttt{DrawShape} --- функция для визуализации фигуры, использующая команду \texttt{patch} для построения граней. Для перехода к обычным координатам используется деление первых трёх строк на $w$.
+\end{enumerate}
+
+\textbf{Зачем нужны однородные координаты?}
+
+Введение четвёртой компоненты ($w$) позволяет удобно описывать аффинные преобразования (масштаб, сдвиг, поворот) в виде матричного умножения. Если $w=1$, то точка находится в обычном 3D-пространстве, а для получения координат достаточно разделить $x$, $y$, $z$ на $w$.
+=======
     \item Функция \texttt{create\_cube()} возвращает массив координат 8 вершин куба с центром в начале координат и длиной ребра 2.
     \item Функция \texttt{get\_faces()} задаёт список граней куба через индексы вершин.
     \item Для визуализации используется функция \texttt{plot\_cube}, которая строит грани куба с помощью \texttt{Poly3DCollection} из библиотеки matplotlib.
@@ -16,9 +30,11 @@
     \item Вся визуализация и сохранение графика выполняется в основной части программы через matplotlib.
 \end{enumerate}
 
+
 \textbf{Зачем использовать четырехкомпонентный вектор?}
 
 Четырехкомпонентный вектор (где последняя координата $w$) позволяет удобно записывать любые аффинные преобразования — такие как перенос, масштабирование и поворот — в виде одного матричного умножения. Благодаря этому все преобразования можно объединять и применять последовательно, не переходя к разным формулам для разных типов операций. После применения преобразования для получения обычных координат достаточно разделить $x$, $y$, $z$ на $w$ (если $w \neq 1$).
+>>>>>>> 153dd74 (manual report task 1)
 
 \textbf{Как задать другие фигуры?}
 
@@ -26,13 +42,13 @@
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.5\textwidth]{task1/cube_original.png}
+    %\includegraphics[width=0.5\textwidth]{cube1.png}
     \caption{Пример: куб в трёхмерном пространстве}
 \end{figure}
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=0.5\textwidth]{task1/tetrahedron.png}
+    %\includegraphics[width=0.5\textwidth]{tetrahedron.png}
     \caption{Пример: тетраэдр в трёхмерном пространстве}
 \end{figure}
 
@@ -51,8 +67,20 @@ S = \begin{bmatrix}
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=\textwidth]{task2/scaling_comparison.png}
-    \caption{Сравнение масштабирования куба: исходный, увеличенный (2, 1.5, 0.5) и уменьшенный (0.5, 0.5, 0.5)}
+    %\includegraphics[width=0.5\textwidth]{cube_scale1.png}
+    \caption{Исходный куб}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    %\includegraphics[width=0.5\textwidth]{cube_scale2.png}
+    \caption{Масштабированный куб}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    %\includegraphics[width=0.5\textwidth]{cube_scale3.png}
+    \caption{Куб после уменьшения}
 \end{figure}
 
 \section{Смещение (перенос) куба}
@@ -70,21 +98,18 @@ T = \begin{bmatrix}
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=\textwidth]{task3/translation_comparison.png}
-    \caption{Сравнение переноса куба: исходный, перенесенный (3, 2, 1) и комбинированное преобразование TS}
+    %\includegraphics[width=0.5\textwidth]{cube_translate1.png}
+    \caption{Кубы с разными размерами и положением}
 \end{figure}
 
-\textbf{Исследование коммутативности преобразований}
-
-Важно отметить, что порядок применения матриц имеет значение. Рассмотрим композиции $TS$ (перенос, затем масштабирование) и $ST$ (масштабирование, затем перенос):
-
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=\textwidth]{task3/ts_vs_st.png}
-    \caption{Сравнение TS и ST: преобразования не коммутируют}
-\end{figure}
-
-Как видно из рисунка, $TS \neq ST$, что демонстрирует некоммутативность аффинных преобразований.
+\textbf{Пояснения к коду:}
+\begin{enumerate}
+    \item \texttt{verticesCube}, \texttt{facesCube} --- определяют форму и грани.
+    \item \texttt{scaleMatrix} --- масштабирует куб.
+    \item \texttt{translationMatrix} --- сдвигает куб.
+    \item \texttt{combinedMatrix} --- объединяет оба преобразования.
+    \item \texttt{DrawShape} --- визуализирует результат.
+\end{enumerate}
 
 \section{Поворот куба}
 
@@ -119,30 +144,25 @@ T = \begin{bmatrix}
     \]
 \end{itemize}
 
-\textbf{Поворот вокруг произвольной оси}
-
-Для поворота вокруг произвольной оси $v$ на угол $\theta$ используется формула Родрига:
-\[
-v = \begin{bmatrix} v_x \\ v_y \\ v_z \end{bmatrix}, \quad J = \frac{1}{\|v\|} \begin{bmatrix}
-0 & -v_z & v_y & 0 \\
-v_z & 0 & -v_x & 0 \\
--v_y & v_x & 0 & 0 \\
-0 & 0 & 0 & 0
-\end{bmatrix}, \quad R_v(\theta) = e^{J\theta}
-\]
+\begin{figure}[h!]
+    \centering
+    %\includegraphics[width=0.5\textwidth]{cube_rotate1.png}
+    \caption{Куб после поворота}
+\end{figure}
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=\textwidth]{task4/rotation_analysis.png}
-    \caption{Анализ поворотов: исходный куб, поворот вокруг произвольной оси (1,1,1) и композиция поворотов вокруг координатных осей}
+    %\includegraphics[width=0.5\textwidth]{cube_rotate2.png}
+    \caption{Поворот куба вокруг другой оси}
 \end{figure}
 
-\textbf{Ответы на вопросы задания:}
-\begin{itemize}
-    \item Матрицы $R_x(\theta)$, $R_y(\phi)$, $R_z(\psi)$ получаются при выборе вектора $v$ вдоль осей $x$, $y$ или $z$ соответственно.
-    \item Тройка матриц $R_x(\theta)R_y(\phi)R_z(\psi)$ достаточна для описания всех возможных вращений в 3D пространстве (теорема Эйлера).
-    \item Ось вращения можно восстановить, найдя собственный вектор матрицы поворота, соответствующий собственному значению 1.
-\end{itemize}
+\begin{figure}[h!]
+    \centering
+    %\includegraphics[width=0.5\textwidth]{cube_rotate3.png}
+    \caption{Комбинированный поворот}
+\end{figure}
+
+В отличие от двумерного случая, в 3D-поворотах важен порядок применения матриц: результат зависит от последовательности вращений.
 
 \section{Поворот куба вокруг вершины}
 
@@ -155,13 +175,13 @@ v_z & 0 & -v_x & 0 \\
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=\textwidth]{task5/rotation_around_vertex.png}
-    \caption{Поворот куба вокруг вершины 0: на угол $\pi/3$ (слева) и $\pi/2$ (справа) вокруг оси Z}
+    %\includegraphics[width=0.5\textwidth]{vertex_rotate.png}
+    \caption{Поворот куба вокруг вершины}
 \end{figure}
 
 \section{Виртуальная камера}
 
-Для имитации движения камеры сцены используются матрицы вращения и матрица переноса камеры:
+Для имитации движения камеры сцены используются матрицы вращения (как выше) и матрица переноса камеры:
 \[
 T_{camera} = \begin{bmatrix}
 1 & 0 & 0 & -t_x \\
@@ -174,8 +194,14 @@ T_{camera} = \begin{bmatrix}
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=\textwidth]{task6/camera_scene.png}
-    \caption{Сцена с несколькими кубами: исходная (слева) и после применения камеры (справа)}
+    %\includegraphics[width=0.5\textwidth]{camera1.png}
+    \caption{Сцена с несколькими кубами и виртуальной камерой}
+\end{figure}
+
+\begin{figure}[h!]
+    \centering
+    %\includegraphics[width=0.5\textwidth]{camera2.png}
+    \caption{Вид сцены под другим углом}
 \end{figure}
 
 Обратная матрица позволяет вернуть камеру в исходное положение.
@@ -200,14 +226,8 @@ s & 0 & 0 & 0 \\
 
 \begin{figure}[h!]
     \centering
-    \includegraphics[width=\textwidth]{task7/perspective_comparison.png}
-    \caption{Сравнение сцены без перспективы (слева) и с перспективной проекцией (справа)}
-\end{figure}
-
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=0.6\textwidth]{task7/perspective_side_view.png}
-    \caption{Перспективная проекция - вид сбоку для демонстрации эффекта перспективы}
+    %\includegraphics[width=0.5\textwidth]{perspective1.png}
+    \caption{Перспективное отображение сцены}
 \end{figure}
 
 \textbf{Пояснения:}
@@ -217,11 +237,3 @@ s & 0 & 0 & 0 \\
 \section{Выводы}
 
 В ходе работы были реализованы и исследованы основные преобразования в 3D: масштабирование, перенос, поворот, а также перспективная проекция и виртуальная камера. Показано, как с помощью матриц можно гибко управлять положением и видом объектов в пространстве, а также формировать реалистичное изображение сцены.
-
-\textbf{Ключевые результаты:}
-\begin{itemize}
-    \item Демонстрирована некоммутативность аффинных преобразований ($TS \neq ST$).
-    \item Реализована формула Родрига для поворота вокруг произвольной оси.
-    \item Показано, как комбинировать преобразования для сложных эффектов.
-    \item Исследована перспективная проекция и её влияние на визуализацию 3D-сцен.
-\end{itemize}
